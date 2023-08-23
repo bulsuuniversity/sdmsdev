@@ -6,8 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'BSU Report-Consultation-WebApp',
-  description: 'Capstone Project For Requisites in Graduation',
+  title: 'SDMS',
+  description: 'Capstone Project For PreRequisites in Graduation',
 }
 
 export default function RootLayout({ children }) {

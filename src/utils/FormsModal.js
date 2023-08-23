@@ -1,6 +1,6 @@
 import { IoMdCloseCircle } from "react-icons/io";
 
-const AccountModal = ({ closeModal, children }) => {
+const FormsModal = ({ closeModal, children }) => {
     return (
         <div style={{ backgroundImage: 'URL("/bulacan-state-university.jpg")' }}
             className={`fixed inset-0 flex bg-no-repeat bg-center flex-col items-center mt-16 justify-center z-50`}>
@@ -22,4 +22,4 @@ const AccountModal = ({ closeModal, children }) => {
     );
 }
 
-export default AccountModal;
+export default FormsModal;

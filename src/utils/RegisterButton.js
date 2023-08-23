@@ -2,7 +2,7 @@ const RegisterButton = ({handleButtonClick, active}) => {
     return (
         <div onClick={() => handleButtonClick("button2")}
         className={`flex items-center ${active === "button2" ? 'bg-[#ebac85] text-black' : 'bg-red-900'}`}>
-        <div className="overflow-hidden flex relative items-center h-14">
+        <div className="overflow-hidden flex relative items-center h-16">
             <div className={`h-0 w-0 
             border-y-[4rem] border-y-transparent 
             border-r-[6rem]

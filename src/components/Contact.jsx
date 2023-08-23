@@ -5,13 +5,12 @@ import { forwardRef } from "react";
 
 const Contact = (props, ref) => {
     return (
-        <div ref={ref} className="bg-gray-600 h-max">
+        <div ref={ref} className="bg-gray-600 w-full">
             <div className="text-white text-3xl flex justify-center p-6 font-serif font-cambria">
                 CONTACT US
             </div>
-            <div className="h-[24rem] flex justify-center items-center">
-                <div className="bg-white">
-                    <div className="my-14 mx-28 flex flex-col gap-10">
+            <div className="flex justify-center items-center">
+                    <div className="flex md:p-12 p-4 bg-white flex-col gap-10">
                         <div className="flex items-center gap-4">
                               <SiGooglemaps size={50} className="text-red-800"/>
                               Bustos, Bulacan
@@ -24,7 +23,6 @@ const Contact = (props, ref) => {
                               <ImMail4 size={50} className="text-red-800"/>
                             officeofthepresident@bulsu.edu.ph
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

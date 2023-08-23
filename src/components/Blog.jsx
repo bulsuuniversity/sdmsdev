@@ -53,12 +53,12 @@ const Blog = ({ images }, ref) => {
     };
 
     return (
-        <div ref={ref} className="w-full h-[28rem]">
+        <div ref={ref} className="w-full md:px-0 px-12 md:h-[28rem] h-[11rem]">
             <div className="flex justify-center items-center">
-                <div className="w-3/4 h-3/4 pt-5">
+                <div className="w-3/4 h-3/4  pt-5">
                     <Slider {...settings}>
                         {images && images.map((image, index) => (
-                            <div key={index} className="w-3/4 h-[24rem] object-cover overflow-hidden">
+                            <div key={index} className="w-3/4 md:h-[24rem] h-[8rem] object-cover overflow-hidden">
                                 <Image src={image} alt={index} />
                             </div>
                         ))}

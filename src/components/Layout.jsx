@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const Layout = ({ children, setViewPort }) => {
     return (
-        <div className="w-full mt-14">
+        <div className="w-full mt-16">
             <Header setViewPort={setViewPort}/>
             {children}
             <Footer />

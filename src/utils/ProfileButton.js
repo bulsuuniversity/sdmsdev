@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
-import { IoMdNavigate } from 'react-icons/io';
+import { RiNavigationFill } from 'react-icons/ri';
 import { BiCommentError } from 'react-icons/bi';
-
-
-
+import { FaUserFriends } from 'react-icons/fa';
+import { ImNewspaper } from 'react-icons/im';
+import { FaUserCircle } from 'react-icons/fa';
+import { VscSignOut } from 'react-icons/vsc';
+import Link from 'next/link';
 
 const ProfileButton = () => {
     const [isopen, setIsOpen] = useState(false);
@@ -29,24 +31,43 @@ const ProfileButton = () => {
 
     return (
         <div className={`flex items-center`} ref={profileRef}>
-            <span onClick={handleToggleMenu} className="mr-4">
-                <BsPersonCircle size={45}/>
+            <span onClick={handleToggleMenu} className="mr-7">
+                <BsPersonCircle size={45} />
             </span>
             {isopen && (
                 <div className="fixed top-8 right-2 flex flex-col">
-                    <div className="scale-y-[-1] flex justify-end text-blue-600">
-                        <IoMdNavigate size={32}/>
-                    </div>
-                    <div className="bg-white w-max h-96">
-                        <div className="flex text-red-900 text-sm w-full flex-col">
-                            <div className="bg-gray-400 flex p-4 gap-4 flex-col">
-                                <div className='flex gap-4 items-center'><BiCommentError size={32}/> MAKE A REPORT</div>
-                                <div>CONSULTATION</div>
-                                <div>REPORT LOGS</div>
-                            </div>
-                            <div className="bg-white flex gap-4 p-4 flex-col">
-                                <div>PROFILE</div>
-                                <div>SIGN OUT</div>
+                    <div className='relative right-52 top-0'>
+                        <div className="absolute top-0 -right-52 scale-y-[-1] text-blue-600">
+                            <RiNavigationFill size={38} style={{ rotate: '45deg' }} />
+                        </div>
+                        <div className="absolute top-8 w-max">
+                            <div className="flex text-red-900 shadow shadow-gray-500 text-sm w-full flex-col">
+                                <div className="bg-gray-400 flex flex-col">
+                                    <Link 
+                                    href={'/MakeReport'}
+                                    onClick={handleToggleMenu}
+                                    className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        <BiCommentError size={32} /> MAKE A REPORT</Link>
+                                    <Link 
+                                    href={'/Consult'}
+                                    onClick={handleToggleMenu}
+                                    className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        <FaUserFriends size={32} /> CONSULTATION</Link>
+                                    <Link 
+                                    href={'/ReportLog'}
+                                    onClick={handleToggleMenu}
+                                    className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        <ImNewspaper size={32} /> REPORT LOGS</Link>
+                                </div>
+                                <div className="bg-white flex flex-col">
+                                    <Link 
+                                    href={'/Profile'}
+                                    onClick={handleToggleMenu}
+                                    className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        <FaUserCircle size={32} /> PROFILE</Link>
+                                    <div className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        <VscSignOut size={32} /> SIGN OUT</div>
+                                </div>
                             </div>
                         </div>
                     </div>
