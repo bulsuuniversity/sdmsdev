@@ -14,9 +14,10 @@ import ProfileButton from "@/utils/ProfileButton";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = ({ setViewPort }) => {
+    //login or register forms for active to display
     const [active, setActive] = useState('')
     const [modal, setModal] = useState('')
-    const [logedIn, setLogedIn] = useState(false)
+    const [logedIn, setLogedIn] = useState()
     const [isopen, setIsOpen] = useState(false);
 
     const handleButtonClick = (buttonName) => {
@@ -31,7 +32,7 @@ const Header = ({ setViewPort }) => {
         <div className="fixed top-0 w-screen bg-red-900 overflow-hidden h-16 flex font-serif justify-between z-10">
             <div className="flex justify-start">
                 <Image className="w-16 h-16 pl-3 pr-2 py-1" src={Logo} alt="Logo" />
-                <span className="text-white md-block hidden text-2xl flex items-center">Bulacan State University</span>
+                <span className="text-white md:flex hidden text-2xl items-center">Bulacan State University</span>
             </div>
             <div className="flex w-full md:hidden cursor-pointer text-white pr-4 text-2xl items-center justify-end">
                 <div onClick={() => setIsOpen(!isopen)}>
@@ -44,7 +45,7 @@ const Header = ({ setViewPort }) => {
                             <Homebutton setViewPort={setViewPort} />
                             <ContactButton setViewPort={setViewPort} />
                             <AboutButton setViewPort={setViewPort} />
-                            <ProfileButton />
+                            <ProfileButton setLogedIn={setLogedIn}/>
                         </div>
                         :
                         <>
@@ -61,7 +62,7 @@ const Header = ({ setViewPort }) => {
                         <Homebutton setViewPort={setViewPort} />
                         <ContactButton setViewPort={setViewPort} />
                         <AboutButton setViewPort={setViewPort} />
-                        <ProfileButton />
+                        <ProfileButton setLogedIn={setLogedIn}/>
                     </>
                     :
                     <>

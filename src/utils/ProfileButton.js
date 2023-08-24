@@ -8,17 +8,18 @@ import { FaUserCircle } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
 import Link from 'next/link';
 
-const ProfileButton = () => {
-    const [isopen, setIsOpen] = useState(false);
+const ProfileButton = ({setLogedIn}) => {
+    const [menuOpen, setMenuOpen] = useState(false);
     const profileRef = useRef(null);
 
     const handleToggleMenu = () => {
-        setIsOpen(prevState => !prevState);
+        setMenuOpen(prevState => !prevState);
+        setLogedIn(true)
     };
 
     const handleClickOutside = event => {
         if (profileRef.current && !profileRef.current.contains(event.target)) {
-            setIsOpen(false);
+            setMenuOpen(false);
         }
     };
 
@@ -34,7 +35,7 @@ const ProfileButton = () => {
             <span onClick={handleToggleMenu} className="mr-7">
                 <BsPersonCircle size={45} />
             </span>
-            {isopen && (
+            {menuOpen && (
                 <div className="fixed top-8 right-2 flex flex-col">
                     <div className='relative right-52 top-0'>
                         <div className="absolute top-0 -right-52 scale-y-[-1] text-blue-600">
@@ -45,24 +46,24 @@ const ProfileButton = () => {
                                 <div className="bg-gray-400 flex flex-col">
                                     <Link 
                                     href={'/MakeReport'}
-                                    onClick={handleToggleMenu}
+                                    // onClick={handleToggleMenu}
                                     className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <BiCommentError size={32} /> MAKE A REPORT</Link>
                                     <Link 
                                     href={'/Consult'}
-                                    onClick={handleToggleMenu}
+                                    // onClick={handleToggleMenu}
                                     className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <FaUserFriends size={32} /> CONSULTATION</Link>
                                     <Link 
                                     href={'/ReportLog'}
-                                    onClick={handleToggleMenu}
+                                    // onClick={handleToggleMenu}
                                     className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <ImNewspaper size={32} /> REPORT LOGS</Link>
                                 </div>
                                 <div className="bg-white flex flex-col">
                                     <Link 
                                     href={'/Profile'}
-                                    onClick={handleToggleMenu}
+                                    // onClick={handleToggleMenu}
                                     className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <FaUserCircle size={32} /> PROFILE</Link>
                                     <div className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AccountModal from "@/utils/AccountModal";
 import ConfirmationModal from "@/utils/ConfirmationModal";
+import axios from "axios";
 
 const Login = ({ setActive, setLogedIn }) => {
     const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ const Login = ({ setActive, setLogedIn }) => {
         if (success) {
             const timer = setTimeout(() => {
                 setsuccess(false);
-            }, 5000);
+            }, 1000);
             return () => {
                 clearTimeout(timer);
                 setActive('button1')
@@ -49,6 +50,9 @@ const Login = ({ setActive, setLogedIn }) => {
         setLogedIn(true)
         setActive('')
     }
+
+
+
 
     return (
         <AccountModal closeModal={closeModal}>

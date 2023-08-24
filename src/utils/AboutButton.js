@@ -1,11 +1,22 @@
-const AboutButton = ({setViewPort}) => {
+
+
+const AboutButton = ({ setViewPort }) => {
+
+    const handleClick = () => {
+        if (window.location.pathname === "/") {
+            setViewPort("aboutRef");
+        } else {
+            window.location.href = "/"
+            setViewPort("aboutRef")
+        }
+    };
     return (
         <div
-        onClick={() => setViewPort("aboutRef")}
-        className={`flex items-center`}>
-        <span className="mr-4">ABOUT</span>
-    </div>
+            onClick={handleClick}
+            className={`flex items-center`}>
+            <span className="mr-4">ABOUT</span>
+        </div>
     );
 }
 
-export default AboutButton;
+export default AboutButton

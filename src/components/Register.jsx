@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AccountModal from "@/utils/AccountModal";
+import axios from "axios";
 
 const Register = ({ setActive }) => {
     const closeModal = () => {
@@ -10,10 +11,11 @@ const Register = ({ setActive }) => {
     };
 
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [picture, setPicture] = useState(null);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [credentials, setCredentials] = useState()
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -22,11 +24,8 @@ const Register = ({ setActive }) => {
     const handlePhoneNumberChange = (e) => {
         setPhoneNumber(e.target.value);
     };
-
-    const handlePictureChange = (e) => {
-        // Handle picture upload logic here
-        const file = e.target.files[0];
-        setPicture(file);
+    const handleName = (e) => {
+        setName(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
@@ -37,16 +36,52 @@ const Register = ({ setActive }) => {
         setConfirmPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setActive('sendCode');
-        console.log("Register submitted");
-        console.log("Email:", email);
-        console.log("Phone Number:", phoneNumber);
-        console.log("Picture:", picture);
-        console.log("Password:", password);
-        console.log("Confirm Password:", confirmPassword);
+    const handlePictureChange = (e) => {
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onloadend = () => {
+            if (file.type.startsWith("image/")) {
+                setCredentials(reader.result);
+            } else {
+                setCredentials('');
+            }
+        };
     };
+
+
+
+    const data = {
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber,
+        credentials: credentials,
+        password: confirmPassword
+    };
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'sikretong-malupet',
+        'Accept': 'application/json',
+    };
+
+
+
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:3000/api/studentAccount', data, { headers });
+            console.log('Response:', response.data);
+            setActive('sendCode');
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+
 
     return (
         <AccountModal closeModal={closeModal}>
@@ -60,12 +95,22 @@ const Register = ({ setActive }) => {
 
                         <div className="mb-4 text-sm">
                             <input
+                                type="text"
+                                className="w-full text-xs px-3 py-2 border border-black"
+                                value={name}
+                                onChange={handleName}
+                                placeholder="FULL NAME"
+                            // required
+                            />
+                        </div>
+                        <div className="mb-4 text-sm">
+                            <input
                                 type="email"
                                 className="w-full text-xs px-3 py-2 border border-black"
                                 value={email}
                                 onChange={handleEmailChange}
                                 placeholder="EMAIL"
-                                // required
+                            // required
                             />
                         </div>
                         <div className="mb-4 text-sm">
@@ -75,7 +120,7 @@ const Register = ({ setActive }) => {
                                 value={phoneNumber}
                                 onChange={handlePhoneNumberChange}
                                 placeholder="PHONE NUMBER"
-                                // required
+                            // required
                             />
                         </div>
                         <div className="mb-4 text-sm">
@@ -93,7 +138,7 @@ const Register = ({ setActive }) => {
                                 value={password}
                                 onChange={handlePasswordChange}
                                 placeholder="PASSWORD"
-                                // required
+                            // required
                             />
                         </div>
                         <div className="mb-4 text-sm">
@@ -103,7 +148,7 @@ const Register = ({ setActive }) => {
                                 value={confirmPassword}
                                 onChange={handleConfirmPasswordChange}
                                 placeholder="CONFIRM PASSWORD"
-                                // required
+                            // required
                             />
                         </div>
                         <button
