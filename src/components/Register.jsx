@@ -16,6 +16,7 @@ const Register = ({ setActive }) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [credentials, setCredentials] = useState()
+    const [uploading, setUploading] = useState(false)
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -45,13 +46,12 @@ const Register = ({ setActive }) => {
         reader.onloadend = () => {
             if (file.type.startsWith("image/")) {
                 setCredentials(reader.result);
+
             } else {
                 setCredentials('');
             }
         };
     };
-
-
 
     const data = {
         name: name,
@@ -66,18 +66,17 @@ const Register = ({ setActive }) => {
         'Accept': 'application/json',
     };
 
-
-
-
-
     const handleSubmit = async (e) => {
+        setUploading(true)
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:3000/api/studentAccount', data, { headers });
             console.log('Response:', response.data);
             setActive('sendCode');
+            setUploading(false)
         } catch (error) {
             console.error('Error:', error);
+            setUploading(false)
         }
     };
 
@@ -154,6 +153,7 @@ const Register = ({ setActive }) => {
                         <button
                             type="submit"
                             className="w-full py-2 my-4 px-4 bg-fuchsia-950 text-white hover:bg-blue-600"
+                          disabled={uploading}
                         >
                             Register
                         </button>

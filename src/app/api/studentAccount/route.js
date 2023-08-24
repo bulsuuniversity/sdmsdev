@@ -4,6 +4,8 @@ import { NextResponse } from "next/server"
 import bcrypt from 'bcrypt';
 import { v2 as cloudinary } from 'cloudinary'
 
+
+
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -18,7 +20,8 @@ export const POST = async (request) => {
 
         const body = await request.json();
         const { name, email, phoneNumber, credentials, password } = body;
-        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const saltRounds = 10
 
         const uploadResponse = await cloudinary.uploader.upload(credentials, {
             upload_preset: "bulsu",
@@ -26,23 +29,39 @@ export const POST = async (request) => {
         });
         if (uploadResponse.secure_url) {
             console.log('name:', name, 'email:', email, 'phone:', phoneNumber, uploadResponse.secure_url, 'password:', password)
-            const newPost = await prisma.studentuser.create({
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+            const newPost = await prisma.student.create({
                 data: {
                     name: name,
                     email: email,
                     phoneNumber: phoneNumber,
                     credentials: uploadResponse.secure_url,
                     password: hashedPassword
-                }
-            });
+                },
+              })
             console.log(newPost)
-            return NextResponse.json({ message: "POST Success", newPost });
+            return NextResponse.json({ message: "POST Success", newPost })
         }
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: "POST Error", error }, { status: 500 });
     }
 };
+
+
+
+    // const newPost = await prisma.student.create({
+        //     data: {
+        //         name: 'title',
+        //         email: 'Desc',
+        //         phoneNumber: '11223456',
+        //         credentials: 'https://res.cloudinary.com/dckxajww8/image/upload/v1692878702/credentials/hxcci0on69jxia60ctaq.png',
+        //         password: '123456789'
+        //     }
+        // })
+        // console.log(newPost)
+        // return NextResponse.json(newPost);
+
 
 
 export const GET = async () => {
