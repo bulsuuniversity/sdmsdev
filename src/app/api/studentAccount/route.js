@@ -15,7 +15,7 @@ export const POST = async (request) => {
     try {
 
         const body = await request.json();
-        const { name, email, phoneNumber, credentials, password } = body;
+        const { email, idNumber, phoneNumber, credentials, password } = body;
 
         const saltRounds = 10
 
@@ -28,13 +28,13 @@ export const POST = async (request) => {
             const hashedPassword = await bcrypt.hash(password, saltRounds);
             const newPost = await prisma.student.create({
                 data: {
-                    name: name,
                     email: email,
                     phoneNumber: phoneNumber,
+                    idNumber: idNumber,
                     credentials: uploadResponse.secure_url,
                     password: hashedPassword
                 },
-              })
+            })
             return NextResponse.json({ message: "POST Success", newPost })
         }
     } catch (error) {
@@ -45,17 +45,17 @@ export const POST = async (request) => {
 
 
 
-    // const newPost = await prisma.student.create({
-        //     data: {
-        //         name: 'title',
-        //         email: 'Desc',
-        //         phoneNumber: '11223456',
-        //         credentials: 'https://res.cloudinary.com/dckxajww8/image/upload/v1692878702/credentials/hxcci0on69jxia60ctaq.png',
-        //         password: '123456789'
-        //     }
-        // })
-        // console.log(newPost)
-        // return NextResponse.json(newPost);
+// const newPost = await prisma.student.create({
+//     data: {
+//         name: 'title',
+//         email: 'Desc',
+//         phoneNumber: '11223456',
+//         credentials: 'https://res.cloudinary.com/dckxajww8/image/upload/v1692878702/credentials/hxcci0on69jxia60ctaq.png',
+//         password: '123456789'
+//     }
+// })
+// console.log(newPost)
+// return NextResponse.json(newPost);
 
 
 

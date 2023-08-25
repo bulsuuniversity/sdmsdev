@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Logo from "../../public/Logo.png"
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import LoginButton from "@/utils/LoginButton";
 import RegisterButton from "@/utils/RegisterButton";
 import Login from "./Login";
@@ -19,6 +19,14 @@ const Header = ({ setViewPort }) => {
     const [modal, setModal] = useState('')
     const [logedIn, setLogedIn] = useState()
     const [isopen, setIsOpen] = useState(false);
+    const [header, setHeader] = useState(false);
+
+    useEffect(() => {
+        const currentPath = window.location.pathname;
+        if (currentPath === "/Admin/Login") {
+            setHeader(true);
+        }
+    }, []);
 
     const handleButtonClick = (buttonName) => {
         setActive(buttonName);
@@ -34,43 +42,64 @@ const Header = ({ setViewPort }) => {
                 <Image className="w-16 h-16 pl-3 pr-2 py-1" src={Logo} alt="Logo" />
                 <span className="text-white md:flex hidden text-2xl items-center">Bulacan State University</span>
             </div>
-            <div className="flex w-full md:hidden cursor-pointer text-white pr-4 text-2xl items-center justify-end">
-                <div onClick={() => setIsOpen(!isopen)}>
-                    <GiHamburgerMenu size={32}/>
+            {header ? <div className="flex italic text-white pr-4 text-2xl items-center justify-end">
+                <div className="overflow-hidden flex relative items-center h-16">
+                    <div className={`h-0 w-0 
+            border-y-[4rem] border-y-red-900 
+            border-r-[6rem] 
+             ${active === "button1" ? 'border-[#ebac85]' : 'border-orange-300'}
+            `}></div>
+                    <div className={`h-0 w-0 absolute left-11 z-10 
+            border-y-[4rem] border-y-transparent 
+            border-r-[6rem]
+             ${active === "button1" ? 'border-r-[#ebac85]' : 'border-r-red-900'}
+            `}></div>
                 </div>
-                {isopen &&
-                    <div className="fixed inset-0 top-16">
-                       {logedIn ?
-                        <div className="bg-red-900 flex flex-col gap-3 p-8 h-screen">
-                            <Homebutton setViewPort={setViewPort} />
-                            <ContactButton setViewPort={setViewPort} />
-                            <AboutButton setViewPort={setViewPort} />
-                            <ProfileButton setLogedIn={setLogedIn}/>
+                <div>Prefect of Discipline
+                </div>
+            </div>
+                : <>
+                    <div className="flex w-full md:hidden cursor-pointer text-white pr-4 text-2xl items-center justify-end">
+                        <div onClick={() => setIsOpen(!isopen)}>
+                            <GiHamburgerMenu size={32} />
                         </div>
-                        :
-                        <>
-                            <LoginButton handleButtonClick={handleButtonClick} active={active} />
-                            <RegisterButton handleButtonClick={handleButtonClick} active={active} />
-                        </>}
-                    </div>
-                }
 
-            </div>
-            <div className="md:flex hidden cursor-pointer text-white text-2xl items-center justify-end">
-                {logedIn ?
-                    <>
-                        <Homebutton setViewPort={setViewPort} />
-                        <ContactButton setViewPort={setViewPort} />
-                        <AboutButton setViewPort={setViewPort} />
-                        <ProfileButton setLogedIn={setLogedIn}/>
-                    </>
-                    :
-                    <>
-                        <LoginButton handleButtonClick={handleButtonClick} active={active} />
-                        <RegisterButton handleButtonClick={handleButtonClick} active={active} />
-                    </>
-                }
-            </div>
+                        {isopen &&
+                            <div className="fixed inset-0 top-16">
+                                {logedIn ?
+                                    <div className="bg-red-900 flex flex-col gap-3 p-8 h-screen">
+                                        <Homebutton setViewPort={setViewPort} />
+                                        <ContactButton setViewPort={setViewPort} />
+                                        <AboutButton setViewPort={setViewPort} />
+                                        <ProfileButton setLogedIn={setLogedIn} />
+                                    </div>
+                                    :
+                                    <>
+                                        <LoginButton handleButtonClick={handleButtonClick} active={active} />
+                                        <RegisterButton handleButtonClick={handleButtonClick} active={active} />
+                                    </>}
+                            </div>
+
+                        }
+
+                    </div>
+                    <div className="md:flex hidden cursor-pointer text-white text-2xl items-center justify-end">
+                        {logedIn ?
+                            <>
+                                <Homebutton setViewPort={setViewPort} />
+                                <ContactButton setViewPort={setViewPort} />
+                                <AboutButton setViewPort={setViewPort} />
+                                <ProfileButton setLogedIn={setLogedIn} />
+                            </>
+                            :
+                            <>
+                                <LoginButton handleButtonClick={handleButtonClick} active={active} />
+                                <RegisterButton handleButtonClick={handleButtonClick} active={active} />
+                            </>
+                        }
+                    </div>
+                </>
+            }
             {active === 'button1' && <Login setActive={setActive} setLogedIn={setLogedIn} />}
             {active === 'button2' && <Register setActive={setActive} />}
             {active === 'sendCode' && <EnterCode handleModal={handleModal} modal={modal} setActive={setActive} />}

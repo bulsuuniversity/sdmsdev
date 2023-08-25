@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { BsPersonCircle } from 'react-icons/bs';
+import { BsPersonCircle, BsExclamationCircle } from 'react-icons/bs';
 import { RiNavigationFill } from 'react-icons/ri';
 import { BiCommentError } from 'react-icons/bi';
 import { FaUserFriends } from 'react-icons/fa';
@@ -8,7 +8,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
 import Link from 'next/link';
 
-const ProfileButton = ({setLogedIn}) => {
+const ProfileButton = ({ setLogedIn }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const profileRef = useRef(null);
 
@@ -44,28 +44,30 @@ const ProfileButton = ({setLogedIn}) => {
                         <div className="absolute top-8 w-max">
                             <div className="flex text-red-900 shadow shadow-gray-500 text-sm w-full flex-col">
                                 <div className="bg-gray-400 flex flex-col">
-                                    <Link 
-                                    href={'/MakeReport'}
-                                    // onClick={handleToggleMenu}
-                                    className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                    <Link
+                                        href={'/MakeReport'}
+                                        // onClick={handleToggleMenu}
+                                        className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <BiCommentError size={32} /> MAKE A REPORT</Link>
-                                    <Link 
-                                    href={'/Consult'}
-                                    // onClick={handleToggleMenu}
-                                    className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                    <Link
+                                        href={'/Consult'}
+                                        // onClick={handleToggleMenu}
+                                        className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <FaUserFriends size={32} /> CONSULTATION</Link>
-                                    <Link 
-                                    href={'/ReportLog'}
-                                    // onClick={handleToggleMenu}
-                                    className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                    <Link
+                                        href={'/ReportLog'}
+                                        // onClick={handleToggleMenu}
+                                        className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <ImNewspaper size={32} /> REPORT LOGS</Link>
                                 </div>
                                 <div className="bg-white flex flex-col">
-                                    <Link 
-                                    href={'/Profile'}
-                                    // onClick={handleToggleMenu}
-                                    className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
-                                        <FaUserCircle size={32} /> PROFILE</Link>
+                                    <Link
+                                        href={'/Profile'}
+                                        // onClick={handleToggleMenu}
+                                        className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        <FaUserCircle size={32} /> PROFILE
+                                        <div className="text-white bg-yellow-600 rounded-full"><BsExclamationCircle size={24} /></div>
+                                    </Link>
                                     <div className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <VscSignOut size={32} /> SIGN OUT</div>
                                 </div>

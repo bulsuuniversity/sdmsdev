@@ -15,9 +15,10 @@ model Student {
   name String
   email String @unique
   phoneNumber String
+  idNumber String
   credentials String
-  profile? String
-  profilePublicId? String
+  profile String?
+  profilePublicId String?
   password String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
