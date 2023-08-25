@@ -4,16 +4,12 @@ import { NextResponse } from "next/server"
 import bcrypt from 'bcrypt';
 import { v2 as cloudinary } from 'cloudinary'
 
-
-
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true
 })
-
-
 
 export const POST = async (request) => {
     try {
@@ -28,7 +24,7 @@ export const POST = async (request) => {
             folder: 'credentials'
         });
         if (uploadResponse.secure_url) {
-            console.log('name:', name, 'email:', email, 'phone:', phoneNumber, uploadResponse.secure_url, 'password:', password)
+            console.log(uploadResponse)
             const hashedPassword = await bcrypt.hash(password, saltRounds);
             const newPost = await prisma.student.create({
                 data: {
@@ -39,7 +35,6 @@ export const POST = async (request) => {
                     password: hashedPassword
                 },
               })
-            console.log(newPost)
             return NextResponse.json({ message: "POST Success", newPost })
         }
     } catch (error) {

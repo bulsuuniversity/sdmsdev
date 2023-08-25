@@ -29,7 +29,7 @@ export const GET = async (request, { params }) => {
 export const PATCH = async (request, {params}) => {
     try {
         const body = await request.json();
-        const {name, email, phoneNumber, credentials, password} = body;
+        const {name, email, phoneNumber, password} = body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const {id} = params;
@@ -42,7 +42,6 @@ export const PATCH = async (request, {params}) => {
                 name,
                 email,
                 phoneNumber,
-                credentials,
                 hashedPassword
             }
         })

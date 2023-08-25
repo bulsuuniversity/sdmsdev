@@ -1,0 +1,21 @@
+cloudinary= {
+  asset_id: '9b081e325f5437fac160e102029ca002',
+  public_id: 'credentials/g4mh4yj5vuo9jmmgdroy',
+  version: 1692923672,
+  version_id: '7986ce0dc93d7a982aecacd6bc45d684',
+  signature: 'd2abd4da97a85b69c153679add6e5b9b45a60d87',
+  width: 612,
+  height: 417,
+  format: 'jpg',
+  resource_type: 'image',
+  created_at: '2023-08-25T00:34:32Z',
+  tags: [],
+  bytes: 41122,
+  type: 'upload',
+  etag: '2c60ff14caf86bfea77710f9421a7ed3',
+  placeholder: false,
+  url: 'http://res.cloudinary.com/dckxajww8/image/upload/v1692923672/credentials/g4mh4yj5vuo9jmmgdroy.jpg',
+  secure_url: 'https://res.cloudinary.com/dckxajww8/image/upload/v1692923672/credentials/g4mh4yj5vuo9jmmgdroy.jpg',
+  folder: 'credentials',
+  api_key: '411776353178914'
+}
