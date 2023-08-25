@@ -127,8 +127,6 @@ const Register = ({ setActive }) => {
                                     required
                                 />
                             </div>
-                        </div>
-                        <div className="grid">
                             <div className="mb-4 text-sm">
                                 <div>Please upload your credentials.</div>
                                 <input
@@ -141,6 +139,8 @@ const Register = ({ setActive }) => {
                                     required
                                 />
                             </div>
+                        </div>
+                        <div className="grid">
                             <div className="mb-4 text-sm">
                                 <input
                                     type="password"
@@ -163,7 +163,7 @@ const Register = ({ setActive }) => {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full py-2 my-4 px-4 bg-fuchsia-950 text-white hover:bg-blue-600"
+                                className="w-full py-1 my-1 px-4 bg-fuchsia-950 text-white hover:bg-blue-600"
                                 disabled={uploading}
                             >
                                 Register

@@ -10,7 +10,7 @@ import EnterCode from "./EnterCode";
 import AboutButton from "@/utils/AboutButton";
 import ContactButton from "@/utils/ContactButton";
 import Homebutton from "@/utils/Homebutton";
-import ProfileButton from "@/utils/ProfileButton";
+import Menu from "@/utils/Menu";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = ({ setViewPort }) => {
@@ -71,7 +71,7 @@ const Header = ({ setViewPort }) => {
                                         <Homebutton setViewPort={setViewPort} />
                                         <ContactButton setViewPort={setViewPort} />
                                         <AboutButton setViewPort={setViewPort} />
-                                        <ProfileButton setLogedIn={setLogedIn} />
+                                        <Menu setLogedIn={setLogedIn} />
                                     </div>
                                     :
                                     <>
@@ -89,7 +89,7 @@ const Header = ({ setViewPort }) => {
                                 <Homebutton setViewPort={setViewPort} />
                                 <ContactButton setViewPort={setViewPort} />
                                 <AboutButton setViewPort={setViewPort} />
-                                <ProfileButton setLogedIn={setLogedIn} />
+                                <Menu setLogedIn={setLogedIn} />
                             </>
                             :
                             <>

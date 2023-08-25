@@ -8,7 +8,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
 import Link from 'next/link';
 
-const ProfileButton = ({ setLogedIn }) => {
+const Menu = ({ setLogedIn }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const profileRef = useRef(null);
 
@@ -80,4 +80,4 @@ const ProfileButton = ({ setLogedIn }) => {
     );
 };
 
-export default ProfileButton;
+export default Menu;

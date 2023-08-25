@@ -27,13 +27,13 @@ const PersonalInformation = () => {
 
     return (
         <div>
-            <div className="absolute -top-2 right-0">
+            <div className="absolute text-lg -top-2 right-0">
                 {!edit && 
                     <button
                         onClick={() => setEdit(true)}
                         className="bg-amber-800 flex items-center text-white rounded-lg px-4"
                     >
-                        <PiPencilFill size={55} /> EDIT INFO
+                        <div className="md:flex hidden"><PiPencilFill size={55} /></div> EDIT INFO
                     </button>
                }
             </div>
@@ -43,7 +43,7 @@ const PersonalInformation = () => {
                     <BsExclamationCircle size={32} />
                 </div>
             </h2>
-            <form className="font-medium text-lg grid grid-cols-3 ml-6" onSubmit={handleSubmit}>
+            <form className="font-medium md:text-lg text-xs grid md:flex gap-4 ml-6" onSubmit={handleSubmit}>
                 <div className="grid">
                     <label for="name">Name: </label>
                     <label for="college">College: </label>
@@ -95,7 +95,7 @@ const PersonalInformation = () => {
                 </div>
                 <div className="flex items-center justify-center">
                     {edit && (
-                        <button type="submit" className="p-4 flex rounded-lg bg-blue-500">
+                        <button type="submit" className="py-2 px-8 flex rounded-lg bg-blue-500">
                             <TfiSave size={35} /> SAVE
                         </button>
                     )}
