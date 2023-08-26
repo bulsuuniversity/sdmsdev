@@ -64,7 +64,7 @@ const PersonalInformation = () => {
                         onChange={(e) => handleInputChange("college", e.target.value)}
                         className="border"
                     >
-                        <option value={editedValues.college} selected>{editedValues.college}</option>
+                        <option defaultValue={editedValues.college}>{editedValues.college}</option>
                         <option value="CBA">CBA</option>
                         <option value="CIT">CIT</option>
                         <option value="CoED">CoED</option>

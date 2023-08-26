@@ -14,7 +14,7 @@ const page = () => {
 
     return (
         <Layout>
-            <div className="bg-red-100 p-4">
+            <div className="bg-red-100 p-4 z-10">
                 <div className="grid md:grid-cols-5 grid-cols-1 bg-red-50 items-center">
                     <div className="col-span-1 md:mt-0 mt-52">
                         <div className="relative ml-5 px-6">

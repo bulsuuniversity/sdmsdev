@@ -12,7 +12,7 @@ datasource db {
 
 model Student {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  name String?
   email String @unique
   phoneNumber String
   idNumber String
@@ -24,11 +24,4 @@ model Student {
   updatedAt DateTime @updatedAt
 }
 
-model User {
-  id  String @id @default(auto()) @map("_id") @db.ObjectId
-  title String?
-  description String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
 

@@ -62,11 +62,12 @@ export const POST = async (request) => {
 export const GET = async () => {
     try {
 
-        const posts = await prisma.studentuser.findMany()
+        const posts = await prisma.student.findMany()
 
         return NextResponse.json(posts);
 
     } catch (err) {
+        console.log(err)
         return NextResponse.json({ message: "GET Error", err }, { status: 500 })
     }
 }

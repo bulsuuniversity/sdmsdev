@@ -1,6 +1,8 @@
-const LoginButton = ({handleButtonClick, active}) => {
+import Link from "next/link";
+
+const LoginButton = ({active}) => {
     return (
-        <div onClick={() => handleButtonClick("button1")}
+        <Link href={'/Login'}
         className={`flex items-center ${active === "button1" ? 'bg-[#ebac85] text-black' : 'bg-red-900'}`}>
         <div className="overflow-hidden flex relative items-center h-16">
             <div className={`h-0 w-0 
@@ -15,7 +17,7 @@ const LoginButton = ({handleButtonClick, active}) => {
             `}></div>
         </div>
         <span className="mr-4">Login</span>
-    </div>
+    </Link>
     );
 }
 

@@ -4,8 +4,6 @@ import Logo from "../../public/Logo.png"
 import { useEffect, useState } from "react";
 import LoginButton from "@/utils/LoginButton";
 import RegisterButton from "@/utils/RegisterButton";
-import Login from "./Login";
-import Register from "./Register";
 import EnterCode from "./EnterCode";
 import AboutButton from "@/utils/AboutButton";
 import ContactButton from "@/utils/ContactButton";
@@ -25,6 +23,11 @@ const Header = ({ setViewPort }) => {
         const currentPath = window.location.pathname;
         if (currentPath === "/Admin/Login") {
             setHeader(true);
+        }
+        if (currentPath === "/Login") {
+            setActive('button1');
+        } else if (currentPath === "/Register") {
+            setActive('button2');
         }
     }, []);
 
@@ -75,8 +78,8 @@ const Header = ({ setViewPort }) => {
                                     </div>
                                     :
                                     <>
-                                        <LoginButton handleButtonClick={handleButtonClick} active={active} />
-                                        <RegisterButton handleButtonClick={handleButtonClick} active={active} />
+                                        <LoginButton active={active} />
+                                        <RegisterButton active={active} />
                                     </>}
                             </div>
 
@@ -93,15 +96,13 @@ const Header = ({ setViewPort }) => {
                             </>
                             :
                             <>
-                                <LoginButton handleButtonClick={handleButtonClick} active={active} />
-                                <RegisterButton handleButtonClick={handleButtonClick} active={active} />
+                                <LoginButton active={active}/>
+                                <RegisterButton active={active}/>
                             </>
                         }
                     </div>
                 </>
             }
-            {active === 'button1' && <Login setActive={setActive} setLogedIn={setLogedIn} />}
-            {active === 'button2' && <Register setActive={setActive} />}
             {active === 'sendCode' && <EnterCode handleModal={handleModal} modal={modal} setActive={setActive} />}
         </div>
     );

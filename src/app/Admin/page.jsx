@@ -3,9 +3,7 @@ import AdminMenu from "@/components/AdminMenu";
 
 const route = () => {
     return (
-        <AdminLayout>
             <AdminMenu />
-        </AdminLayout>
     );
 }
 

@@ -1,7 +1,10 @@
+"use client"
+
 import { useState, useEffect } from "react";
 import AccountModal from "@/utils/AccountModal";
 import ConfirmationModal from "@/utils/ConfirmationModal";
 import axios from "axios";
+import Layout from "@/components/Layout";
 
 const Login = ({ setActive, setLogedIn }) => {
     const [email, setEmail] = useState("");
@@ -55,6 +58,7 @@ const Login = ({ setActive, setLogedIn }) => {
 
 
     return (
+        <Layout>
         <AccountModal closeModal={closeModal}>
             <div className="bg-white p-6 shadow-lg z-10">
                 <div className="mx-4">
@@ -117,6 +121,7 @@ const Login = ({ setActive, setLogedIn }) => {
                 </ConfirmationModal>
             }
         </AccountModal>
+        </Layout>
     );
 }
 

@@ -7,9 +7,11 @@ import Header from "./Header";
 const AdminLayout = ({ children }) => {
 
     return (
-        <div className={`w-full `}>
+        <div className={`w-full`}>
             {children}
-            <Footer />
+            <div className="fixed bottom-0 w-screen">
+                  <Footer />
+            </div>
         </div>
     );
 };
