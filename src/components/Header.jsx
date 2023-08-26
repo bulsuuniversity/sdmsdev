@@ -10,6 +10,8 @@ import ContactButton from "@/utils/ContactButton";
 import Homebutton from "@/utils/Homebutton";
 import Menu from "@/utils/Menu";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useSession } from "next-auth/react";
+
 
 const Header = ({ setViewPort }) => {
     //login or register forms for active to display
@@ -18,6 +20,7 @@ const Header = ({ setViewPort }) => {
     const [logedIn, setLogedIn] = useState()
     const [isopen, setIsOpen] = useState(false);
     const [header, setHeader] = useState(false);
+    const { data: session } = useSession()
 
     useEffect(() => {
         const currentPath = window.location.pathname;
@@ -38,6 +41,7 @@ const Header = ({ setViewPort }) => {
     const handleModal = (modalName) => {
         setModal(modalName);
     };
+
 
     return (
         <div className="fixed top-0 w-screen bg-red-900 overflow-hidden h-16 flex font-serif justify-between z-10">
@@ -69,7 +73,7 @@ const Header = ({ setViewPort }) => {
 
                         {isopen &&
                             <div className="fixed inset-0 top-16">
-                                {logedIn ?
+                                {session ?
                                     <div className="bg-red-900 flex flex-col gap-3 p-8 h-screen">
                                         <Homebutton setViewPort={setViewPort} />
                                         <ContactButton setViewPort={setViewPort} />
@@ -87,7 +91,7 @@ const Header = ({ setViewPort }) => {
 
                     </div>
                     <div className="md:flex hidden cursor-pointer text-white text-2xl items-center justify-end">
-                        {logedIn ?
+                        {session ?
                             <>
                                 <Homebutton setViewPort={setViewPort} />
                                 <ContactButton setViewPort={setViewPort} />

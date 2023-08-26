@@ -35,7 +35,7 @@ export const POST = async (request) => {
                     password: hashedPassword
                 },
             })
-            return NextResponse.json({ message: "POST Success", newPost })
+            return NextResponse.json({ message: "Registered", newPost })
         }
     } catch (error) {
         console.error(error);
@@ -43,19 +43,6 @@ export const POST = async (request) => {
     }
 };
 
-
-
-// const newPost = await prisma.student.create({
-//     data: {
-//         name: 'title',
-//         email: 'Desc',
-//         phoneNumber: '11223456',
-//         credentials: 'https://res.cloudinary.com/dckxajww8/image/upload/v1692878702/credentials/hxcci0on69jxia60ctaq.png',
-//         password: '123456789'
-//     }
-// })
-// console.log(newPost)
-// return NextResponse.json(newPost);
 
 
 
