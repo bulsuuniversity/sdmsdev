@@ -16,7 +16,6 @@ const handler = NextAuth({
                 const user = await prisma.student.findUnique({
                     where: { email: credentials.email }
                 });
-
                 if (user && bcrypt.compareSync(credentials.password, user.password)) {
                     return (user);
                 } else {
@@ -27,8 +26,9 @@ const handler = NextAuth({
     ],
     callbacks: {
         async session({ session, token }) {
-            session.user.id = token.id
-            console.log('Session User:', token);
+            session.user = token.token.user
+            const expiresIn = 3600; // 1 hour in seconds
+            token.exp = Math.floor(Date.now() / 1000) + expiresIn;
             return session;
         },
         async jwt(token, user) {
@@ -38,8 +38,6 @@ const handler = NextAuth({
             return token;
         }
     },
-
-
     secret: 'your-secret-goes-here',
 });
 

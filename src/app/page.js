@@ -8,10 +8,17 @@ import ima1 from "../../public/ima1.jpeg"
 import ima2 from "../../public/ima2.png"
 import ima3 from "../../public/ima3.png"
 import { useState, useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 const Home = () => {
   const [viewPort, setViewPort] = useState(null);
+  const [setUp, setSetup] = useState(false)
 
+  const { data: session } = useSession();
+
+    useEffect(() => {
+        console.log(session)
+    }, [session])
 
   const refs = {
     blogRef: useRef(null),
@@ -33,6 +40,19 @@ const Home = () => {
   return (
     <main>
       <Layout setViewPort={setViewPort}>
+        {session && setUp &&
+          <ConfirmationModal>
+            <div className="flex flex-col w-96 justify-center p-4 justify-center">
+              <div className="text-2xl font-bold whitespace-normal text-center ">
+                Please setup you profile first!
+              </div>
+              <div className="text-center italic text-sm">Personal information are needed to be filled out first before doing any proccess.</div>
+              <div className="flex justify-center mt-4">
+                <button className="bg-white w-max rounded-md px-5 py-1" onClick={() => setSetup(false)}>Okay</button>
+              </div>
+            </div>
+          </ConfirmationModal>
+        }
         <Blog ref={refs.blogRef} images={images} />
         <Contact ref={refs.contactRef} />
         <About ref={refs.aboutRef} />

@@ -24,4 +24,17 @@ model Student {
   updatedAt DateTime @updatedAt
 }
 
+model Admin {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  password String
+  carousel Carousel[]
+  contactUs String?
+  about String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
+type Carousel {
+  image String?
+}

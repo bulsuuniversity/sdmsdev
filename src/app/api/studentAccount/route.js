@@ -3,6 +3,7 @@ import prisma from "@/app/libs/prismadb"
 import { NextResponse } from "next/server"
 import bcrypt from 'bcrypt';
 import { v2 as cloudinary } from 'cloudinary'
+import { getServerSession } from "next-auth";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -47,12 +48,13 @@ export const POST = async (request) => {
 
 
 export const GET = async () => {
+    const session = await getServerSession(request)
+
     try {
-
-        const posts = await prisma.student.findMany()
-
-        return NextResponse.json(posts);
-
+        if (session) {
+            const posts = await prisma.student.findMany()
+            return NextResponse.json(posts);
+        }
     } catch (err) {
         console.log(err)
         return NextResponse.json({ message: "GET Error", err }, { status: 500 })

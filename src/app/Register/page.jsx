@@ -5,12 +5,14 @@ import AccountModal from "@/utils/AccountModal";
 import axios from "axios";
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import EnterCode from "@/components/EnterCode";
 
-const Register = ({ setActive }) => {
+const Register = ({ setActive, setData }) => {
     const closeModal = () => {
         setActive('');
     };
-
+    const [registerData, setRegisterData] = useState(false)
+    const [code, setCode] = useState()
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
@@ -71,13 +73,18 @@ const Register = ({ setActive }) => {
         'Accept': 'application/json',
     };
 
-    const handleSubmit = async (e) => {
-        setUploading(true)
-        e.preventDefault();
+    const emailData = {
+        email: data.email,
+        subject: "Key for SDMS Registration",
+        message: "Greetings! This is your registration key. PLease keep it private and do not share to other stdents. Key: "
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setUploading(true);
         try {
-            const response = await axios.post('http://localhost:3000/api/studentAccount', data, { headers });
-            console.log('Response:', response.data);
-            setActive('sendCode');
+            const sendCode = await axios.post('http://localhost:3000/api/Mailer', emailData, { headers });
+            setCode(sendCode.data.key)
             setUploading(false)
         } catch (error) {
             console.error('Error:', error);
@@ -90,97 +97,98 @@ const Register = ({ setActive }) => {
     return (
         <Layout>
             <AccountModal closeModal={closeModal}>
-                <div className="bg-white p-6 shadow-lg z-10">
-                    <div className="mx-4">
-                        <div className="flex flex-col text-xs justify-center">
-                            <h2 className="text-2xl text-center font-semibold">Register</h2>
-                            <h4 className="italic py-4 text-center">Please enter the needed information below.</h4>
+                {code ?
+                    <EnterCode resendCode={handleSubmit} registerData={data} sentCode={code}/> :
+                    <div className="bg-white p-6 shadow-lg z-10">
+                        <div className="mx-4">
+                            <div className="flex flex-col text-xs justify-center">
+                                <h2 className="text-2xl text-center font-semibold">Register</h2>
+                                <h4 className="italic py-4 text-center">Please enter the needed information below.</h4>
+                            </div>
+                            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+                                <div className="grid">
+                                    <div className="mb-4 text-sm">
+                                        <input
+                                            type="email"
+                                            className="w-full text-xs px-3 py-2 border border-black"
+                                            value={email}
+                                            onChange={handleEmailChange}
+                                            placeholder="EMAIL"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-4 text-sm">
+                                        <input
+                                            type="tel"
+                                            className="w-full text-xs px-3 py-2 border border-black"
+                                            value={phoneNumber}
+                                            onChange={handlePhoneNumberChange}
+                                            placeholder="PHONE NUMBER"
+                                            maxLength={13}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-4 text-sm">
+                                        <input
+                                            type="text"
+                                            value={idNum}
+                                            className="w-full text-xs px-3 py-2 border border-black"
+                                            onChange={handleIdNUmChange}
+                                            placeholder="ID Number"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-4 text-sm">
+                                        <input
+                                            type="password"
+                                            className="w-full text-xs px-3 py-2 border border-black"
+                                            value={password}
+                                            onChange={handlePasswordChange}
+                                            placeholder="PASSWORD"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-4 text-sm">
+                                        <input
+                                            type="password"
+                                            className="w-full text-xs px-3 py-2 border border-black"
+                                            value={confirmPassword}
+                                            onChange={handleConfirmPasswordChange}
+                                            placeholder="CONFIRM PASSWORD"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="grid">
+
+                                    <div className="mb-4 text-sm">
+                                        <div>Please upload your school credentials.</div>
+                                        <div className="italic mt-4">Make sure the file is in *jpg/*png file format</div>
+                                        <input
+                                            id="credentials"
+                                            type="file"
+                                            className="w-full text-xs px-3 mt-2 py-2 border border-black"
+                                            onChange={handlePictureChange}
+                                            accept="image/jpeg, image/png"
+                                            title="Credentials"
+                                            required
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className={`w-full py-1 my-1 px-4 ${uploading ? "bg-gray-600" : 'bg-fuchsia-950 hover:bg-blue-600'}  text-white `}
+                                        disabled={uploading}
+                                    >
+                                        Register
+                                    </button>
+                                    <Link href={'/Login'} onClick={() => setActive('button1')}
+                                        className="text-blue-500 cursor-pointer text-xs text-end">
+                                        Already have an account? Log in here.
+                                    </Link>
+                                </div>
+                            </form>
                         </div>
-                        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-                            <div className="grid">
-                                <div className="mb-4 text-sm">
-                                    <input
-                                        type="email"
-                                        className="w-full text-xs px-3 py-2 border border-black"
-                                        value={email}
-                                        onChange={handleEmailChange}
-                                        placeholder="EMAIL"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4 text-sm">
-                                    <input
-                                        type="tel"
-                                        className="w-full text-xs px-3 py-2 border border-black"
-                                        value={phoneNumber}
-                                        onChange={handlePhoneNumberChange}
-                                        placeholder="PHONE NUMBER"
-                                        maxLength={13}
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4 text-sm">
-                                    <input
-                                        type="text"
-                                        value={idNum}
-                                        className="w-full text-xs px-3 py-2 border border-black"
-                                        onChange={handleIdNUmChange}
-                                        placeholder="ID Number"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4 text-sm">
-                                    <input
-                                        type="password"
-                                        className="w-full text-xs px-3 py-2 border border-black"
-                                        value={password}
-                                        onChange={handlePasswordChange}
-                                        placeholder="PASSWORD"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4 text-sm">
-                                    <input
-                                        type="password"
-                                        className="w-full text-xs px-3 py-2 border border-black"
-                                        value={confirmPassword}
-                                        onChange={handleConfirmPasswordChange}
-                                        placeholder="CONFIRM PASSWORD"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className="grid">
-
-                                <div className="mb-4 text-sm">
-                                    <div>Please upload your school credentials.</div>
-                                    <div className="italic mt-4">Make sure the file is in *jpg/*png file format</div>
-                                    <input
-                                        id="credentials"
-                                        type="file"
-                                        className="w-full text-xs px-3 mt-2 py-2 border border-black"
-                                        onChange={handlePictureChange}
-                                        accept="image/*"
-                                        title="Credentials"
-                                        required
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    className={`w-full py-1 my-1 px-4 ${uploading ? "bg-gray-600" : 'bg-fuchsia-950 hover:bg-blue-600'}  text-white `}
-                                    disabled={uploading}
-                                >
-                                    Register
-                                </button>
-                                <Link href={'/Login'} onClick={() => setActive('button1')}
-                                className="text-blue-500 cursor-pointer text-xs text-end">
-                                    Already have an account? Log in here.
-                                </Link>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
+                    </div>}
             </AccountModal>
         </Layout>
     );

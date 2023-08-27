@@ -4,7 +4,6 @@ import Logo from "../../public/Logo.png"
 import { useEffect, useState } from "react";
 import LoginButton from "@/utils/LoginButton";
 import RegisterButton from "@/utils/RegisterButton";
-import EnterCode from "./EnterCode";
 import AboutButton from "@/utils/AboutButton";
 import ContactButton from "@/utils/ContactButton";
 import Homebutton from "@/utils/Homebutton";
@@ -16,8 +15,6 @@ import { useSession } from "next-auth/react";
 const Header = ({ setViewPort }) => {
     //login or register forms for active to display
     const [active, setActive] = useState('')
-    const [modal, setModal] = useState('')
-    const [logedIn, setLogedIn] = useState()
     const [isopen, setIsOpen] = useState(false);
     const [header, setHeader] = useState(false);
     const { data: session } = useSession()
@@ -33,14 +30,6 @@ const Header = ({ setViewPort }) => {
             setActive('button2');
         }
     }, []);
-
-    const handleButtonClick = (buttonName) => {
-        setActive(buttonName);
-    };
-
-    const handleModal = (modalName) => {
-        setModal(modalName);
-    };
 
 
     return (
@@ -78,7 +67,7 @@ const Header = ({ setViewPort }) => {
                                         <Homebutton setViewPort={setViewPort} />
                                         <ContactButton setViewPort={setViewPort} />
                                         <AboutButton setViewPort={setViewPort} />
-                                        <Menu setLogedIn={setLogedIn} />
+                                        <Menu />
                                     </div>
                                     :
                                     <>
@@ -96,18 +85,17 @@ const Header = ({ setViewPort }) => {
                                 <Homebutton setViewPort={setViewPort} />
                                 <ContactButton setViewPort={setViewPort} />
                                 <AboutButton setViewPort={setViewPort} />
-                                <Menu setLogedIn={setLogedIn} />
+                                <Menu />
                             </>
                             :
                             <>
-                                <LoginButton active={active}/>
-                                <RegisterButton active={active}/>
+                                <LoginButton active={active} />
+                                <RegisterButton active={active} />
                             </>
                         }
                     </div>
                 </>
             }
-            {active === 'sendCode' && <EnterCode handleModal={handleModal} modal={modal} setActive={setActive} />}
         </div>
     );
 }

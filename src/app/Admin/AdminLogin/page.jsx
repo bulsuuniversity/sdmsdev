@@ -1,36 +1,33 @@
 "use client"
 
+import AdminLayout from '@/components/AdminLayout';
 import { useSession, signIn, signOut } from 'next-auth/react';
-import { useEffect } from 'react';
 
-function AuthComponent() {
+const page = () => {
     const { data: session } = useSession();
 
-    useEffect(() => {
-        console.log(session)
-    }, [session])
-
     const handleSignIn = () => {
-        signIn('credentials', {
-            email: 'Aron@gmail.com',
+        signIn('admincredentials', {
+            username: 'Nicole',
             password: '1'
         })
     }
     if (session) {
         return (
-            <div>
-                <p>Welcome, !</p>
+            <AdminLayout>
+                <p>Welcome, {session.user.username}!</p>
                 <button onClick={() => signOut()}>Sign out</button>
-            </div>
+            </AdminLayout>
         );
     } else {
         return (
-            <div>
+            <AdminLayout>
                 <p>You are not signed in.</p>
                 <button onClick={handleSignIn}>Sign in</button>
-            </div>
+            </AdminLayout>
         );
     }
 }
 
-export default AuthComponent;
+export default page;
+
