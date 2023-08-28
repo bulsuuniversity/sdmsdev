@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcrypt'
 
 
+
 const handler = NextAuth({
     providers: [
         CredentialsProvider({
@@ -13,32 +14,41 @@ const handler = NextAuth({
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials) {
-                const user = await prisma.student.findUnique({
-                    where: { email: credentials.email }
-                });
-                if (user && bcrypt.compareSync(credentials.password, user.password)) {
-                    return (user);
-                } else {
-                    return (null);
+                if (credentials.username && credentials.password) {
+                    const admin = await prisma.admin.findUnique({
+                        where: { name: credentials.username }
+                    });
+                    if (admin && bcrypt.compareSync(credentials.password, admin.password)) {
+                        return admin;
+                    }
+                } else if (credentials.email && credentials.password) {
+                    const user = await prisma.student.findUnique({
+                        where: { email: credentials.email }
+                    });
+                    if (user && bcrypt.compareSync(credentials.password, user.password)) {
+
+                        return user
+                    }
                 }
+                return null;
             }
         })
     ],
     callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token = {user: 'user'}
+            }
+            return token
+          },
         async session({ session, token }) {
-            session.user = token.token.user
-            const expiresIn = 3600; // 1 hour in seconds
-            token.exp = Math.floor(Date.now() / 1000) + expiresIn;
+            if (token) {
+                console.log(token)
+            }
             return session;
         },
-        async jwt(token, user) {
-            if (user) {
-                token.id = user.id;
-            }
-            return token;
-        }
     },
-    secret: 'your-secret-goes-here',
+    secret: 'super secret',
 });
 
 
