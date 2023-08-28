@@ -7,7 +7,7 @@ const Homebutton = ({ setViewPort }) => {
             setViewPort("blogRef");;
         } else {
             router.push("/")
-            setViewPort("blogRef");
+            window.location.pathname === "/" && setViewPort("blogRef");
         }
     };
 

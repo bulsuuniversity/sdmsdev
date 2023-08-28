@@ -8,7 +8,7 @@ const router = useRouter()
             setViewPort("contactRef");;
         } else {
             router.push("/")
-            setViewPort("contactRef");
+            window.location.pathname === "/" && setViewPort("contactRef");
         }
 
     };

@@ -1,7 +1,7 @@
 // url: http://localhost:3000/api/studentAccount/12345
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 
 export const GET = async (request, { params }) => {
