@@ -11,7 +11,6 @@ const Register = ({ setActive, setData }) => {
     const closeModal = () => {
         setActive('');
     };
-    const [registerData, setRegisterData] = useState(false)
     const [code, setCode] = useState()
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -83,7 +82,7 @@ const Register = ({ setActive, setData }) => {
         event.preventDefault();
         setUploading(true);
         try {
-            const sendCode = await axios.post('http://localhost:3000/api/Mailer', emailData, { headers });
+            const sendCode = await axios.post(`${process.env.URL}/api/Mailer`, emailData, { headers });
             setCode(sendCode.data.key)
             setUploading(false)
         } catch (error) {
@@ -91,7 +90,6 @@ const Register = ({ setActive, setData }) => {
             setUploading(false)
         }
     };
-
 
 
     return (
