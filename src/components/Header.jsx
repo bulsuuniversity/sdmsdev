@@ -12,6 +12,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useSession } from "next-auth/react";
 
 
+
 const Header = ({ setViewPort }) => {
     //login or register forms for active to display
     const [active, setActive] = useState('')
@@ -30,6 +31,11 @@ const Header = ({ setViewPort }) => {
             setActive('button2');
         }
     }, []);
+
+    useEffect(() => {
+        console.log('Header Session', session)
+    }, [session])
+
 
 
     return (

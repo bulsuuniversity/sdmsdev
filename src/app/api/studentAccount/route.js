@@ -33,7 +33,8 @@ export const POST = async (request) => {
                     phoneNumber: phoneNumber,
                     idNumber: idNumber,
                     credentials: uploadResponse.secure_url,
-                    password: hashedPassword
+                    password: hashedPassword,
+                    role: 'user'
                 },
             })
             return NextResponse.json({ message: "Registered", newPost })

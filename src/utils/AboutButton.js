@@ -1,12 +1,13 @@
+import { useRouter } from "next/navigation";
 
 
 const AboutButton = ({ setViewPort }) => {
-
+const router = useRouter()
     const handleClick = () => {
         if (window.location.pathname === "/") {
             setViewPort("aboutRef");
         } else {
-            window.location.href = "/"
+            router.push("/")
             setViewPort("aboutRef")
         }
     };

@@ -1,12 +1,13 @@
+import { useRouter } from "next/navigation";
 
 
 const ContactButton = ({ setViewPort }) => {
-
+const router = useRouter()
     const handleClick = () => {
         if (window.location.pathname === "/") {
             setViewPort("contactRef");;
         } else {
-            window.location.href = "/"
+            router.push("/")
             setViewPort("contactRef");
         }
 

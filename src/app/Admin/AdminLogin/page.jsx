@@ -7,12 +7,13 @@ const page = () => {
     const { data: session } = useSession();
 
     const handleSignIn = () => {
-        signIn('admincredentials', {
+        signIn('credentials', {
             username: 'Nicole',
             password: '1'
         })
     }
     if (session) {
+        console.log(session)
         return (
             <AdminLayout>
                 <p>Welcome, {session.user.username}!</p>

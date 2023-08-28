@@ -1,16 +1,14 @@
-
+import { useRouter } from "next/navigation";
 
 const Homebutton = ({ setViewPort }) => {
-
+    const router = useRouter()
     const handleClick = () => {
         if (window.location.pathname === "/") {
             setViewPort("blogRef");;
         } else {
-            window.location.href = "/"
+            router.push("/")
             setViewPort("blogRef");
         }
-
-
     };
 
     return (

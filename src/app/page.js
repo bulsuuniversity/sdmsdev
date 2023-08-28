@@ -17,7 +17,7 @@ const Home = () => {
   const { data: session } = useSession();
 
     useEffect(() => {
-        console.log(session)
+        console.log('Home page session', session)
     }, [session])
 
   const refs = {

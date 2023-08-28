@@ -6,6 +6,7 @@ import axios from "axios";
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import EnterCode from "@/components/EnterCode";
+import { url, headers } from "../libs/api"
 
 const Register = ({ setActive, setData }) => {
     const closeModal = () => {
@@ -66,11 +67,7 @@ const Register = ({ setActive, setData }) => {
         credentials: credentials,
         password: confirmPassword
     };
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'sikretong-malupet',
-        'Accept': 'application/json',
-    };
+
 
     const emailData = {
         email: data.email,
@@ -82,7 +79,7 @@ const Register = ({ setActive, setData }) => {
         event.preventDefault();
         setUploading(true);
         try {
-            const sendCode = await axios.post(`${process.env.URL}/api/Mailer`, emailData, { headers });
+            const sendCode = await axios.post(`${url}/api/Mailer`, emailData, { headers });
             setCode(sendCode.data.key)
             setUploading(false)
         } catch (error) {
@@ -96,7 +93,7 @@ const Register = ({ setActive, setData }) => {
         <Layout>
             <AccountModal closeModal={closeModal}>
                 {code ?
-                    <EnterCode resendCode={handleSubmit} registerData={data} sentCode={code}/> :
+                    <EnterCode resendCode={handleSubmit} registerData={data} sentCode={code} /> :
                     <div className="bg-white p-6 shadow-lg z-10">
                         <div className="mx-4">
                             <div className="flex flex-col text-xs justify-center">

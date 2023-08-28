@@ -6,12 +6,16 @@ import Link from "next/link";
 import Layout from "@/components/Layout";
 import AccountModal from "@/utils/AccountModal";
 import ConfirmationModal from "@/utils/ConfirmationModal";
+import useLoading from "@/utils/Loading";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
   const { data: session } = useSession();
+  const [loading, setLoading] = useState(false)
+  const route = useRouter()
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -23,28 +27,27 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const signInResult = await signIn('credentials', {
+    setLoading(true)
+    await signIn('credentials', {
       email: email,
       password: password
     });
-    console.log(signInResult)
-    
-    if (signInResult?.ok) {
-      setSuccess(true);
-    }
+
   };
 
   useEffect(() => {
-    if (success) {
+    if (session) {
       const timer = setTimeout(() => {
-        setSuccess(false);
-        router.push('/')
-      }, 2000);
+        setLoading(false)
+        console.log(session)
+        setSuccess(true);
+        route.push('/')
+      }, 1000);
       return () => {
         clearTimeout(timer);
       };
     }
-  }, [success]);
+  }, [session]);
 
   return (
     <Layout>
@@ -77,7 +80,8 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 my-4 px-4 bg-fuchsia-950 text-white hover:bg-blue-600"
+                className={`w-full py-2 my-4 ${loading && 'bg-gray'} px-4 bg-fuchsia-950 text-white hover:bg-blue-600`}
+                disabled={loading}
               >
                 Log In
               </button>
@@ -87,12 +91,12 @@ const Login = () => {
             </form>
           </div>
         </div>
-        
+
         {success && (
           <ConfirmationModal>
             <div className="flex flex-col justify-center p-7 justify-center">
               <div className="text-2xl font-bold whitespace-normal text-center ">
-                LOGIN SUCCESSFUL!
+                {session ? 'LOGIN SUCCESSFUL!': 'LOG OUT SUCCESSFUL!'}
               </div>
               <div className="text-center italic text-sm">Redirecting you now to the home page.</div>
               <span className="loader" />
