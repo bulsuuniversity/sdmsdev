@@ -6,15 +6,11 @@ import { useState } from "react";
 import { PiUserCircleFill } from "react-icons/pi";
 import PersonalInformation from "@/components/PersonalInformation";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const page = () => {
     const [profile, setProfile] = useState(<PiUserCircleFill size={100} />)
-    const [edit, setEdit] = useState(false)
     const { data: session } = useSession()
-
-    console.log(session)
 
     return (
         <Layout>
@@ -24,7 +20,7 @@ const page = () => {
                         <div className="relative ml-5 px-6">
                             <div className="absolute z-10 w-40 h-40 -left-1 -top-48">
                                 <div className="w-full bg-white rounded-full border border-white border-8">
-                                    <Image alt="profile" width={500} height={500} src={session ? session.credentials : <PiUserCircleFill size={100} />} />
+                                    <Image alt="profile" className="object-cover overflow-hidden" height={250} width={250} src={session ? session.credentials : <PiUserCircleFill size={100} />} />
                                 </div>
                             </div>
                             <div className="absolute z-10 mx-3 -top-6 -left-2 rounded-lg bg-orange-300">
@@ -48,16 +44,15 @@ const page = () => {
                             <h2 className="font-semibold">Account Information</h2>
                             <div className="ml-4 font-medium flex gap-5">
                                 <div className="grid">
-                                    <label for="email">Email:</label>
-                                    <label for="idNumber">ID Number:</label>
-                                    <label for="password">Password:</label>
+                                    <label htmlFor="email">Email:</label>
+                                    <label htmlFor="idNumber">ID Number:</label>
+                                    <label htmlFor="password">Password:</label>
                                 </div>
                                 <div className="grid">
                                     <div id="email">{session && session.email}</div>
                                     <div id="idNumber">{session && session.idNumber}</div>
                                     <div id="password">Hidden</div>
                                 </div>
-
                             </div>
                             <Link href={'/ChangePassword'} className="text-blue-500 text-sm">
                                 Want to change password? Click here.
@@ -65,10 +60,7 @@ const page = () => {
                         </div>
 
                         <div className="p-6 bg-white relative">
-
-
-                            <PersonalInformation />
-
+                            <PersonalInformation session={session}/>
                         </div>
                     </div>
                 </div>

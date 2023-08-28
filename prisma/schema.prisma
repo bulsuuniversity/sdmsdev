@@ -15,8 +15,11 @@ model Student {
   name String?
   email String @unique
   phoneNumber String
+  address String?
   idNumber String
   credentials String
+  college String?
+  yearLevel String?
   profile String?
   profilePublicId String?
   password String
