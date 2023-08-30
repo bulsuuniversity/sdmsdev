@@ -10,7 +10,7 @@ import Homebutton from "@/utils/Homebutton";
 import Menu from "@/utils/Menu";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSession } from "next-auth/react";
-
+import { useRouter } from "next/navigation";
 
 
 const Header = ({ setViewPort }) => {
@@ -19,9 +19,10 @@ const Header = ({ setViewPort }) => {
     const [isopen, setIsOpen] = useState(false);
     const [header, setHeader] = useState(false);
     const { data: session } = useSession()
+    const router = useRouter()
 
     useEffect(() => {
-        const currentPath = window.location.pathname;
+        const currentPath = router.pathname;
         if (currentPath === "/Admin/Login") {
             setHeader(true);
         }
@@ -34,6 +35,9 @@ const Header = ({ setViewPort }) => {
 
     useEffect(() => {
         console.log('Header Session', session)
+        if (session && !session.id) {
+            router.push('/Login')
+        }
     }, [session])
 
 
@@ -67,7 +71,7 @@ const Header = ({ setViewPort }) => {
                         </div>
 
                         {isopen &&
-                            <div className="fixed inset-0 top-16">
+                            <div className="fixed inset-0 top-16 z-20">
                                 {session ?
                                     <div className="bg-red-900 flex flex-col gap-3 p-8 h-screen">
                                         <Homebutton setViewPort={setViewPort} />

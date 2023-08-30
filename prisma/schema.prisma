@@ -11,34 +11,50 @@ datasource db {
 }
 
 model Student {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String?
-  email String @unique
-  phoneNumber String
-  address String?
-  idNumber String
-  credentials String
-  college String?
-  yearLevel String?
-  profile String?
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String   @unique
+  phoneNumber     String
+  address         String?
+  idNumber        String
+  credentials     String
+  college         String?
+  yearLevel       String?
+  profile         String?
   profilePublicId String?
-  password String
-  role String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  password        String
+  role            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Admin {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  password String
-  carousel Carousel[]
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  password  String
+  carousel  Carousel[]
   contactUs String?
-  about String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  about     String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 type Carousel {
   image String?
+}
+
+model Studentreport {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  reporter             String
+  actionOfDiscipline   String
+  offender             String
+  college              String
+  attachment           String
+  dateOfIncident       String
+  platformOfIncident   String
+  rateOfOccurence      String
+  describeTheSituation String
+  status               String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 }

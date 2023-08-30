@@ -5,8 +5,8 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import ima1 from "../../public/ima1.jpeg"
-import ima2 from "../../public/ima2.png"
-import ima3 from "../../public/ima3.png"
+import ima2 from "../../public/ima2.jpeg"
+import ima3 from "../../public/ima3.jpeg"
 import { useState, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
 

@@ -4,13 +4,16 @@ import { PiPencilFill } from "react-icons/pi";
 import { BsExclamationCircle } from "react-icons/bs";
 
 const PersonalInformation = ({ session }) => {
-    const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState(true);
     const [editedValues, setEditedValues] = useState({
-        name: session && session.name ,
-        college: session && session.college,
-        address: session && session.address,
-        phoneNumber: session && session.phoneNumber,
-        yearLevel: session && session.yearLevel
+        idNumber: profileData.name,
+        name: profileData.name,
+        email: profileData.email,
+        phoneNumber: profileData.phoneNumber,
+        address: profileData.address,
+        yearLevel: profileData.yearLevel,
+        college: profileData.college,
+
     });
 
     const handleInputChange = (field, value) => {
@@ -22,15 +25,15 @@ const PersonalInformation = ({ session }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setEdit(false);
+        setEdit(true);
     };
 
     return (
         <div>
             <div className="absolute text-lg -top-2 right-0">
-                {!edit &&
+                {edit &&
                     <button
-                        onClick={() => setEdit(true)}
+                        onClick={() => setEdit(false)}
                         className="bg-amber-800 flex items-center text-white rounded-lg px-4"
                     >
                         <div className="md:flex hidden"><PiPencilFill size={55} /></div> EDIT INFO
@@ -55,12 +58,12 @@ const PersonalInformation = ({ session }) => {
                     <input
                         value={editedValues.name}
                         type="text"
-                        disabled={!edit}
+                        readOnly={edit}
                         onChange={(e) => handleInputChange("name", e.target.value)}
                         className="border"
                     />
                     <select
-                        disabled={!edit}
+                        readOnly={edit}
                         onChange={(e) => handleInputChange("college", e.target.value)}
                         className="border"
                     >
@@ -74,27 +77,27 @@ const PersonalInformation = ({ session }) => {
                     <input
                         value={editedValues.address}
                         type="text"
-                        disabled={!edit}
+                        readOnly={edit}
                         onChange={(e) => handleInputChange("address", e.target.value)}
                         className="border"
                     />
                     <input
                         value={editedValues.phoneNumber}
                         type="text"
-                        disabled={!edit}
+                        readOnly={edit}
                         onChange={(e) => handleInputChange("contactNum", e.target.value)}
                         className="border"
                     />
                     <input
                         value={editedValues.yearLevel}
                         type="text"
-                        disabled={!edit}
+                        readOnly={edit}
                         onChange={(e) => handleInputChange("year", e.target.value)}
                         className="border"
                     />
                 </div>
                 <div className="flex items-center justify-center">
-                    {edit && (
+                    {!edit && (
                         <button type="submit" className="py-2 px-8 flex rounded-lg bg-blue-500">
                             <TfiSave size={35} /> SAVE
                         </button>

@@ -17,6 +17,10 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
   const route = useRouter()
 
+
+
+  // const { data: session, status } = useSession();
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
