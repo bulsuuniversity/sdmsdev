@@ -24,12 +24,12 @@ const Page = () => {
     return (
         <Layout>
             <div className="p-10 grid grid-cols-3 bg-red-50">
-                <form className="col-span-2 border border-black border-2 p-4 bg-white rounded-lg" onSubmit={handleSubmit}>
-                    <h2 className="text-2xl font-bold">SELF-CONSULTATION REQUEST FORM</h2>
-                    <p className="text-xs italic">Please fill out the needed details for the request</p>
+                <form className="col-span-2 grid border border-black border-2 mx-24 px-12 py-4 bg-white rounded-lg" onSubmit={handleSubmit}>
+                    <h2 className="text-2xl text-center font-bold">SELF-CONSULTATION REQUEST FORM</h2>
+                    <p className="text-xs text-center italic">Please fill out the needed details for the request</p>
                     <div className="">Ticket No.: _______</div>
-                    <label>
-                        Reason for consultation:
+                    <label className="grid">
+                        <p className="font-bold">Reason for consultation:</p>
                         <select
                             className="border-b"
                             name="consultationReason"
@@ -46,9 +46,10 @@ const Page = () => {
                             <option value="Others">Other/s</option>
                         </select>
                     </label>
-                    <label>
-                        Requested date of appointment:
+                    <label className="grid">
+                        <p className="font-bold">Requested date of appointment:</p>
                         <input
+                            className="border-b"
                             type="date"
                             placeholder="select date"
                             name="appointmentDate"
@@ -57,8 +58,8 @@ const Page = () => {
                             required
                         />
                     </label>
-                    <label>
-                        Type of consultation:
+                    <label className="grid">
+                        <p className="font-bold">Type of consultation:</p>
                         <select
                             className="border-b"
                             name="consultationType"
@@ -71,10 +72,12 @@ const Page = () => {
                             <option value="Virtually">Virtually</option>
                         </select>
                     </label>
-                    <button type="submit">Submit</button>
+                    <div className="flex justify-center">
+                        <button className="bg-amber-200 font-bold p-2 m-2 w-1/2 border border-black rounded-[1.3rem]" type="submit">Submit</button>
+                    </div>
                 </form>
-                <div className="col-span-1"> 
-                    <Image className="object-cover" src="/bg.png" width={500} height={700} />
+                <div className="col-span-1">
+                    <Image className="object-cover scale-x-[-1]" src="/bg.png" width={500} height={700} />
                 </div>
             </div>
         </Layout>
