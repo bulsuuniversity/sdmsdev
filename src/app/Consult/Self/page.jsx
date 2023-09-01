@@ -23,15 +23,15 @@ const Page = () => {
 
     return (
         <Layout>
-            <div className="p-10 grid grid-cols-3 bg-red-50">
-                <form className="col-span-2 grid border border-black border-2 mx-24 px-12 py-4 bg-white rounded-lg" onSubmit={handleSubmit}>
+            <div className="px-10 py-4 grid grid-cols-1 md:grid-cols-3 bg-red-50">
+                <form className="md:col-span-2 col-span-1 grid gap-4 border border-black border-2 mx-24 px-12 py-4 bg-white rounded-lg" onSubmit={handleSubmit}>
                     <h2 className="text-2xl text-center font-bold">SELF-CONSULTATION REQUEST FORM</h2>
                     <p className="text-xs text-center italic">Please fill out the needed details for the request</p>
                     <div className="">Ticket No.: _______</div>
                     <label className="grid">
                         <p className="font-bold">Reason for consultation:</p>
                         <select
-                            className="border-b"
+                            className="border-b-2"
                             name="consultationReason"
                             value={formData.consultationReason}
                             onChange={handleInputChange}
@@ -49,7 +49,7 @@ const Page = () => {
                     <label className="grid">
                         <p className="font-bold">Requested date of appointment:</p>
                         <input
-                            className="border-b"
+                            className="border-b-2"
                             type="date"
                             placeholder="select date"
                             name="appointmentDate"
@@ -61,7 +61,7 @@ const Page = () => {
                     <label className="grid">
                         <p className="font-bold">Type of consultation:</p>
                         <select
-                            className="border-b"
+                            className="border-b-2"
                             name="consultationType"
                             value={formData.consultationType}
                             onChange={handleInputChange}
