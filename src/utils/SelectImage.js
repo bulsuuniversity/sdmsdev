@@ -56,9 +56,9 @@ const SelectImage = ({ handleCLick, profileData, getProfileData }) => {
         <div>
             <ConfirmationModal>
                 <ConfirmationDialog />
-                <div className="relative  p-7">
+                <div className="relative p-7">
                     <div className="absolute top-0 right-0">
-                        <button onClick={() => handleCLick()}> <IoMdCloseCircle size={28} style={{ color: 'red' }} /></button>
+                        <button className="bg-white rounded-full" onClick={() => handleCLick()}> <IoMdCloseCircle size={28} style={{ color: 'red' }} /></button>
                     </div>
                     <form onSubmit={handleUpdate} className="grid md:grid-cols-2 grid-cols-1 justify-center">
                         <div className="grid justify-center">
@@ -76,9 +76,8 @@ const SelectImage = ({ handleCLick, profileData, getProfileData }) => {
                                 )}
                             </div>
                         </div>
-                        <div className="grid m-4 gap-2">
-                            <div className="rounded-lg grid h-6 items-center justify-center bg-amber-600">
-                                <label className="text-center" htmlFor="inputFile">Choose Image</label>
+                        <div className="grid m-4">
+                            <div className="rounded-[3rem] h-14 relative bg-amber-400">
                                 <input
                                     id="inputFile"
                                     type="file"
@@ -87,9 +86,10 @@ const SelectImage = ({ handleCLick, profileData, getProfileData }) => {
                                     accept="image/jpeg, image/png"
                                     required
                                 />
+                                <label className="text-center absolute top-4 right-24" htmlFor="inputFile">CHOOSE IMAGE</label>
                             </div>
 
-                            <button disabled={loading} type="submit" className={`${loading ? "bg-gray-600" : "bg-green-400"} rounded-lg `}>UPLOAD</button>
+                            <button disabled={loading} type="submit" className={`${loading ? "bg-gray-400" : "bg-green-400"} rounded-[3rem]`}>UPLOAD</button>
                         </div>
                     </form>
                 </div>

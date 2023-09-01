@@ -5,8 +5,6 @@ import Image from "next/image";
 import { useState } from "react";
 import PersonalInformation from "@/components/PersonalInformation";
 import Link from "next/link";
-import axios from "axios";
-import { url, headers } from "../libs/api";
 import SelectImage from "@/utils/SelectImage";
 import { useProfileData } from "../libs/store"
 
