@@ -8,10 +8,12 @@ import { FaUserCircle } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
+import { useProfileData } from '@/app/libs/store';
 
-const Menu = ({  }) => {
+const Menu = ({ }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const profileRef = useRef(null);
+    const { profileData } = useProfileData()
 
     const handleToggleMenu = () => {
         setMenuOpen(prevState => !prevState);
@@ -66,7 +68,7 @@ const Menu = ({  }) => {
                                         // onClick={handleToggleMenu}
                                         className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
                                         <FaUserCircle size={32} /> PROFILE
-                                        <div className="text-white bg-yellow-600 rounded-full"><BsExclamationCircle size={24} /></div>
+                                        {profileData && !profileData.name && <div className="text-white bg-yellow-600 rounded-full"><BsExclamationCircle size={24} /></div>}
                                     </Link>
                                     <Link
                                         href={'/Login'}

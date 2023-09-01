@@ -11,7 +11,7 @@ import Menu from "@/utils/Menu";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import { useProfileData } from "@/app/libs/store";
 
 const Header = ({ setViewPort }) => {
     //login or register forms for active to display
@@ -20,9 +20,10 @@ const Header = ({ setViewPort }) => {
     const [header, setHeader] = useState(false);
     const { data: session } = useSession()
     const router = useRouter()
+    const { profileData, getProfileData } = useProfileData()
 
     useEffect(() => {
-        const currentPath = router.pathname;
+        const currentPath = window.location.href;
         if (currentPath === "/Admin/Login") {
             setHeader(true);
         }
@@ -34,13 +35,17 @@ const Header = ({ setViewPort }) => {
     }, []);
 
     useEffect(() => {
-        console.log('Header Session', session)
-        if (session && !session.id) {
-            router.push('/Login')
+        if (session && session.id) {
+            getProfileData(session.id)
+            console.log('Header Session', session.id)
+            console.log('Header ProfileData', profileData)
         }
     }, [session])
 
 
+    if (session && !session.id) {
+        router.push('/Login')
+    }
 
     return (
         <div className="fixed top-0 w-screen bg-red-900 overflow-hidden h-16 flex font-serif justify-between z-10">

@@ -8,9 +8,10 @@ import { useEffect } from "react";
 const page = () => {
     const {data: session} = useSession()
     const phoneNumber = '09273420007'
+    const message = "Hello we received your report and our officers are currently working on it"
     const handleSend = async () => {
         try {
-            const response = await axios.post(`${url}/api/sendSms`, phoneNumber, { headers })
+            const response = await axios.post(`${url}/api/sendSms`, {phoneNumber, message}, { headers })
             console.log(response)
         } catch (err) {
             console.log(err)

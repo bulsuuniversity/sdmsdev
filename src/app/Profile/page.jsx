@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useState } from "react";
 import PersonalInformation from "@/components/PersonalInformation";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import axios from "axios";
 import { url, headers } from "../libs/api";
 import SelectImage from "@/utils/SelectImage";
@@ -13,8 +12,6 @@ import { useProfileData } from "../libs/store"
 
 
 const page = () => {
-    const [profile, setProfile] = useState('https://res.cloudinary.com/dckxajww8/image/upload/v1693269023/icons/profile_2_cotaml.png')
-    const { data: session } = useSession()
     const [changeProfile, setChangeProfile] = useState(false)
 
     const { profileData, getProfileData } = useProfileData()
@@ -23,35 +20,24 @@ const page = () => {
         setChangeProfile(!changeProfile)
     }
 
-    const getProfile = async () => {
-        try {
-            const response = await axios.get(`${url}/api/studentAccount/${session.id}`, { headers });
-            console.log(response.data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
     return (
         <Layout>
             {changeProfile &&
-                <SelectImage session={session} setProfile={setProfile} handleCLick={handleCLick} />
+                <SelectImage handleCLick={handleCLick} profileData={profileData} getProfileData={getProfileData} />
             }
-            <div className="bg-red-100 p-4 z-10">
-                <div className="h-screen bg-gray-300 w-full">
-                    <div className="m-10">{profileData && profileData.email}</div>
-                   {session && <button onClick={() => getProfileData(session.id)} className="bg-blue-600 p-4 rounded-lg">Get profile data</button>}
-                </div>
+            {profileData && profileData.id && <div className="bg-red-100 p-4 z-10">
                 <div className="grid md:grid-cols-5 grid-cols-1 bg-red-50 items-center">
-                    {/* <button onClick={getProfile} className="rounded-lg bg-blue-700 p-4">Get Profile</button> */}
                     <div className="col-span-1 md:mt-0 mt-52">
                         <div className="relative ml-5 px-6">
                             <div className="absolute rounded-full bg-white border border-white border-8 overflow-hidden z-10 -left-3 -top-52">
                                 <div className="w-40 h-40 rounded-full overflow-hidden ">
                                     <Image alt="profile"
-                                        src={profile}
-                                        layout="fill"
-                                        objectFit="cover"
+                                        src={profileData.profile === null ?
+                                            "https://res.cloudinary.com/dckxajww8/image/upload/v1693269023/icons/profile_2_cotaml.png"
+                                            : profileData.profile}
+                                        width={500}
+                                        height={500}
+                                        className="object-cover"
                                     />
                                 </div>
                             </div>
@@ -83,9 +69,9 @@ const page = () => {
                                     <label htmlFor="password">Password:</label>
                                 </div>
                                 <div className="grid">
-                                    <div id="email">{session && session.email}</div>
-                                    <div id="idNumber">{session && session.idNumber}</div>
-                                    <div id="password">Hidden</div>
+                                    <div id="email">{profileData.email}</div>
+                                    <div id="idNumber">{profileData.idNumber}</div>
+                                    <div id="password">*********</div>
                                 </div>
                             </div>
                             <Link href={'/ChangePassword'} className="text-blue-500 text-sm">
@@ -94,11 +80,11 @@ const page = () => {
                         </div>
 
                         <div className="p-6 bg-white relative">
-                            <PersonalInformation session={session} />
+                            <PersonalInformation />
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
         </Layout>
     );
 }

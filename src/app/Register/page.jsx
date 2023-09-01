@@ -72,7 +72,8 @@ const Register = ({ setActive, setData }) => {
     const emailData = {
         email: data.email,
         subject: "Key for SDMS Registration",
-        message: "Greetings! This is your registration key. PLease keep it private and do not share to other stdents. Key: "
+        message: "Greetings! This is your registration key. PLease keep it private and do not share to other stdents. Key: ",
+        html: `<p>Greetings! This is your registration key. PLease keep it private and do not share to other stdents. Key: </p>`
     }
 
     const handleSubmit = async (event) => {

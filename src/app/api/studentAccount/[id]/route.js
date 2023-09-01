@@ -12,6 +12,7 @@ export const GET = async (request, { params }) => {
         });
         return NextResponse.json(post);
     } catch (err) {
+        console.log(err)
         return NextResponse.json(
             { message: "GET Error" },
             { status: 500 }
@@ -24,33 +25,23 @@ export const PUT = async (request, { params }) => {
     try {
         const { id } = params
         const body = await request.json();
-        const { name, email, idNumber, phoneNumber } = body;
-
+        const { editedValues } = body;
         const updatePost = await prisma.student.update({
             where: {
                 id
             },
             data: {
-                idNumber,
-                name,
-                email,
-                phoneNumber,
-                address,
-                yearLevel,
-                college,
+                name: editedValues.name,
+                phoneNumber: editedValues.phoneNumber,
+                address: editedValues.address,
+                yearLevel: editedValues.yearLevel,
+                college: editedValues.college,
             }
         })
 
-        if (!updatePost) {
-            return NextResponse.json(
-                { message: "Post not found", err },
-                { status: 404 }
-            )
-        }
-
         return NextResponse.json(updatePost);
-
     } catch (err) {
+        console.log(err)
         return NextResponse.json({ message: "update Error", err }, { status: 500 })
     }
 }
