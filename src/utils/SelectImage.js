@@ -11,7 +11,8 @@ const SelectImage = ({ handleCLick, profileData, getProfileData }) => {
     const [file, setFile] = useState(null)
     const { loading, startLoading, stopLoading } = useLoading()
     const { showConfirmation, ConfirmationDialog } = useConfirmation();
-
+    const [message, setMessage] = useState()
+    const [response, setResponse] = useState()
     const handlePictureChange = (e) => {
         const picture = e.target.files[0];
         if (picture) {
@@ -36,10 +37,12 @@ const SelectImage = ({ handleCLick, profileData, getProfileData }) => {
                     prevProfileImage: profileData.profilePublicId,
                 }, { headers });
                 getProfileData(profileData.id)
-                handleCLick()
+                setMessage(true)
+                setResponse("Successfully Updated Profile!")
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            setResponse("Something went wrong!")
         } finally {
             stopLoading();
         }
@@ -56,6 +59,12 @@ const SelectImage = ({ handleCLick, profileData, getProfileData }) => {
         <div>
             <ConfirmationModal>
                 <ConfirmationDialog />
+                {message && <div className="p-10 grid">
+                    <div className="text-2xl text-center">
+                        {response}
+                    </div>
+                    <button onClick={handleCLick()} className="bg-amber-100 py-2 px-4 rounded-lg">Okay</button>
+                </div>}
                 <div className="relative p-7">
                     <div className="absolute top-0 right-0">
                         <button className="bg-white rounded-full" onClick={() => handleCLick()}> <IoMdCloseCircle size={28} style={{ color: 'red' }} /></button>
@@ -89,11 +98,12 @@ const SelectImage = ({ handleCLick, profileData, getProfileData }) => {
                                 <label className="text-center absolute top-4 right-24" htmlFor="inputFile">CHOOSE IMAGE</label>
                             </div>
 
-                            <button disabled={loading} type="submit" className={`${loading ? "bg-gray-400" : "bg-green-400"} rounded-[3rem]`}>UPLOAD</button>
+                            <button disabled={loading} type="submit"
+                                className={`${loading ? "bg-gray-400" : "bg-green-400"} rounded-[3rem]`}>
+                                {loading ? 'UPLOADING' : 'UPLOAD'}</button>
                         </div>
                     </form>
                 </div>
-
             </ConfirmationModal>
         </div>
     );

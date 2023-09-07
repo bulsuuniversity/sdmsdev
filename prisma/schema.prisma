@@ -45,16 +45,43 @@ type Carousel {
 
 model Studentreport {
   id                   String   @id @default(auto()) @map("_id") @db.ObjectId
-  reporter             String
+  reporter             Json
   actionOfDiscipline   String
-  offender             String
-  college              String
-  attachment           String
+  offender             String?
+  college              String?
+  attachment           String?
   dateOfIncident       String
   platformOfIncident   String
   rateOfOccurence      String
   describeTheSituation String
+  sentMessage          String?
   status               String
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
+}
+
+model Consultself {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  student            Json
+  appointmentDate    String
+  consultationReason String
+  consultationType   String
+  status             String
+  sentMessage        String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Consultreferral {
+  id                     String   @id @default(auto()) @map("_id") @db.ObjectId
+  student                Json
+  referredStudent        String
+  referredStudentCollege String
+  referralDate           String
+  referralReason         String
+  describeSituation      String
+  status                 String
+  sentMessage            String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 }

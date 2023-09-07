@@ -20,7 +20,7 @@ const Header = ({ setViewPort }) => {
     const [header, setHeader] = useState(false);
     const { data: session } = useSession()
     const router = useRouter()
-    const { profileData, getProfileData } = useProfileData()
+    const { getProfileData } = useProfileData()
 
     useEffect(() => {
         const currentPath = window.location.href;
@@ -37,20 +37,22 @@ const Header = ({ setViewPort }) => {
     useEffect(() => {
         if (session && session.id) {
             getProfileData(session.id)
-            console.log('Header Session', session.id)
-            console.log('Header ProfileData', profileData)
+        }
+    }, [session])
+
+    useEffect(() => {
+        if (session && !session.id) {
+            router.push('/Login')
         }
     }, [session])
 
 
-    if (session && !session.id) {
-        router.push('/Login')
-    }
-
     return (
         <div className="fixed top-0 w-screen bg-red-900 overflow-hidden h-16 flex font-serif justify-between z-10">
-            <div className="flex justify-start">
-                <Image className="w-16 h-16 pl-3 pr-2 py-1" src={Logo} alt="Logo" />
+            <div className="flex justify-start items-center">
+                <div className="w-16 flex p-3 overflow h-full">
+                    <Image width={400} height={300} className="object-cover" src={Logo} alt="Logo" />
+                </div>
                 <span className="text-white md:flex hidden text-2xl items-center">Bulacan State University</span>
             </div>
             {header ? <div className="flex italic text-white pr-4 text-2xl items-center justify-end">

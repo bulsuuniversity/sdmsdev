@@ -9,16 +9,19 @@ import ima2 from "../../public/ima2.jpeg"
 import ima3 from "../../public/ima3.jpeg"
 import { useState, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useProfileData } from "./libs/store";
+import ConfirmationModal from "@/utils/ConfirmationModal";
 
 const Home = () => {
   const [viewPort, setViewPort] = useState(null);
   const [setUp, setSetup] = useState(false)
+  const { profileData } = useProfileData()
 
   const { data: session } = useSession();
 
-    useEffect(() => {
-        console.log('Home page session', session)
-    }, [session])
+  useEffect(() => {
+    console.log('Home page session', session)
+  }, [session])
 
   const refs = {
     blogRef: useRef(null),
@@ -40,7 +43,7 @@ const Home = () => {
   return (
     <main>
       <Layout setViewPort={setViewPort}>
-        {session && setUp &&
+        {profileData && !profileData.name && setUp &&
           <ConfirmationModal>
             <div className="flex flex-col w-96 justify-center p-4 justify-center">
               <div className="text-2xl font-bold whitespace-normal text-center ">

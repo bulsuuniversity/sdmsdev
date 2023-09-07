@@ -21,9 +21,53 @@ export const useProfileData = create((set) => ({
       set((state) => ({
         profileData: response.data,
       }));
-      console.log('store', response)
+      console.log('profile data store', response)
     } catch (err) {
       console.log(err);
     }
-  }  
+  }
+}));
+
+
+export const useSelfConsultData = create((set) => ({
+  selfConsultData: "",
+  getSelfConsultData: async (session) => {
+    try {
+      const response = await axios.get(`${url}/api/consultSelf/${session}`, { headers }); 
+        set((state) => ({
+          selfConsultData: response.data,
+        }));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}));
+
+export const useReferConsultData = create((set) => ({
+  referConsultData: "",
+  getReferConsultData: async (session) => {
+    try {
+      const response = await axios.get(`${url}/api/consultReferral/${session}`, { headers }); 
+        set((state) => ({
+          referConsultData: response.data,
+        }));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}));
+
+export const useReportData = create((set) => ({
+  reportData: "",
+  getReportData: async (session) => {
+    try {
+      const response = await axios.get(`${url}/api/studentReport/${session}`, { headers }); 
+        set((state) => ({
+          reportData: response.data,
+        }));
+        console.log('consult report store', response)
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }));

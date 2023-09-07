@@ -13,7 +13,6 @@ cloudinary.config({
 
 export const POST = async (request) => {
     try {
-
         const body = await request.json();
         const {
             reporter,
@@ -23,33 +22,54 @@ export const POST = async (request) => {
             attachment,
             dateOfIncident,
             platformOfIncident,
-            rateOfOccurence,
-            describeTheSituation } = body;
+            rateOfOccurrence,
+            describeTheSituation,
+            status,
+        } = body;
 
-        const uploadResponse = await cloudinary.uploader.upload(attachment, {
-            upload_preset: "bulsu",
-            folder: 'report'
-        });
-        if (uploadResponse.secure_url) {
-            console.log(uploadResponse)
-            const newPost = await prisma.studentreport.create({
+        if (attachment === "empty") {
+            const report = await prisma.studentreport.create({
                 data: {
-                    reporter,
-                    actionOfDiscipline,
-                    offender,
-                    college,
-                    attachment: uploadResponse.secure_url,
-                    dateOfIncident,
-                    platformOfIncident,
-                    rateOfOccurence,
-                    describeTheSituation
+                    reporter: reporter,
+                    actionOfDiscipline: actionOfDiscipline,
+                    offender: offender,
+                    college: college,
+                    attachment: "",
+                    dateOfIncident: dateOfIncident,
+                    platformOfIncident: platformOfIncident,
+                    rateOfOccurence: rateOfOccurrence,
+                    describeTheSituation: describeTheSituation,
+                    status,
                 },
-            })
-            return NextResponse.json({ message: "Registered", newPost })
+            });
+            return NextResponse.json({ message: "Submitted", report });
+        } else {
+            const uploadResponse = await cloudinary.uploader.upload(attachment, {
+                upload_preset: "bulsu",
+                folder: 'report'
+            });
+            console.log(uploadResponse);
+            if (uploadResponse) {
+                const report = await prisma.studentreport.create({
+                    data: {
+                        reporter: reporter,
+                        actionOfDiscipline: actionOfDiscipline,
+                        offender: offender,
+                        college: college,
+                        attachment: uploadResponse.secure_url,
+                        dateOfIncident: dateOfIncident,
+                        platformOfIncident: platformOfIncident,
+                        rateOfOccurence: rateOfOccurrence,
+                        describeTheSituation: describeTheSituation,
+                        status,
+                    },
+                });
+                return NextResponse.json({ message: "Submitted", report });
+            }
         }
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ message: "POST Error", error }, { status: 500 });
+        return NextResponse.json({ message: "Failed to Submit", error }, { status: 500 });
     }
 };
 

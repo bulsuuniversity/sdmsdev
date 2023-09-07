@@ -14,21 +14,12 @@ const handler = NextAuth({
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials) {
-                //   async () => { if (credentials.username && credentials.password) {
-                //         const admin = await prisma.admin.findUnique({
-                //             where: { name: credentials.username }
-                //         });
-                //         if (admin && bcrypt.compareSync(credentials.password, admin.password)) {
-                //             return admin;
-                //         }
-                //     } else if (credentials.email && credentials.password) {
                 const user = await prisma.student.findUnique({
                     where: { email: credentials.email }
                 });
                 if (user && bcrypt.compareSync(credentials.password, user.password)) {
                     return user
                 }
-                // }}
                 return null;
             }
         })

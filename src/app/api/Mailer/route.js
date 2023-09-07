@@ -10,14 +10,14 @@ export async function POST(req) {
     }
     const sixDigitRandomKey = generateRandomKey();
     try {
-        transporter.sendMail({
+       const mailed = transporter.sendMail({
             from: "Student Discipline Management System",
             to: emailData.email,
             subject: emailData.subject,
             text: emailData.message + sixDigitRandomKey,
             html: emailData.html + " " + `<p>${sixDigitRandomKey}</p>`,
         });
-        return NextResponse.json({ msg: "Successfuly Sent ", key: sixDigitRandomKey, message: emailData.message, status: 200 })
+        return NextResponse.json({ key: sixDigitRandomKey, status: 200, data: mailed })
     } catch (error) {
         console.error('Error sending email:', error);
         return NextResponse.json({ error: "Error on '/api/mail': " + error, status: 400 })

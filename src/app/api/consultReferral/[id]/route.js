@@ -1,13 +1,13 @@
-// url: http://localhost:3000/api/studentAccount/${id}
+// url: http://localhost:3000/api/consultReferralAccount/${id}
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
 export const GET = async (request, { params }) => {
     try {
         const { id } = params;
-        const post = await prisma.student.findUnique({
-            where: {
-                id
+        const post = await prisma.consultreferral.findMany({
+            include: {
+                "student.id" : id
             }
         });
         return NextResponse.json(post);
@@ -25,20 +25,15 @@ export const PUT = async (request, { params }) => {
     try {
         const { id } = params
         const body = await request.json();
-        const { editedValues } = body;
-        const updatePost = await prisma.student.update({
+        const { status } = body;
+        const updatePost = await prisma.consultreferral.update({
             where: {
                 id
             },
             data: {
-                name: editedValues.name,
-                phoneNumber: editedValues.phoneNumber,
-                address: editedValues.address,
-                yearLevel: editedValues.yearLevel,
-                college: editedValues.college,
+                status
             }
         })
-
         return NextResponse.json(updatePost);
     } catch (err) {
         console.log(err)
@@ -50,7 +45,7 @@ export const DELETE = async (request, { params }) => {
     try {
         const { id } = params;
 
-        await prisma.student.delete({
+        await prisma.consultreferral.delete({
             where: {
                 id
             }

@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
+import { NextResponse } from 'next/server';
 
-export const PATCH = async (request, { params }) => {
+export const PUT = async (request, { params }) => {
     try {
         const body = await request.json();
         const { password } = body;
@@ -8,24 +9,15 @@ export const PATCH = async (request, { params }) => {
         const saltRounds = 10
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const updatePost = await prisma.studentuser.update({
+        const updatePost = await prisma.student.update({
             where: {
                 id
             },
             data: {
-                hashedPassword
+                password: hashedPassword
             }
         })
-
-        if (!updatePost) {
-            return NextResponse.json(
-                { message: "Post not found", err },
-                { status: 404 }
-            )
-        }
-
         return NextResponse.json(updatePost);
-
     } catch (err) {
         return NextResponse.json({ message: "update Error", err }, { status: 500 })
     }
