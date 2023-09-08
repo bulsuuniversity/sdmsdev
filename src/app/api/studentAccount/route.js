@@ -20,11 +20,7 @@ export const POST = async (request) => {
 
         const saltRounds = 10
 
-        const uploadResponse = await cloudinary.uploader.upload(credentials, {
-            upload_preset: "bulsu",
-            folder: 'credentials'
-        });
-        if (uploadResponse.secure_url) {
+        if (credentials === null) {
             console.log(uploadResponse)
             const hashedPassword = await bcrypt.hash(password, saltRounds);
             const newPost = await prisma.student.create({
@@ -34,11 +30,35 @@ export const POST = async (request) => {
                     idNumber: idNumber,
                     credentials: uploadResponse.secure_url,
                     password: hashedPassword,
-                    role: 'user'
+                    role: 'user',
+                    status: 'Unregistered'
                 },
             })
             return NextResponse.json({ message: "Registered", newPost })
+        } else {
+            const uploadResponse = await cloudinary.uploader.upload(credentials, {
+                upload_preset: "bulsu",
+                folder: 'credentials'
+            });
+            if (uploadResponse.secure_url) {
+                console.log(uploadResponse)
+                const hashedPassword = await bcrypt.hash(password, saltRounds);
+                const newPost = await prisma.student.create({
+                    data: {
+                        email: email,
+                        phoneNumber: phoneNumber,
+                        idNumber: idNumber,
+                        credentials: uploadResponse.secure_url,
+                        password: hashedPassword,
+                        role: 'user'
+                    },
+                })
+                return NextResponse.json({ message: "Registered", newPost })
+            }
         }
+
+
+
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: "POST Error", error }, { status: 500 });

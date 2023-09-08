@@ -14,10 +14,13 @@ const handler = NextAuth({
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials) {
-                const user = await prisma.student.findUnique({
-                    where: { email: credentials.email }
+
+                const user = await prisma.student.findMany({
+                    where: { email: credentials.email, }
                 });
-                if (user && bcrypt.compareSync(credentials.password, user.password)) {
+                console.log("credentials", credentials)
+                console.log("user", user[0].password)
+                if (user && bcrypt.compareSync(credentials.password, user[0].password)) {
                     return user
                 }
                 return null;
@@ -27,7 +30,7 @@ const handler = NextAuth({
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token = user
+                token = user[0]
             }
             return token
         },

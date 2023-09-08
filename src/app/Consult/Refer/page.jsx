@@ -8,9 +8,12 @@ import { useProfileData } from "@/app/libs/store";
 import useLoading from "@/utils/Loading";
 import axios from "axios";
 import { url, headers } from "@/app/libs/api";
+import { formatDate, reverseFormatDate } from "@/utils/formatDate";
+import useConfirmation from "@/utils/ConfirmationHook";
 
 
 const Page = () => {
+    const { showConfirmation, ConfirmationDialog } = useConfirmation()
     const { profileData } = useProfileData()
     const [responseData, setResponseData] = useState()
     const [message, setMessage] = useState(false)
@@ -39,8 +42,7 @@ const Page = () => {
         }
     }, [profileData])
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmitReport = async () => {
         startLoading()
         try {
             const response = await axios.post(`${url}/api/consultReferral`, formData, { headers });
@@ -64,23 +66,24 @@ const Page = () => {
         }
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        showConfirmation('Are you sure you want to submit report?', () => {
+            handleSubmitReport()
+        });
+    };
 
-    function formatDate(inputDate) {
-        const dateParts = inputDate.split('-');
-        if (dateParts.length === 3) {
-            const [year, month, day] = dateParts;
-            return `${month}/${day}/${year}`;
-        }
-        return inputDate;
-    }
+    const [customOption, setCustomOption] = useState(false)
 
-    function reverseFormatDate(formattedDate) {
-        const dateParts = formattedDate.split('/');
-        if (dateParts.length === 3) {
-            const [month, day, year] = dateParts;
-            return `${year}-${month}-${day}`;
+    const handleChangeCollege = (e) => {
+        const selectedValue = e.target.value;
+
+        if (selectedValue === 'others') {
+            setCustomOption(true);
+        } else {
+            handleInputChange('referredStudentCollege', e.target.value)
+            setCustomOption(false);
         }
-        return formattedDate;
     }
 
     return (
@@ -103,6 +106,7 @@ const Page = () => {
                     </ConfirmationModal>}
 
                     <div className="text-sm font-bold">Ticket No.: _______</div>
+                    <ConfirmationDialog />
                     <label className="grid">
                         <p className="text-sm font-bold">Referred Student:</p>
                         <div className="grid gap-2">
@@ -115,7 +119,20 @@ const Page = () => {
                                 onChange={(e) => handleInputChange('referredStudent', e.target.value)}
                                 required
                             />
-                            <input
+                            <select
+                                onChange={handleChangeCollege}
+                                className="border"
+                                required
+                            >
+                                <option value="">Select College</option>
+                                <option value="CBA">CBA</option>
+                                <option value="CIT">CIT</option>
+                                <option value="CoED">CoED</option>
+                                <option value="CICS">CICS</option>
+                                <option value="COE">COE</option>
+                                <option value="others">Others</option>
+                            </select>
+                            {customOption && <input
                                 placeholder="Enter college"
                                 className="border border-2"
                                 type="text"
@@ -123,7 +140,7 @@ const Page = () => {
                                 value={formData.referredStudentCollege}
                                 onChange={(e) => handleInputChange('referredStudentCollege', e.target.value)}
                                 required
-                            />
+                            />}
                         </div>
                     </label>
                     <label className="grid">
@@ -169,6 +186,7 @@ const Page = () => {
                     </label>
                     <div className="flex justify-center">
                         <button
+                            disabled={loading}
                             className={`${loading ? "bg-gray-400" : "bg-amber-200"} font-bold p-2 m-2 w-1/2 border border-black rounded-[1.3rem]`}
                             type="submit">{loading ? "Submitting" : "Submit"}</button>
                     </div>

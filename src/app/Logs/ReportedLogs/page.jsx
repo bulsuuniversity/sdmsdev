@@ -4,9 +4,11 @@ import DataGridView from "@/utils/DataGridView";
 import LogsLayout from "@/components/LogsLayout";
 import { useReportData } from "@/app/libs/store";
 import { useEffect, useState } from "react";
-import ConfirmationModal from "@/utils/ConfirmationModal";
+import InformationModal from "@/utils/InformationModal"; 
 import { AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";
+import { url } from "@/app/libs/api";
+import axios from "axios";
 
 const Page = () => {
     const { reportData } = useReportData()
@@ -53,14 +55,33 @@ const Page = () => {
         setInfo(clcikedInfo)
     }, [clickedID])
 
-    useEffect(() => {
-        console.log(info)
-    }, [info])
+    // cannot delete folders 
+    // const handleDeleteFile = async () => {
+    //     try {
+    //         const response = await axios.delete(`${url}/api/removeFile`, {
+    //             data: {
+    //                 fileName: 'useless.jsx',
+    //                 fileDir: 'src/app',
+    //             },
+    //         });
+    //         console.log(response.data.message);
+    //     } catch (error) {
+    //         console.error('Error deleting file:', error);
+    //     }
+
+    // };
+
+    // const thirtyMinutes = 5 * 60 * 1000;
+    // useEffect(() => {
+    //     const time = setTimeout(handleDeleteFile, thirtyMinutes); 
+    //     return () => clearTimeout(time);
+    // }, []);
+
 
 
     return (
         <LogsLayout>
-            {openInfo && info && <ConfirmationModal>
+            {openInfo && info && <InformationModal>
                 <div className="relative p-6">
                     <div className="absolute -top-4 -right-4">
                         <button
@@ -80,8 +101,8 @@ const Page = () => {
                             </label>
                             <label className="grid">
                                 <p className="font-bold">Offender Details: </p>
-                                <div className="indent-5"> {info.offender}</div>
-                                <div className="indent-5"> {info.college}</div>
+                                <div className="indent-5">Name: {info.offender}</div>
+                                <div className="indent-5">College: {info.college}</div>
                             </label>
                             <label className="flex gap-3">
                                 <p className="font-bold">Date of Incident: </p>
@@ -100,20 +121,28 @@ const Page = () => {
                                 <div> {info.describeTheSituation}</div>
                             </label>
                             <label onClick={() => setSeeImage(true)} className="flex gap-3">
-                                <p className="font-bold">Attachment: </p>
-                                <div>{info.attachment != "" ? "No attachment" : (info.attachment).slice(-8)}</div>
+                                <p className="font-bold">View Attachment: </p>
+                                <div>{info.attachment ? (info.attachment).slice(-8): "No attachment"}</div>
                             </label>
-                            {seeImage && info.attachment != "" && <ConfirmationModal>
-                                <div className="h-96 w-96 object-cover">
-                                    <Image width={500} height={500}
-                                        className="object-cover"
-                                        src={info.attachment} alt="attachment" />
+                            {seeImage && info.attachment !== "" && <InformationModal>
+                                <div className="relative p-6">
+                                    <div className="h-96">
+                                        <Image width={400} height={200}
+                                            className="object-fill h-96 w-96"
+                                            src={info.attachment} alt="attachment" />
+                                    </div>
+                                    <div className="absolute -top-4 -right-4">
+                                        <button
+                                            onClick={() => setSeeImage(false)} className="rounded-full text-red-600 bg-white">
+                                            <AiFillCloseCircle size={30} /></button>
+                                    </div>
+
                                 </div>
-                            </ConfirmationModal>}
+                            </InformationModal>}
                         </div>
                     </div>
                 </div>
-            </ConfirmationModal>}
+            </InformationModal>}
             <div className="mx-10 my-6 border border-blue-400 border-2">
                 {data && data.length > 0 && <DataGridView
                     setOpenINfo={setOpenINfo}

@@ -30,8 +30,8 @@ const Page = () => {
                     password
                 }, { headers });
                 console.log(changed)
+                setResponseData("success")
             }
-            setResponseData("success")
         } catch (error) {
             console.error('An error occurred:', error);
             setResponseData("failed")

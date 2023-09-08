@@ -28,6 +28,12 @@ const Page = () => {
 
     console.log("report data", reportData)
 
+    useEffect(() => {
+        if (profileData && !profileData.id) {
+            router.push('/Login')
+        }
+    }, [profileData])
+
     return (
         <div>
             <LogsLayout />

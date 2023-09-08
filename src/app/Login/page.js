@@ -8,6 +8,7 @@ import AccountModal from "@/utils/AccountModal";
 import ConfirmationModal from "@/utils/ConfirmationModal";
 import useLoading from "@/utils/Loading";
 import { useRouter } from "next/navigation";
+import InformationModal from "@/utils/InformationModal";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,10 +17,7 @@ const Login = () => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false)
   const route = useRouter()
-
-
-
-  // const { data: session, status } = useSession();
+  const [erroring, setError] = useState(false)
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -32,21 +30,24 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
-    await signIn('credentials', {
+    const response = await signIn('credentials', {
       email: email,
-      password: password
+      password: password,
+      redirect: false,
     });
-
+    if (response.error) {
+      setLoading(false)
+      setError(true)
+    }
   };
 
   useEffect(() => {
     if (session) {
       const timer = setTimeout(() => {
         setLoading(false)
-        console.log(session)
         setSuccess(true);
         route.push('/')
-      }, 1000);
+      }, 500);
       return () => {
         clearTimeout(timer);
       };
@@ -62,6 +63,16 @@ const Login = () => {
               <h2 className="text-2xl text-center font-semibold">Login</h2>
               <h4 className="italic py-4 text-center">Please enter the needed information below</h4>
             </div>
+            {erroring &&
+              <InformationModal>
+                <div className="grid p-6 justify-center gap-2">
+                  <p className="text-center w-48">Failed to Login! Please check your email or password.</p>
+                  <div className="flex justify-center">
+                    <button onClick={() => setError(false)}
+                      className="px-4 bg-amber-200 rounded-lg py-2 w-16">Okay</button>
+                  </div>
+                </div>
+              </InformationModal>}
             <form onSubmit={handleSubmit}>
               <div className="mb-4 text-sm">
                 <input
@@ -70,6 +81,7 @@ const Login = () => {
                   value={email}
                   onChange={handleEmailChange}
                   placeholder="EMAIL"
+                  required
                 />
               </div>
               <div className="mb-4">
@@ -79,12 +91,13 @@ const Login = () => {
                   value={password}
                   onChange={handlePasswordChange}
                   placeholder="PASSWORD"
+                  required
                 />
                 <div className="text-blue-500 text-xs text-end">Forgot your password? Click here.</div>
               </div>
               <button
                 type="submit"
-                className={`w-full py-2 my-4 ${loading && 'bg-gray'} px-4 bg-fuchsia-950 text-white hover:bg-blue-600`}
+                className={`w-full py-2 my-4 ${loading ? 'bg-gray-600' : "bg-fuchsia-950 hover:bg-blue-600"} text-white px-4 `}
                 disabled={loading}
               >
                 Log In
@@ -100,7 +113,7 @@ const Login = () => {
           <ConfirmationModal>
             <div className="flex flex-col justify-center p-7 justify-center">
               <div className="text-2xl font-bold whitespace-normal text-center ">
-                {session ? 'LOGIN SUCCESSFUL!': 'LOG OUT SUCCESSFUL!'}
+                {session ? 'LOGIN SUCCESSFUL!' : 'LOG OUT SUCCESSFUL!'}
               </div>
               <div className="text-center italic text-sm">Redirecting you now to the home page.</div>
               <span className="loader" />

@@ -10,7 +10,7 @@ export async function POST(req) {
     }
     const sixDigitRandomKey = generateRandomKey();
     try {
-       const mailed = transporter.sendMail({
+       const mailed = await transporter.sendMail({
             from: "Student Discipline Management System",
             to: emailData.email,
             subject: emailData.subject,

@@ -1,8 +1,12 @@
+"use client"
+
+import AdminMenu from "@/components/AdminMenu";
+
 const page = () => {
     return (
-        <div>
+        <AdminMenu>
             Settings
-        </div>
+        </AdminMenu>
     );
 }
 

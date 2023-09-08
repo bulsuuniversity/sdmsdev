@@ -1,4 +1,5 @@
 "use client"
+
 import Image from "next/image";
 import Logo from "../../public/Logo.png"
 import { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ import Homebutton from "@/utils/Homebutton";
 import Menu from "@/utils/Menu";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useProfileData } from "@/app/libs/store";
 
 const Header = ({ setViewPort }) => {
@@ -22,30 +23,29 @@ const Header = ({ setViewPort }) => {
     const router = useRouter()
     const { getProfileData } = useProfileData()
 
+    const currentPath = usePathname();
+
     useEffect(() => {
-        const currentPath = window.location.href;
-        if (currentPath === "/Admin/Login") {
+        console.log(currentPath)
+        if (currentPath === "/Admin/AdminLogin" || "/Admin/AdminRegister") {
             setHeader(true);
         }
         if (currentPath === "/Login") {
             setActive('button1');
+            setHeader(false);
         } else if (currentPath === "/Register") {
             setActive('button2');
+            setHeader(false);
+        } else {
+            setHeader(false);
         }
-    }, []);
+    }, [currentPath]);
 
     useEffect(() => {
         if (session && session.id) {
             getProfileData(session.id)
         }
     }, [session])
-
-    useEffect(() => {
-        if (session && !session.id) {
-            router.push('/Login')
-        }
-    }, [session])
-
 
     return (
         <div className="fixed top-0 w-screen bg-red-900 overflow-hidden h-16 flex font-serif justify-between z-10">
@@ -55,22 +55,15 @@ const Header = ({ setViewPort }) => {
                 </div>
                 <span className="text-white md:flex hidden text-2xl items-center">Bulacan State University</span>
             </div>
-            {header ? <div className="flex italic text-white pr-4 text-2xl items-center justify-end">
-                <div className="overflow-hidden flex relative items-center h-16">
-                    <div className={`h-0 w-0 
-            border-y-[4rem] border-y-red-900 
-            border-r-[6rem] 
-             ${active === "button1" ? 'border-[#ebac85]' : 'border-orange-300'}
-            `}></div>
-                    <div className={`h-0 w-0 absolute left-11 z-10 
-            border-y-[4rem] border-y-transparent 
-            border-r-[6rem]
-             ${active === "button1" ? 'border-r-[#ebac85]' : 'border-r-red-900'}
-            `}></div>
+            {header ?
+                <div className="flex italic text-white pr-4 text-2xl items-center justify-end">
+                    <div className="overflow-hidden flex relative items-center h-16">
+                        <div className={`h-0 w-0 border-y-[4rem] border-y-red-900 border-r-[6rem] ${active === "button1" ? 'border-[#ebac85]' : 'border-orange-300'}`}></div>
+                        <div className={`h-0 w-0 absolute left-11 z-10 border-y-[4rem] border-y-transparent border-r-[6rem] ${active === "button1" ? 'border-r-[#ebac85]' : 'border-r-red-900'}`}></div>
+                    </div>
+                    <div>Prefect of Discipline
+                    </div>
                 </div>
-                <div>Prefect of Discipline
-                </div>
-            </div>
                 : <>
                     <div className="flex w-full md:hidden cursor-pointer text-white pr-4 text-2xl items-center justify-end">
                         <div onClick={() => setIsOpen(!isopen)}>

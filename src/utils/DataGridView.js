@@ -64,7 +64,6 @@ const DataGridView = ({ headerData, tableData, setClickedID, setOpenINfo }) => {
     }))
 
     const handleRowClick = (row) => {
-        console.log('Row clicked:', row);
         setClickedID(row.one)
         setOpenINfo(true)
     };

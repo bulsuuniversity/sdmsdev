@@ -8,12 +8,13 @@ import { url } from "../libs/api";
 import useLoading from "@/utils/Loading";
 import ConfirmationModal from "@/utils/ConfirmationModal";
 import useConfirmation from "@/utils/ConfirmationHook";
+import { formatDate, reverseFormatDate } from "@/utils/formatDate";
 
 const page = () => {
     const { profileData } = useProfileData()
     const { loading, startLoading, stopLoading } = useLoading()
     const [message, setMessage] = useState()
-    const [confirmation, setConfirmation] = useState()
+    const [confirmation, setConfirmation] = useState(false)
     const { showConfirmation, ConfirmationDialog } = useConfirmation();
     const [reportData, setReportData] = useState({
         reporter: "",
@@ -74,6 +75,18 @@ const page = () => {
             setConfirmation(true)
             setMessage("Thank you for submitting your report")
             stopLoading()
+            setReportData({
+                reporter: "",
+                actionOfDiscipline: '',
+                offender: '',
+                college: "",
+                attachment: '',
+                dateOfIncident: '',
+                platformOfIncident: '',
+                rateOfOccurrence: '',
+                describeTheSituation: '',
+                status: 'Pending',
+            });
         } catch (error) {
             console.error('Error:', error);
             stopLoading()
@@ -86,25 +99,54 @@ const page = () => {
         e.preventDefault();
         showConfirmation('Are you sure you want to submit report?', () => {
             handleSubmit()
+            console.log(reportData)
         });
     };
 
     const handleOk = () => {
         setConfirmation(false)
     }
+
+    const [customOption, setCustomOption] = useState(false)
+    const [customActionOption, setActionCustomOption] = useState(false)
+
+    const handleChangeCollege = (e) => {
+        const selectedValue = e.target.value
+
+        if (selectedValue === 'Others') {
+            setCustomOption(true);
+        } else {
+            handleInputChange("college", selectedValue)
+            setCustomOption(false);
+        }
+    }
+
+    const handleAction = (e) => {
+        const selectedValue = e.target.value
+
+        if (selectedValue === 'Others') {
+            setActionCustomOption(true);
+        } else {
+            handleInputChange("actionOfDiscipline", selectedValue)
+            setActionCustomOption(false);
+        }
+    }
+
     return (
         <Layout>
             <div className="py-4 px-4 md:px-28">
                 {confirmation && <ConfirmationModal>
                     <div className="grid gap-2 m-10">
                         <div>{message}</div>
-                        <button className="bg-amber-100 py-2 px-4 rounded-lg" onClick={handleOk}>Okay</button>
+                        <div className="flex mt-6 justify-center">
+                            <button className="bg-amber-100 py-2 px-4 w-16 rounded-lg" onClick={handleOk}>Okay</button>
+                        </div>
                     </div>
                 </ConfirmationModal>}
                 <ConfirmationDialog />
                 <div className="border grid justify-center border-black border-2 mb-14 md:mb-7 rounded-lg px-2 md:px-6 py-4">
                     <h2 className="text-4xl text-center">Report Form</h2>
-                    <h3 className="text-xs italic grid justify-center">
+                    <h3 className="text-xs italic px-20 pb-4 grid justify-center">
                         Please fill the necessary details denoted by &#40;&#42;&#41;.
                         Other information may be optional, but still providing its details might hasten the process.
                     </h3>
@@ -116,8 +158,7 @@ const page = () => {
                                 <select
                                     className="border-b-2"
                                     name="consultationReason"
-                                    value={reportData.actionOfDiscipline}
-                                    onChange={(e) => handleInputChange('actionOfDiscipline', e.target.value)}
+                                    onChange={handleAction}
                                     required
                                 >
                                     <option value="">Select Action of Discipline</option>
@@ -126,14 +167,21 @@ const page = () => {
                                     <option value="Verbal abuse">Verbal abuse</option>
                                     <option value="Harrassment">Harrassment</option>
                                     <option value="Hateful behavior">Hateful behavior</option>
-                                    <option value="Others">Other/s</option>
+                                    <option value="Others">Others</option>
                                 </select>
+                                {customActionOption && <input
+                                    className="border-b-2"
+                                    placeholder="Action of Discipline"
+                                    type="text"
+                                    value={reportData.actionOfDiscipline}
+                                    onChange={(e) => handleInputChange('actionOfDiscipline', e.target.value)}
+                                />}
                             </label>
                             <label className="grid">
                                 <p className="font-bold text-md">Offender:</p>
                                 <input
                                     className="border-b-2"
-                                    placeholder=""
+                                    placeholder="Offender name"
                                     type="text"
                                     value={reportData.offender}
                                     onChange={(e) => handleInputChange('offender', e.target.value)}
@@ -142,14 +190,26 @@ const page = () => {
                             </label>
                             <label className="grid">
                                 <p className="font-bold text-md"> College:</p>
-                                <input
+                                <select
+                                    onChange={handleChangeCollege}
+                                    className="border"
+                                    required
+                                >
+                                    <option value="">Select offender College</option>
+                                    <option value="CBA">CBA</option>
+                                    <option value="CIT">CIT</option>
+                                    <option value="CoED">CoED</option>
+                                    <option value="CICS">CICS</option>
+                                    <option value="COE">COE</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                                {customOption && <input
                                     className="border-b-2"
                                     placeholder=""
                                     type="text"
                                     value={reportData.college}
                                     onChange={(e) => handleInputChange('college', e.target.value)}
-
-                                />
+                                />}
                             </label>
                             <label className="grid">
                                 <p className="font-bold text-md"> Attachment:</p>
@@ -169,8 +229,11 @@ const page = () => {
                                     className="border-b-2"
                                     placeholder=""
                                     type="date"
-                                    value={reportData.dateOfIncident}
-                                    onChange={(e) => handleInputChange('dateOfIncident', e.target.value)}
+                                    value={reverseFormatDate(reportData.dateOfIncident)}
+                                    onChange={(e) => {
+                                        const formattedDate = formatDate(e.target.value);
+                                        handleInputChange('dateOfIncident', formattedDate);
+                                    }}
                                     required
                                 />
                             </label>
@@ -178,7 +241,7 @@ const page = () => {
                                 <div className="flex font-bold text-md"><p className="text-red-600">&#42;</p> Place/Platform of Incident:</div>
                                 <input
                                     className="border-b-2"
-                                    placeholder=""
+                                    placeholder="Place or platform used"
                                     type="text"
                                     value={reportData.platformOfIncident}
                                     onChange={(e) => handleInputChange('platformOfIncident', e.target.value)}

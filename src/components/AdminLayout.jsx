@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Footer from "./Footer";
-import Header from "./Header";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const AdminLayout = ({ children }) => {
 
@@ -10,7 +11,7 @@ const AdminLayout = ({ children }) => {
         <div className={`w-full`}>
             {children}
             <div className="fixed bottom-0 w-screen">
-                  <Footer />
+                <Footer />
             </div>
         </div>
     );

@@ -3,12 +3,12 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req, { params }) => {
     try {
-        const data = params
-        const post = await prisma.student.findUnique({
+        const email = params
+        const post = await prisma.student.findMany({
             where: {
-                email: data.id
-            }
-        });
+              email: email.id,
+            },
+          })
         return NextResponse.json(post);
     } catch (err) {
         console.log(err)

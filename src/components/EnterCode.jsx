@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import ConfirmationModal from "@/utils/ConfirmationModal";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { url } from "@/app/libs/api";
 
 
 const EnterCode = ({ registerData, sentCode }) => {
@@ -10,6 +11,7 @@ const EnterCode = ({ registerData, sentCode }) => {
     const [xCode, setXCode] = useState(false)
     const [uploading, setUploading] = useState(false)
     const router = useRouter()
+    const currentPathName = usePathname()
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -17,27 +19,31 @@ const EnterCode = ({ registerData, sentCode }) => {
     }
 
     useEffect(() => {
-      const timer = setTimeout(() => {
-        setSubmitted(false)
-      }, 2000); 
-      return () => {
-        router.push("./Login")
-        clearTimeout(timer); 
-      };
+        const timer = setTimeout(() => {
+            setSubmitted(false)
+        }, 1500);
+        return () => {
+            if (currentPathName === "/Register") {
+                    router.push("/Login")
+            } else {
+                router.push("/Admin/AdminLogin")
+            }
+            clearTimeout(timer);
+        };
     }, [submitted]);
-    
+
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': 'sikretong-malupet',
         'Accept': 'application/json',
     };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setUploading(true)
         if (sentCode === code) {
             try {
-                const response = await axios.post('http://localhost:3000/api/studentAccount', registerData, { headers });
+                const response = await axios.post(`${url}/api/studentAccount`, registerData, { headers });
                 console.log('Response:', response.data);
                 setUploading(false)
                 setSubmitted(true)
@@ -58,7 +64,10 @@ const EnterCode = ({ registerData, sentCode }) => {
                     <div className="flex flex-col text-xs justify-center">
                         <h2 className="text-2xl text-center font-semibold">Login</h2>
                         <h4 className="italic text-xs text-center">Please verify if it's you</h4>
-                        <div className="bg-green-300 rounded-full text-center whitespace-normal m-4 p-4">Enter the verification code sent to you</div>
+                        <div className="bg-green-300 rounded-full text-center whitespace-normal mt-4 p-4">
+                            Enter the verification code sent to your email.
+                        </div>
+                        <p className="italic text-xs mb-4">If not received, please check spam emails.</p>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4 text-sm">
@@ -73,10 +82,10 @@ const EnterCode = ({ registerData, sentCode }) => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full py-2 my-4 px-4 bg-blue-500 text-white  hover:bg-blue-600"
+                            className={`${uploading ? 'bg-gray-500' : "bg-purple-800"} w-full py-2 my-3 px-4  text-white  hover:bg-purple-600`}
                             disabled={uploading}
                         >
-                            Submit
+                            {uploading ? "Please wait" : "Submit"}
                         </button>
                     </form>
                 </div>

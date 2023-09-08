@@ -7,6 +7,7 @@ import Layout from "@/components/Layout";
 import Link from "next/link";
 import EnterCode from "@/components/EnterCode";
 import { url, headers } from "../libs/api"
+import InformationModal from "@/utils/InformationModal";
 
 const Register = ({ setActive, setData }) => {
     const closeModal = () => {
@@ -20,6 +21,7 @@ const Register = ({ setActive, setData }) => {
     const [credentials, setCredentials] = useState()
     const [uploading, setUploading] = useState(false)
     const [idNum, setIdNum] = useState("")
+    const [info, setInfo] = useState(false)
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -72,17 +74,24 @@ const Register = ({ setActive, setData }) => {
     const emailData = {
         email: data.email,
         subject: "Key for SDMS Registration",
-        message: "Greetings! This is your registration key. PLease keep it private and do not share to other stdents. Key: ",
-        html: `<p>Greetings! This is your registration key. PLease keep it private and do not share to other stdents. Key: </p>`
+        message: "Greetings! This is your registration key. PLease keep it private and do not share to other students. Key: ",
+        html: `<p>Greetings! This is your registration key. PLease keep it private and do not share to other students. Key: </p>`
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUploading(true);
         try {
-            const sendCode = await axios.post(`${url}/api/Mailer`, emailData, { headers });
-            setCode(sendCode.data.key)
-            setUploading(false)
+            const response = await axios.get(`${url}/api/findByEmail/${data.email}`, { headers });
+            if (Array.isArray(response.data) && response.data.length > 0) {
+                setInfo(true)
+                setUploading(false)
+            } else {
+                const sendCode = await axios.post(`${url}/api/Mailer`, emailData, { headers });
+                console.log(sendCode)
+                setCode(sendCode.data.key)
+                setUploading(false)
+            }
         } catch (error) {
             console.error('Error:', error);
             setUploading(false)
@@ -93,8 +102,16 @@ const Register = ({ setActive, setData }) => {
     return (
         <Layout>
             <AccountModal closeModal={closeModal}>
+                {info && <InformationModal>
+                    <div className="p-6 grid justify-center gap-4">
+                        <div>Email already exist!</div>
+                        <div className="flex justify-center">
+                            <button onClick={() => setInfo(false)} className="bg-amber-600 rounded-lg w-16 py-2 px-4">Okay</button>
+                        </div>
+                    </div>
+                </InformationModal>}
                 {code ?
-                    <EnterCode resendCode={handleSubmit} registerData={data} sentCode={code} /> :
+                    <EnterCode registerData={data} sentCode={code} /> :
                     <div className="bg-white p-6 shadow-lg z-10">
                         <div className="mx-4">
                             <div className="flex flex-col text-xs justify-center">
@@ -175,7 +192,7 @@ const Register = ({ setActive, setData }) => {
                                         className={`w-full py-1 my-1 px-4 ${uploading ? "bg-gray-600" : 'bg-fuchsia-950 hover:bg-blue-600'}  text-white `}
                                         disabled={uploading}
                                     >
-                                        Register
+                                        {uploading ? "Please wait" : "Register"}
                                     </button>
                                     <Link href={'/Login'} onClick={() => setActive('button1')}
                                         className="text-blue-500 cursor-pointer text-xs text-end">

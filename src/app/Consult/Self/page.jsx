@@ -8,8 +8,11 @@ import axios from "axios";
 import ConfirmationModal from "@/utils/ConfirmationModal";
 import { url, headers } from "@/app/libs/api";
 import { useProfileData } from "@/app/libs/store";
+import { formatDate, reverseFormatDate } from "@/utils/formatDate";
+import useConfirmation from "@/utils/ConfirmationHook";
 
 const Page = () => {
+    const { showConfirmation, ConfirmationDialog } = useConfirmation()
     const { profileData } = useProfileData()
     const [responseData, setResponseData] = useState()
     const [message, setMessage] = useState(false)
@@ -36,8 +39,7 @@ const Page = () => {
         }
     }, [profileData])
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmitReport = async () => {
         startLoading()
         try {
             const response = await axios.post(`${url}/api/consultSelf`, formData, { headers });
@@ -57,24 +59,12 @@ const Page = () => {
         }
     };
 
-    function formatDate(inputDate) {
-        const dateParts = inputDate.split('-');
-        if (dateParts.length === 3) {
-            const [year, month, day] = dateParts;
-            return `${month}/${day}/${year}`;
-        }
-        return inputDate;
-    }
-
-    function reverseFormatDate(formattedDate) {
-        const dateParts = formattedDate.split('/');
-        if (dateParts.length === 3) {
-            const [month, day, year] = dateParts;
-            return `${year}-${month}-${day}`;
-        }
-        return formattedDate;
-    }
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        showConfirmation('Are you sure you want to submit report?', () => {
+            handleSubmitReport()
+        });
+    };
 
     return (
         <Layout>
@@ -93,6 +83,7 @@ const Page = () => {
                         </ConfirmationModal>
                     }
                     <div className="">Ticket No.: _______</div>
+                    <ConfirmationDialog />
                     <label className="grid">
                         <p className="font-bold">Reason for consultation:</p>
                         <select
@@ -142,6 +133,7 @@ const Page = () => {
                     </label>
                     <div className="flex justify-center">
                         <button
+                            disabled={loading}
                             className={`${loading ? "bg-gray-600" : "bg-amber-200 "} font-bold p-2 m-2 w-1/2 border border-black rounded-[1.3rem]`}
                             type="submit">{loading ? "Submitting" : "Submit"}</button>
                     </div>

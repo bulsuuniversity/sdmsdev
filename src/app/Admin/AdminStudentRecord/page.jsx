@@ -1,5 +1,6 @@
 "use client"
 
+import AdminMenu from "@/components/DashboardLayout";
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -8,10 +9,9 @@ const page = () => {
 
 
     return (
-        <div>
-           
+        <AdminMenu>
             Student Record
-        </div>
+        </AdminMenu>
     );
 }
 

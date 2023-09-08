@@ -4,7 +4,7 @@ import DataGridView from "@/utils/DataGridView";
 import LogsLayout from "@/components/LogsLayout";
 import { useSelfConsultData } from "@/app/libs/store";
 import { useEffect, useState } from "react";
-import ConfirmationModal from "@/utils/ConfirmationModal";
+import InformationModal from "@/utils/InformationModal";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const Page = () => {
@@ -58,7 +58,7 @@ const Page = () => {
 
     return (
         <LogsLayout>
-            {openInfo && info && <ConfirmationModal>
+            {openInfo && info && <InformationModal>
                 <div className="relative p-6">
                     <div className="absolute -top-4 -right-4">
                         <button
@@ -87,7 +87,7 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
-            </ConfirmationModal>}
+            </InformationModal>}
             <div className="mx-10 my-6 border border-blue-400 border-2">
                 {data && data.length > 0 && <DataGridView
                     setOpenINfo={setOpenINfo}

@@ -1,5 +1,6 @@
 "use client"
 
+import AdminMenu from "@/components/AdminMenu";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 
@@ -21,9 +22,9 @@ const page = () => {
         }
     };
     return (
-        <div>
+        <AdminMenu>
             <button onClick={handleClick}>Create</button>
-        </div>
+        </AdminMenu>
     );
 }
 
