@@ -1,36 +1,34 @@
 import DataTable from 'react-data-table-component';
+import { Media } from 'react-data-table-component';
 
 const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
     const columns = [
         {
-            name: <div className='flex text-center'>STUDENT ID</div>,
-            selector: row => row.idNumber,
+            name: <div className='flex text-center'>TICKET NO.</div>,
+            selector: row => row.ticket,
             sortable: true,
-            cell: (row) => <div onClick={() => handleRowClick(row)} style={{ whiteSpace: 'normal' }}>{row.idNumber}</div>,
+            cell: (row) => <div onClick={() => handleRowClick(row)} style={{ whiteSpace: 'normal' }}>{row.ticket}</div>,
+            hide: Media.SM
         },
         {
-            name: <div className='flex text-center'>EMAIL</div>,
-            selector: row => row.email,
+            name: <div className='flex text-center'>REASON</div>,
+            selector: row => row.reason,
             sortable: true,
-            cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.email}</div>,
+            cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.reason}</div>,
+            hide: Media.SM
         },
         {
-            name: <div className='flex text-center'>NAME</div>,
-            selector: row => row.name,
+            name: <div className='flex text-center'>REQUESTED DATE OF APPOINMENT</div>,
+            selector: row => row.date,
             sortable: true,
-            cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.name}</div>,
+            cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.date}</div>,
         },
         {
-            name: <div className='flex text-center'>COLLEGE</div>,
-            selector: row => row.college,
+            name: <div className='flex text-center'>TYPE OF CONSULTATION</div>,
+            selector: row => row.type,
             sortable: true,
-            cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.college}</div>,
-        },
-        {
-            name: <div className='flex text-center'>YEAR LEVEL</div>,
-            selector: row => row.yearLevel,
-            sortable: true,
-            cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.yearLevel}</div>,
+            cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.type}</div>,
+            hide: Media.SM
         },
         {
             name: <div className='flex text-center'>STATUS</div>,
@@ -39,13 +37,13 @@ const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
             cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.status}</div>,
             conditionalCellStyles: [
                 {
-                    when: (row) => row.status === "Unregistered",
+                    when: (row) => row.status === "Pending",
                     style: {
                         color: 'red',
                     },
                 },
                 {
-                    when: (row) => row.status === "Registered",
+                    when: (row) => row.status === "Cleared",
                     style: {
                         color: 'green',
                     },
@@ -53,18 +51,17 @@ const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
             ],
         },
     ];
-    const data = Object.values(tableData).map((profileData, index) => ({
+    const data = Object.values(tableData).map((consultSelf, index) => ({
         id: index,
-        idNumber: profileData.idNumber,
-        email: profileData.email,
-        name: profileData.name,
-        college: profileData.college,
-        yearLevel: profileData.yearLevel,
-        status: profileData.status,
+        ticket: consultSelf.id,
+        reason: consultSelf.consultationReason,
+        date: consultSelf.appointmentDate,
+        type: consultSelf.consultationType,
+        status: consultSelf.status,
     }))
 
     const handleRowClick = (row) => {
-        setClickedID(row.email)
+        setClickedID(row.ticket)
         setOpenINfo(true)
     };
 

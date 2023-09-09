@@ -1,13 +1,11 @@
 "use client"
 
-import AdminMenu from "@/components/DashboardLayout";
+import AdminMenu from "@/components/AdminMenu";
 import axios from "axios";
 import { useEffect } from "react";
 
-const page = () => {
+const Page = () => {
  
-
-
     return (
         <AdminMenu>
             Student Record
@@ -15,4 +13,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

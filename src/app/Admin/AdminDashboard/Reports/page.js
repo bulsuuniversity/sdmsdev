@@ -1,6 +1,6 @@
 "use client"
 
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from "../DashboardLayout";
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement } from 'chart.js';
 
@@ -39,6 +39,7 @@ const page = () => {
         },
     };
     return (
+        
         <DashboardLayout>
             Reports Percentage
             <div className="flex gap-5">

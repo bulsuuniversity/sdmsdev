@@ -1,4 +1,6 @@
-import DashboardLayout from "@/components/DashboardLayout";
+"use client"
+
+import DashboardLayout from "../DashboardLayout";
 
 const page = () => {
     return (

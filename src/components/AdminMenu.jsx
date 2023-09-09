@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { IoMdMenu } from "react-icons/io";
 import { useSession } from "next-auth/react";
+import { useProfileData } from "@/app/libs/store";
 
 
 const AdminMenu = ({ children }) => {
@@ -20,6 +21,7 @@ const AdminMenu = ({ children }) => {
     const [menuOpen, setMenuOpen] = useState(false)
     const { data: session } = useSession()
     const router = useRouter()
+    const { profileData } = useProfileData()
 
     useEffect(() => {
         setActive(currentPathname)
@@ -27,6 +29,7 @@ const AdminMenu = ({ children }) => {
 
     useEffect(() => {
         console.log("Admin menu session", session)
+        console.log("Admin menu Profile data", profileData)
     }, [session])
 
 
@@ -38,9 +41,11 @@ const AdminMenu = ({ children }) => {
         )
     }
 
-    if (!session) {
-        router.push("/Admin/AdminLogin")
-    }
+    useEffect(() => {
+        if (!session) {
+            router.push("/Admin/AdminLogin")
+        }
+    }, [])
 
     const handleSignOut = (e) => {
         e.preventDefault();
@@ -72,21 +77,25 @@ const AdminMenu = ({ children }) => {
                     </div>
                 }
                 <div className="bg-gray-800 md:block hidden col-span-3 pt-4">
-                    <div className="flex pl-4 text-lg text-purple-600 items-center gap-5"><Image alt="design" height={50} width={50} src={Logo} /> Admin</div>
-                    <p className="text-white whitespace-wrap mx-4">{session && session.email}</p>
+                    <div className="flex pl-4 text-lg text-purple-600 items-center gap-5">
+                        <Image alt="design" height={50} width={50} src={Logo} /> Admin</div>
+                    <div className="w-16 mx-4">
+                        <p className="text-white whitespace-normal">{session && session.email}</p>
+                    </div>
+
                     <ConfirmationDialog />
                     <div className="text-white grid mt-4">
-                        <Link className={`px-4 pl-8 py-2 ${active === "/Admin/AdminDashboard" ? "bg-gray-600" : "hover:bg-gray-600"}`}
+                        <Link className={`mx-2 pl-8 py-2 ${active && active.includes("/Admin/AdminDashboard") ? "bg-gray-600 rounded-lg" : "hover:rounded-lg hover:bg-gray-600"}`}
                             href={'/Admin/AdminDashboard'}>Dashboard</Link>
-                        <Link className={`px-4 pl-8 py-2 ${active === "/Admin/AdminStudentRecord" ? "bg-gray-600" : "hover:bg-gray-600"}`}
+                        <Link className={`mx-2 pl-8 py-2 ${active && active.includes("/Admin/AdminStudentRecord") ? "bg-gray-600 rounded-lg" : "hover:rounded-lg hover:bg-gray-600"}`}
                             href={'/Admin/AdminStudentRecord'}>Student Records</Link>
-                        <Link className={`px-4 pl-8 py-2 ${active === "/Admin/AdminReports" ? "bg-gray-600" : "hover:bg-gray-600"}`}
+                        <Link className={`mx-2 pl-8 py-2 ${active && active.includes("/Admin/AdminReports") ? "bg-gray-600 rounded-lg" : "hover:rounded-lg hover:bg-gray-600"}`}
                             href={'/Admin/AdminReports'}>Reports</Link>
-                        <Link className={`px-4 pl-8 py-2 ${active === "/Admin/AdminCounseling" ? "bg-gray-600" : "hover:bg-gray-600"}`}
+                        <Link className={`mx-2 pl-8 py-2 ${(active && active.includes("/Admin/AdminCounseling")) ? "bg-gray-600 rounded-lg" : "hover:rounded-lg hover:bg-gray-600"}`}
                             href={'/Admin/AdminCounseling'}>Counselling</Link>
-                        <Link className={`px-4 pl-8 py-2 ${active === "/Admin/AdminSettings" ? "bg-gray-600" : "hover:bg-gray-600"}`}
+                        <Link className={`mx-2 pl-8 py-2 ${active && active.includes("/Admin/AdminSettings") ? "bg-gray-600 rounded-lg" : "hover:rounded-lg hover:bg-gray-600"}`}
                             href={'/Admin/AdminSettings'}>Settings</Link>
-                        <Link className="px-4 pl-8 py-2 hover:bg-gray-600" href={'/Admin/AdminSettings'} onClick={handleSignOut}>Logout</Link >
+                        <Link className="mx-2 pl-8 py-2 hover:bg-gray-600 hover:rounded-lg" href={'/Admin/AdminSettings'} onClick={handleSignOut}>Logout</Link >
                     </div>
 
                 </div>

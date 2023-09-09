@@ -1,11 +1,10 @@
 "use client"
 
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from "./DashboardLayout";
 
 const Page = () => {
     return (
         <DashboardLayout>
-            
         </DashboardLayout>
     );
 }

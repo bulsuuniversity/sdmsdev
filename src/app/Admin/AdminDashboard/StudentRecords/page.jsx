@@ -1,13 +1,18 @@
 "use client"
 
 import AdminMenu from "@/components/AdminMenu";
+import DashboardLayout from "../DashboardLayout";
 
 
 const page = () => {
     return (
-        <AdminMenu>
+
+
+        <DashboardLayout>
             Student Records Chart %
-        </AdminMenu>
+        </DashboardLayout>
+
+
     );
 }
 

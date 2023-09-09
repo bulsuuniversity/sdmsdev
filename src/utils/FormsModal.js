@@ -3,7 +3,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 const FormsModal = ({ closeModal, children }) => {
     return (
         <div style={{ backgroundImage: 'URL("/bulacan-state-university.jpg")' }}
-            className={`fixed inset-0 flex bg-no-repeat bg-center flex-col items-center mt-16 justify-center z-50`}>
+            className={`fixed inset-0 flex bg-no-repeat bg-center flex-col items-center mt-16 justify-center z-20`}>
             <div className="relative">
                 <div className="absolute right-0 top-0 flex justify-end ">
                     <button

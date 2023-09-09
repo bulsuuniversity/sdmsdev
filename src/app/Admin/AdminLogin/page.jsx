@@ -59,7 +59,7 @@ const Login = () => {
             const timer = setTimeout(() => {
                 setLoading(false)
                 setSuccess(true);
-                route.push('/Admin')
+                route.push('/Admin/AdminDashboard')
             }, 500);
             return () => {
                 clearTimeout(timer);
