@@ -5,23 +5,23 @@ import useLoading from '@/utils/Loading';
 import useConfirmation from '@/utils/ConfirmationHook';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { MdOutlineEmail } from 'react-icons/md';
+import { url, headers } from '@/app/libs/api';
 
 
-function SendMessage({ suggestions, email, setClose }) {
-    const [message, setMessage] = useState('');
+function SendMessage({ sentEmail, setSentEmail, suggestions, email, setClose }) {
     const [success, setSuccess] = useState(false);
     const { loading, startLoading, stopLoading } = useLoading()
     const { showConfirmation, ConfirmationDialog } = useConfirmation();
 
     const handleChoiceClick = (choice) => {
-        setMessage(choice);
+        setSentEmail(choice);
     };
 
     const emailData = {
         email: email,
         subject: "SDMS Admin",
-        message: message,
-        html: `<p>${message}</p>`
+        message: sentEmail,
+        html: `<p>${sentEmail}</p>`
     }
 
     const handleSubmitReport = async () => {
@@ -30,7 +30,7 @@ function SendMessage({ suggestions, email, setClose }) {
             const sendCode = await axios.post(`${url}/api/AdminSendMail`, emailData, { headers });
             console.log(sendCode)
             setSuccess(true)
-            setMessage("")
+            setSentEmail("")
             stopLoading()
         } catch (error) {
             console.error('Error:', error);
@@ -45,6 +45,11 @@ function SendMessage({ suggestions, email, setClose }) {
         });
     };
 
+    const handleClose = () => {
+        setSuccess(false)
+        setClose()
+    }
+
     return (
         <InformationModal>
             <div className="relative text-lg sm:w-80 w-72 md:w-96 rounded-lg grid justify-center bg-gray-300 p-6">
@@ -54,47 +59,53 @@ function SendMessage({ suggestions, email, setClose }) {
                         <AiFillCloseCircle size={30} /></button>
                 </div>
                 <ConfirmationDialog />
+                {loading && <InformationModal>
+                        <div className="grid justify-center p-6">
+                            <div>Sending Message.</div>
+                            <p>Please wait...</p>
+                        </div>
+                    </InformationModal>}
                 {success ?
                     <>
-                        <div className='bg-amber-200 grid gap-4'>
+                        <div className='bg-amber-200 grid p-10 rounded-lg gap-4'>
                             <p>Sent Successfully!</p>
-                            <button onClick={() => setSuccess(false)} className='bg-amber-600 rounded-lg p-4'>Okay</button>
+                            <button onClick={handleClose} className='bg-amber-600 rounded-lg py-2 px-4'>Okay</button>
                         </div>
                     </> :
-                    <><div className='grid bg-gray-100 p-3 rounded-lg'>
+                    <form onSubmit={handleSendEmail}><div className='grid bg-gray-100 p-3 rounded-lg'>
                         <div className='relative grid mb-4'>
                             <label>Message:  </label>
                             <textarea
                                 className='ml-4'
-                                value={message}
-                                onChange={(e) => setMessage(e.target.value)}
+                                value={sentEmail}
+                                onChange={(e) => setSentEmail(e.target.value)}
                                 rows="4"
                                 cols="50"
                                 placeholder="Enter your message..."
+                                required
                             ></textarea>
                             <div className='absolute left-32 -bottom-4'>
-                                <button onClick={() => setMessage("")} className='rounded px-2 bg-red-700 text-white'>Clear</button>
+                                <div onClick={() => setSentEmail("")} className='cursor-pointer rounded px-2 bg-red-700 text-white'>Clear</div>
                             </div>
                         </div>
 
 
                         <div className='grid gap-2 rounded-lg bg-gray-100 divide-y'>
-                            <button className='bg-gray-100 rounded-lg' onClick={() => handleChoiceClick(suggestions.one)}>
+                            <div className='bg-gray-100 cursor-pointer rounded-lg' onClick={() => handleChoiceClick(suggestions.one)}>
                                 {suggestions.one}
-                            </button>
-                            <button className='bg-gray-100 rounded-lg' onClick={() => handleChoiceClick(suggestions.two)}>
+                            </div>
+                            <div className='bg-gray-100 cursor-pointer rounded-lg' onClick={() => handleChoiceClick(suggestions.two)}>
                                 {suggestions.two}
-                            </button>
+                            </div>
                         </div>
                     </div>
-
                         <div className="flex mt-4 justify-center">
-                            <button disabled={loading} onClick={handleSendEmail}
+                            <button disabled={loading} type='submit'
                                 className="bg-amber-400 rounded-full px-4 py-2 flex justify-center items-center">
                                 <MdOutlineEmail size={32} /> {loading ? "Sending" : "SEND MESSAGE"}
                             </button>
                         </div>
-                    </>}
+                    </form>}
             </div>
         </InformationModal>
     );

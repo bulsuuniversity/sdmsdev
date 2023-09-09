@@ -1,13 +1,13 @@
-// url: http://localhost:3000/api/consultselfAccount/${id}
+// url: http://localhost:3000/api/studentAccount/${id}
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
 export const GET = async (request, { params }) => {
     try {
         const { id } = params;
-        const post = await prisma.consultself.findMany({
-            include: {
-                "student.id" : id
+        const post = await prisma.student.findUnique({
+            where: {
+                id
             }
         });
         return NextResponse.json(post);
@@ -24,14 +24,15 @@ export const GET = async (request, { params }) => {
 export const PUT = async (request, { params }) => {
     try {
         const { id } = params
-        const updatePost = await prisma.consultself.update({
+        const updatePost = await prisma.student.update({
             where: {
                 id
             },
             data: {
-                status: "Cleared"
+                status: "Registered"
             }
         })
+
         return NextResponse.json(updatePost);
     } catch (err) {
         console.log(err)
@@ -43,7 +44,7 @@ export const DELETE = async (request, { params }) => {
     try {
         const { id } = params;
 
-        await prisma.consultself.delete({
+        await prisma.student.delete({
             where: {
                 id
             }

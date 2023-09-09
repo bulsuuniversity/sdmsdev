@@ -69,13 +69,14 @@ export const POST = async (request) => {
 
 
 export const GET = async () => {
-    const session = await getServerSession(request)
-
     try {
-        if (session) {
-            const posts = await prisma.student.findMany()
-            return NextResponse.json(posts);
-        }
+        const posts = await prisma.student.findMany({
+            where: {
+                role: "user"
+            }
+        })
+
+        return NextResponse.json(posts);
     } catch (err) {
         console.log(err)
         return NextResponse.json({ message: "GET Error", err }, { status: 500 })

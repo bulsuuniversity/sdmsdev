@@ -1,5 +1,5 @@
 import DataTable from 'react-data-table-component';
-import { Media }from 'react-data-table-component';
+
 
 const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
     const columns = [
@@ -54,14 +54,14 @@ const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
             ],
         },
     ];
-    const data = Object.values(tableData).map((consultSelf, index) => ({
-        id: consultSelf.id,
-        idNumber: consultSelf.student.idNumber,
-        email: consultSelf.student.email,
-        name: consultSelf.student.name,
-        college: consultSelf.student.college,
-        yearLevel: consultSelf.student.yearLevel,
-        status: consultSelf.status,
+    const data = Object.values(tableData).map((account, index) => ({
+        id: account.id,
+        idNumber: account.idNumber,
+        email: account.email,
+        name: account.name,
+        college: account.college,
+        yearLevel: account.yearLevel,
+        status: account.status,
     }))
 
     const handleRowClick = (row) => {

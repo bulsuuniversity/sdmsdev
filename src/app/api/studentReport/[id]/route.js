@@ -24,14 +24,12 @@ export const GET = async (request, { params }) => {
 export const PUT = async (request, { params }) => {
     try {
         const { id } = params
-        const body = await request.json();
-        const { status } = body;
         const updatePost = await prisma.studentreport.update({
             where: {
-                "reporter.id": id
+                id
             },
             data: {
-                status
+                status: 'Cleared',
             }
         })
         return NextResponse.json(updatePost);

@@ -1,5 +1,5 @@
 import DataTable from 'react-data-table-component';
-import { Media } from 'react-data-table-component';
+
 
 const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
     const columns = [
@@ -8,14 +8,14 @@ const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
             selector: row => row.ticket,
             sortable: true,
             cell: (row) => <div onClick={() => handleRowClick(row)} style={{ whiteSpace: 'normal' }}>{row.ticket}</div>,
-            hide: Media.SM
+          
         },
         {
             name: <div className='flex text-center'>REASON</div>,
             selector: row => row.reason,
             sortable: true,
             cell: (row) => <div style={{ whiteSpace: 'normal' }}>{row.reason}</div>,
-            hide: Media.SM
+          
         },
         {
             name: <div className='flex text-center'>REFERRAL DATE</div>,
@@ -78,7 +78,8 @@ const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
             onRowClicked={handleRowClick}
             columns={columns}
             data={data}
-            pagination
+            pagination={tableData.length > 10}
+            responsive
         />
 
     );

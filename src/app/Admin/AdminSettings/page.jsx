@@ -1,12 +1,12 @@
 "use client"
 
-import AdminMenu from "@/components/AdminMenu";
+import Layout from "./Layout";
 
 const page = () => {
     return (
-        <AdminMenu>
-            Settings
-        </AdminMenu>
+        <Layout>
+
+        </Layout>
     );
 }
 
