@@ -16,12 +16,27 @@ const Home = () => {
   const [viewPort, setViewPort] = useState(null);
   const [setUp, setSetup] = useState(false)
   const { profileData } = useProfileData()
+  const [data, setData] = useState()
 
   const { data: session } = useSession();
 
   useEffect(() => {
     console.log('Home page session', session)
   }, [session])
+
+  const getDetails = async () => {
+    try {
+      const details = await axios.get(`${url}/api/HomeAbout/${"64fdc6b73128648258b80c86"}`,
+        { headers });
+      setData(details.data[0])
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    getDetails()
+  }, [])
 
   const refs = {
     blogRef: useRef(null),
@@ -56,9 +71,9 @@ const Home = () => {
             </div>
           </ConfirmationModal>
         }
-        <Blog ref={refs.blogRef} images={images} />
-        <Contact ref={refs.contactRef} />
-        <About ref={refs.aboutRef} />
+        <Blog data={data} ref={refs.blogRef} images={images} />
+        <Contact data={data} ref={refs.contactRef} />
+        <About data={data} ref={refs.aboutRef} />
       </Layout>
     </main>
   );

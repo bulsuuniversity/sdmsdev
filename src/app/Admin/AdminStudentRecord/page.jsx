@@ -115,13 +115,12 @@ const Page = () => {
                     <ConfirmationDialog />
                     {success && <InformationModal>
                         <div className='bg-amber-200 grid p-10 rounded-lg gap-4'>
-                            <p>Cleared Successfully!</p>
+                            <p>Approved Successfully!</p>
                             <button onClick={() => setSuccess(false)} className='bg-amber-600 rounded-lg py-2 px-4'>Okay</button>
                         </div>
                     </InformationModal>}
                     {loading && <InformationModal>
                         <div className="grid justify-center p-6">
-                            <div>Redirecting where you left.</div>
                             <p>Please wait...</p>
                         </div>
                     </InformationModal>}
@@ -180,8 +179,11 @@ const Page = () => {
                             </label>
                         </div>
                     </div>
-                    <div className={`left-32 -bottom-10 flex justify-center gap-4`}>
-                        {info.status === "Unregistered" && <button onClick={handleUpdate} className="bg-green-600 rounded-full p-2"><GiCheckMark size={32} /></button>}
+                    <div className={`absolute left-24 -bottom-8`}>
+                        {info.status !== "Registered" && <button onClick={handleUpdate}
+                            className="bg-green-600 rounded-full p-2">
+                            <div><GiCheckMark size={32} /></div>
+                        </button>}
                     </div>
                 </div>
             </InformationModal>}

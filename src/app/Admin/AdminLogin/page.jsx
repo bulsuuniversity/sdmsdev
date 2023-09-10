@@ -54,18 +54,26 @@ const Login = () => {
     };
 
     useEffect(() => {
-        console.log("session", session)
-        if (session && session.role === "admin") {
-            const timer = setTimeout(() => {
-                setLoading(false)
-                setSuccess(true);
-                route.push('/Admin/AdminDashboard')
-            }, 500);
-            return () => {
-                clearTimeout(timer);
-            };
+        if (session && session.role === "user") {
+          const timer = setTimeout(() => {
+            setLoading(false)
+            setSuccess(true);
+            route.push('/')
+          }, 500);
+          return () => {
+            clearTimeout(timer);
+          };
+        } else if (session && session.role === "admin") {
+          const timer = setTimeout(() => {
+            setLoading(false)
+            setSuccess(true);
+            route.push('/Admin/AdminDashboard')
+          }, 500);
+          return () => {
+            clearTimeout(timer);
+          };
         }
-    }, [session]);
+      }, [session]);
 
     return (
         <Layout>

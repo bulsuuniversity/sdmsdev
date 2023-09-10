@@ -90,7 +90,8 @@ const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
             onRowClicked={handleRowClick}
             columns={columns}
             data={data}
-            pagination
+            pagination={tableData.length > 10}
+            responsive
         />
 
     );

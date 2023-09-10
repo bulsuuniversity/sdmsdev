@@ -42,11 +42,20 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (session) {
+    if (session && session.role === "user") {
       const timer = setTimeout(() => {
         setLoading(false)
         setSuccess(true);
         route.push('/')
+      }, 500);
+      return () => {
+        clearTimeout(timer);
+      };
+    } else if (session && session.role === "admin") {
+      const timer = setTimeout(() => {
+        setLoading(false)
+        setSuccess(true);
+        route.push('/Admin')
       }, 500);
       return () => {
         clearTimeout(timer);

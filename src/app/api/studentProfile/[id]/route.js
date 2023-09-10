@@ -15,10 +15,8 @@ export const PUT = async (request, { params }) => {
         const body = await request.json();
         const { file, prevProfileImage } = body;
 
-
         if (prevProfileImage) {
             await cloudinary.uploader.destroy(prevProfileImage, { invalidate: true });
-
         }
 
         const uploadResponse = await cloudinary.uploader.upload(file, {

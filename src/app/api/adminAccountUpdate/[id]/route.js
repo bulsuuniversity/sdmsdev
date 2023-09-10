@@ -3,62 +3,42 @@ import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
 
-
-export const GET = async (request, { params }) => {
+export const POST = async (request, { params }) => {
     try {
         const { id } = params;
         const body = await request.json();
-        const { password } = body
-
-        const post = await prisma.admin.findUnique({
+        const { current } = body;
+        const post = await prisma.student.findUnique({
             where: {
                 id
             }
         });
-
-        if (post && bcrypt.compareSync(password, user.password)) {
-            return NextResponse.json(post);
-        } else {
-            return NextResponse.json(
-                { message: "Post not found", err },
-                { status: 404 }
-            )
-        }
+        const same = bcrypt.compareSync(current, post.password)
+        return NextResponse.json(same);
     } catch (err) {
+        console.log(err)
         return NextResponse.json({ message: "GET Error", err }, { status: 500 });
     }
 };
 
-export const PATCH = async (request, { params }) => {
+export const PUT = async (request, { params }) => {
     try {
         const { id } = params;
         const body = await request.json();
-        const { name, password, carousel, contactUs, about } = body;
+        const { confirm } = body;
         const saltRounds = 10
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-        const updatePost = await prisma.admin.update({
+        const hashedPassword = await bcrypt.hash(confirm, saltRounds);
+        const updatePost = await prisma.student.update({
             where: {
                 id
             },
             data: {
-                name,
                 password: hashedPassword,
-                carousel,
-                contactUs,
-                about
             }
         })
-
-        if (!updatePost) {
-            return NextResponse.json(
-                { message: "Post not found", err },
-                { status: 404 }
-            )
-        }
-
         return NextResponse.json(updatePost);
-
     } catch (err) {
+        console.log(err)
         return NextResponse.json({ message: "update Error", err }, { status: 500 })
     }
 }

@@ -79,10 +79,6 @@ const AdminMenu = ({ children }) => {
                 <div className="bg-gray-800 md:block hidden col-span-3 pt-4">
                     <div className="flex pl-4 text-lg text-purple-600 items-center gap-5">
                         <Image alt="design" height={50} width={50} src={Logo} /> Admin</div>
-                    <div className="w-16 mx-4">
-                        <p className="text-white whitespace-normal">{session && session.email}</p>
-                    </div>
-
                     <ConfirmationDialog />
                     <div className="text-white grid mt-4">
                         <Link className={`mx-2 pl-8 py-2 ${active && active.includes("/Admin/AdminDashboard") ? "bg-gray-600 rounded-lg" : "hover:rounded-lg hover:bg-gray-600"}`}

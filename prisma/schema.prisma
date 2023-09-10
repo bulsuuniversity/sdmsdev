@@ -29,19 +29,22 @@ model Student {
   updatedAt       DateTime @updatedAt
 }
 
-model Admin {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  password  String
-  carousel  Carousel[]
-  contactUs String?
-  about     String?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+model Home {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  address     String
+  email       String
+  phoneNumber String
+  about       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
-type Carousel {
-  image String?
+model Carousel {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  image     String
+  publicId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Studentreport {
