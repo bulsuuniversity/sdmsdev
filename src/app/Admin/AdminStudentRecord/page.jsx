@@ -1,6 +1,6 @@
 "use client"
 
-import DataGridView from "./Datagridview";
+import StudentRecordDatagridview from "./StudentRecordDatagridview";
 import { useEffect, useState } from "react";
 import InformationModal from "@/utils/InformationModal";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -203,7 +203,7 @@ const Page = () => {
             </InformationModal>}
             <div className="md:mx-10 mx-1 my-10 border border-blue-400 border-2">
                 {data && data.length > 0 ?
-                    <DataGridView
+                    <StudentRecordDatagridview
                         setOpenINfo={setOpenINfo}
                         setClickedID={setClickedID}
                         tableData={data}

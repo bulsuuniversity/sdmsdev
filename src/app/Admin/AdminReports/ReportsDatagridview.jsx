@@ -1,6 +1,6 @@
 import DataTable from 'react-data-table-component';
 
-const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
+const ReportsDatagridview = ({ tableData, setClickedID, setOpenINfo }) => {
     const columns = [
         {
             name: <div className='flex text-center'>TICKET NO.</div>,
@@ -89,4 +89,4 @@ const DataGridView = ({ tableData, setClickedID, setOpenINfo }) => {
     );
 }
 
-export default DataGridView;
+export default ReportsDatagridview;
