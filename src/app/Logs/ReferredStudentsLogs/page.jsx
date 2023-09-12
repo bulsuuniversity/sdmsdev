@@ -46,14 +46,10 @@ const Page = () => {
     ]
 
     useEffect(() => {
-        console.log("click id", clickedID)
         const clcikedInfo = Object.values(referConsultData).find(selfConsul => selfConsul.id === clickedID);
         setInfo(clcikedInfo)
     }, [clickedID])
 
-    useEffect(() => {
-        console.log(info)
-    }, [info])
     return (
         <LogsLayout>
             {openInfo && info && <InformationModal>
@@ -95,11 +91,11 @@ const Page = () => {
                 </div>
             </InformationModal>}
             <div className="mx-10 my-6 border border-blue-400 border-2">
-                {data && data.length > 0 && <DataGridView
+                {data && data.length > 0 ? <DataGridView
                     setOpenINfo={setOpenINfo}
                     setClickedID={setClickedID}
                     headerData={headerData}
-                    tableData={data} />}
+                    tableData={data} />: <div>No Logs Found</div>}
             </div>
         </LogsLayout>
     );

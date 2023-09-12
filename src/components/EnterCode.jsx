@@ -44,7 +44,6 @@ const EnterCode = ({ registerData, sentCode }) => {
         if (sentCode === code) {
             try {
                 const response = await axios.post(`${url}/api/studentAccount`, registerData, { headers });
-                console.log('Response:', response.data);
                 setUploading(false)
                 setSubmitted(true)
             } catch (error) {

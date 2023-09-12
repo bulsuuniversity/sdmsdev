@@ -88,7 +88,6 @@ const Page = () => {
     }, [])
 
     useEffect(() => {
-        console.log("click id", clickedID)
         const clcikedInfo = data && Object.values(data).find(selfConsult => selfConsult.id === clickedID);
         setInfo(clcikedInfo)
     }, [clickedID])
@@ -203,12 +202,12 @@ const Page = () => {
                 </div>
             </InformationModal>}
             <div className="md:mx-10 mx-1 my-10 border border-blue-400 border-2">
-                {data && data.length > 0 &&
+                {data && data.length > 0 ?
                     <DataGridView
                         setOpenINfo={setOpenINfo}
                         setClickedID={setClickedID}
                         tableData={data}
-                    />}
+                    />: <div className="inset-0">No records found</div>}
             </div>
         </AdminMenu>
     );

@@ -47,7 +47,6 @@ const Page = () => {
         try {
             const response = await axios.post(`${url}/api/consultReferral`, formData, { headers });
             setResponseData("Thank you! We will contact you soon about your concern.")
-            console.log(response)
             setFormData({
                 student: "",
                 referredStudent: "",

@@ -48,7 +48,6 @@ export const POST = async (request) => {
                 upload_preset: "bulsu",
                 folder: 'report'
             });
-            console.log(uploadResponse);
             if (uploadResponse) {
                 const report = await prisma.studentreport.create({
                     data: {

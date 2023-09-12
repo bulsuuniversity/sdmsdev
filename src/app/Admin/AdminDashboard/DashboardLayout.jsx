@@ -17,7 +17,6 @@ const DashboardLayout = ({ children }) => {
     const handleSubmit = async () => {
         try {
             const response = await axios.get('http://localhost:3000/api/studentAccount');
-            console.log('Response:', response);
             setResponse(response.data)
         } catch (error) {
             console.error('Error:', error);

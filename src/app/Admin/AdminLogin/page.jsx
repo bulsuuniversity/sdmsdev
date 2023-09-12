@@ -33,7 +33,6 @@ const Login = () => {
         e.preventDefault();
         setLoading(true)
         const emailCheck = await axios.get(`${url}/api/findByEmail/${email}`, { headers });
-        console.log("email check", emailCheck)
         if (Array.isArray(emailCheck.data)
             && emailCheck.data.length > 0
             && emailCheck.data[0].role === "admin") {
@@ -55,25 +54,25 @@ const Login = () => {
 
     useEffect(() => {
         if (session && session.role === "user") {
-          const timer = setTimeout(() => {
-            setLoading(false)
-            setSuccess(true);
-            route.push('/')
-          }, 500);
-          return () => {
-            clearTimeout(timer);
-          };
+            const timer = setTimeout(() => {
+                setLoading(false)
+                setSuccess(true);
+                route.push('/')
+            }, 500);
+            return () => {
+                clearTimeout(timer);
+            };
         } else if (session && session.role === "admin") {
-          const timer = setTimeout(() => {
-            setLoading(false)
-            setSuccess(true);
-            route.push('/Admin/AdminDashboard')
-          }, 500);
-          return () => {
-            clearTimeout(timer);
-          };
+            const timer = setTimeout(() => {
+                setLoading(false)
+                setSuccess(true);
+                route.push('/Admin/AdminDashboard')
+            }, 500);
+            return () => {
+                clearTimeout(timer);
+            };
         }
-      }, [session]);
+    }, [session]);
 
     return (
         <Layout>

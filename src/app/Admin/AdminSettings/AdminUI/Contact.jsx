@@ -18,7 +18,7 @@ const Contact = ({ setOpen }) => {
 
     const getDetails = async () => {
         try {
-            const details = await axios.get(`${url}/api/HomeDetails/${"64fdc6b73128648258b80c86"}`,
+            const details = await axios.get(`${url}/api/HomeDetails/${"650052b5a72ea4301b3147ab"}`,
                 { headers });
             setFormData({
                 location: details.data[0].address,
@@ -30,11 +30,26 @@ const Contact = ({ setOpen }) => {
         }
     }
 
+    // const CreateData = {
+    //     address: "Bulacan",
+    //     email: "email@gmail.com",
+    //     phoneNumber: "02394923",
+    //     about: "sdfsdf"
+    // }
+
+
+    // const createDetails = async () => {
+    //     try {
+    //         await axios.post(`${url}/api/HomeDetails`, CreateData, { headers });
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+    // }
 
     const handleUpdate = async () => {
         startLoading()
         try {
-            await axios.put(`${url}/api/HomeDetails/${"64fdc6b73128648258b80c86"}`,
+            await axios.put(`${url}/api/HomeDetails/${"650052b5a72ea4301b3147ab"}`,
                 formData, { headers });
             setMessage(true)
             stopLoading()
@@ -63,6 +78,9 @@ const Contact = ({ setOpen }) => {
         <InformationModal>
             <ConfirmationDialog />
             <div className="relative p-6 rounded-lg bg-gray-200">
+                {/* <div className="p-6 bg-white">
+                    <button onClick={createDetails} className="bg-blue-600 p-4">Create</button>
+                </div> */}
                 <div className="absolute -top-4 -right-4">
                     <button
                         onClick={() => setOpen("")} className="rounded-full text-red-600 bg-white">

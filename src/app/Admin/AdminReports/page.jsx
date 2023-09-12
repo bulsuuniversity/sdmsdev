@@ -182,12 +182,12 @@ const Page = () => {
                 </div>
             </InformationModal>}
             <div className="md:mx-10 mx-1 my-10 border border-blue-400 border-2">
-                {data && data.length > 0 &&
+                {data && data.length > 0 ?
                     <DataGridView
                         setOpenINfo={setOpenINfo}
                         setClickedID={setClickedID}
                         tableData={data}
-                    />}
+                    /> : <div className="flex inset-0">No records found</div>}
             </div>
         </AdminMenu>
     );

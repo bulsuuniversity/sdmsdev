@@ -4,7 +4,7 @@ import DataGridView from "@/utils/DataGridView";
 import LogsLayout from "@/components/LogsLayout";
 import { useReportData } from "@/app/libs/store";
 import { useEffect, useState } from "react";
-import InformationModal from "@/utils/InformationModal"; 
+import InformationModal from "@/utils/InformationModal";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";
 import { url } from "@/app/libs/api";
@@ -50,7 +50,6 @@ const Page = () => {
     ]
 
     useEffect(() => {
-        console.log("click id", clickedID)
         const clcikedInfo = Object.values(reportData).find(selfConsul => selfConsul.id === clickedID);
         setInfo(clcikedInfo)
     }, [clickedID])
@@ -98,7 +97,7 @@ const Page = () => {
                             </label>
                             <label onClick={() => setSeeImage(true)} className="flex gap-3">
                                 <p className="font-bold">View Attachment: </p>
-                                <div>{info.attachment ? (info.attachment).slice(-8): "No attachment"}</div>
+                                <div>{info.attachment ? (info.attachment).slice(-8) : "No attachment"}</div>
                             </label>
                             {seeImage && info.attachment !== "" && <InformationModal>
                                 <div className="relative p-6">
@@ -120,11 +119,11 @@ const Page = () => {
                 </div>
             </InformationModal>}
             <div className="mx-10 my-6 border border-blue-400 border-2">
-                {data && data.length > 0 && <DataGridView
+                {data && data.length > 0 ? <DataGridView
                     setOpenINfo={setOpenINfo}
                     setClickedID={setClickedID}
                     headerData={headerData}
-                    tableData={data} />}
+                    tableData={data} /> : <div>No Logs Found</div>}
             </div>
         </LogsLayout>
     );

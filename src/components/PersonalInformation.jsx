@@ -45,7 +45,6 @@ const PersonalInformation = () => {
             const response = await
                 axios.put(`${url}/api/studentAccount/${profileData.id}`,
                     { editedValues }, headers);
-            console.log(response)
             getProfileData(profileData.id)
             stopLoading()
         } catch (error) {

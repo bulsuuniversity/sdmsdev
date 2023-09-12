@@ -44,7 +44,6 @@ const Page = () => {
         try {
             const response = await axios.post(`${url}/api/consultSelf`, formData, { headers });
             setResponseData("Thank you! We will contact you soon about your concern.")
-            console.log(response)
             setFormData({
                 consultationReason: "",
                 appointmentDate: "",

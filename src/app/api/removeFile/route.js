@@ -11,7 +11,6 @@ export const DELETE = async (req) => {
       const filePathToDelete = path.join(process.cwd(), fileDir, fileName);
       fs.unlinkSync(filePathToDelete);
       deletedFiles.push(fileName);
-      console.log(`File "${fileName}" deleted successfully`);
     }
 
     return NextResponse.json({ message: "Deleted", deletedFiles });

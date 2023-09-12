@@ -21,7 +21,6 @@ export const POST = async (request) => {
         const saltRounds = 10
 
         if (credentials === null) {
-            console.log(uploadResponse)
             const hashedPassword = await bcrypt.hash(password, saltRounds);
             const newPost = await prisma.student.create({
                 data: {
@@ -41,7 +40,6 @@ export const POST = async (request) => {
                 folder: 'credentials'
             });
             if (uploadResponse.secure_url) {
-                console.log(uploadResponse)
                 const hashedPassword = await bcrypt.hash(password, saltRounds);
                 const newPost = await prisma.student.create({
                     data: {

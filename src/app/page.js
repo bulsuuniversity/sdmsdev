@@ -22,7 +22,7 @@ const Home = () => {
 
   const getDetails = async () => {
     try {
-      const details = await axios.get(`${url}/api/HomeAbout/${"64fdc6b73128648258b80c86"}`,
+      const details = await axios.get(`${url}/api/HomeAbout/${"650052b5a72ea4301b3147ab"}`,
         { headers });
       setData(details.data[0])
     } catch (err) {

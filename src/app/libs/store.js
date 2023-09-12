@@ -64,7 +64,6 @@ export const useReportData = create((set) => ({
         set((state) => ({
           reportData: response.data,
         }));
-        console.log('consult report store', response)
     } catch (err) {
       console.log(err);
     }

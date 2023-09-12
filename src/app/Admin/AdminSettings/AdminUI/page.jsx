@@ -1,12 +1,7 @@
 "use client"
 
-import axios from "axios";
-import { url, headers } from "@/app/libs/api";
 import { useState } from "react";
 import Layout from "../Layout";
-import InformationModal from "@/utils/InformationModal";
-import { AiFillCloseCircle, AiOutlinePlus } from "react-icons/ai";
-import { BsFillTrash3Fill } from "react-icons/bs";
 import Image from "next/image";
 import Carousel from "./Carousel";
 import About from "./About";
@@ -14,9 +9,6 @@ import Contact from "./Contact";
 
 
 const Page = () => {
-    const [setCarousel, setSetCarousel] = useState()
-    const [setContactUs, setSetContactUs] = useState()
-    const [setAboutUs, setSetAboutUs] = useState()
     const [open, setOpen] = useState("")
     return (
         <Layout>

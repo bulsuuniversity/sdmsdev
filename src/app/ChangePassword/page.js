@@ -36,7 +36,6 @@ const Page = () => {
             // console.log(response)
             // if (response.data !== null) {
             const sendCode = await axios.post(`${url}/api/Mailer`, emailData, { headers });
-            console.log(sendCode);
             setSent(true);
             // } else {
             //     setError("No email found!")

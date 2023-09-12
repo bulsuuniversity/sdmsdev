@@ -88,7 +88,6 @@ const Register = ({ setActive, setData }) => {
                 setUploading(false)
             } else {
                 const sendCode = await axios.post(`${url}/api/Mailer`, emailData, { headers });
-                console.log(sendCode)
                 setCode(sendCode.data.key)
                 setUploading(false)
             }

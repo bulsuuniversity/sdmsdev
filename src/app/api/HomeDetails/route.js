@@ -5,7 +5,7 @@ export const POST = async (request) => {
     try {
         const body = await request.json();
         const {
-            location,
+            address,
             email,
             phoneNumber,
             about
@@ -13,7 +13,7 @@ export const POST = async (request) => {
 
         const newPost = await prisma.home.create({
             data: {
-                address: location,
+                address,
                 email,
                 phoneNumber,
                 about

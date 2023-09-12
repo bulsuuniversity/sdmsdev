@@ -26,8 +26,6 @@ const Page = () => {
         getReportData(profileData.id)
     }, [profileData])
 
-    console.log("report data", reportData)
-
     useEffect(() => {
         if (profileData && !profileData.id) {
             router.push('/Login')

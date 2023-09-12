@@ -36,7 +36,6 @@ const page = () => {
         startLoading()
         try {
             const response = await axios.get(`${url}/api/consultSelf`, { headers });
-            console.log("get users", response)
             const responseData = response.data
             setSelf(responseData)
             stopLoading()
@@ -78,8 +77,6 @@ const page = () => {
         Social: self && referral && selSocial + refSocial,
         Others: self && referral && selOthers + refOthers
     }
-
-    console.log("Deppression", consultationAll && consultationAll.Depression)
 
     useEffect(() => {
         handleGetDataSelf()
@@ -165,7 +162,8 @@ const page = () => {
     return (
         <DashboardLayout>
             <div className="bg-blue-100 px-14">
-                {loading ? <div>loading...</div> :
+                {loading && <div>loading...</div>}
+                {self && self.length < 0 ? <div className="inset-0">No Records Found</div> :
                     <div className="overflow-y-auto grid justify-center gap-10 max-h-96 pb-6">
                         <h2 className="font-bold flex py-4 justify-center">
                             REQUEST FOR CONSULTATION

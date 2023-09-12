@@ -67,11 +67,8 @@ const page = () => {
 
     const handleSubmit = async () => {
         startLoading()
-        console.log({ headers })
-        console.log(reportData)
         try {
             const response = await axios.post(`${url}/api/studentReport`, reportData, { headers });
-            console.log(response)
             setConfirmation(true)
             setMessage("Thank you for submitting your report")
             stopLoading()
@@ -99,7 +96,6 @@ const page = () => {
         e.preventDefault();
         showConfirmation('Are you sure you want to submit report?', () => {
             handleSubmit()
-            console.log(reportData)
         });
     };
 

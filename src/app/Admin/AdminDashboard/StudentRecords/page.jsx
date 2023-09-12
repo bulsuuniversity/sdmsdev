@@ -22,7 +22,6 @@ const page = () => {
         startLoading()
         try {
             const response = await axios.get(`${url}/api/studentAccount`, { headers });
-            console.log("get users", response)
             const responseData = response.data
             setUsers(responseData)
             stopLoading()
@@ -168,7 +167,8 @@ const page = () => {
     return (
         <DashboardLayout>
             <div className="bg-blue-100 px-14">
-                {loading ? <div>loading...</div> :
+                {loading && <div>loading...</div>}
+                {users && users.length < 0 ? <div className="inset-0">No records found</div> :
                     <div className="overflow-y-auto grid justify-center gap-10 max-h-96 pb-6">
                         <h2 className="font-bold flex py-4 justify-center">
                             ACCOUNT STATUS

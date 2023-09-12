@@ -34,7 +34,6 @@ const Page = () => {
             if (checkPass.data) {
                 const response = await axios.put(`${url}/api/AdminAccountUpdate/${profileData.id}`,
                     data, { headers })
-                console.log("succes change", response)
                 setSuccess(true)
                 stopLoading()
             }
