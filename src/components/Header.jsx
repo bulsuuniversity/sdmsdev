@@ -39,9 +39,6 @@ const Header = ({ setViewPort }) => {
         }
     }, []);
 
-    console.log(currentPath)
-    console.log(header)
-
     useEffect(() => {
         if (session && session.id) {
             getProfileData(session.id)

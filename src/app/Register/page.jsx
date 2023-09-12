@@ -8,6 +8,7 @@ import Link from "next/link";
 import EnterCode from "@/components/EnterCode";
 import { url, headers } from "../libs/api"
 import InformationModal from "@/utils/InformationModal";
+import { PublicRoute } from "@/components/auth";
 
 const Register = ({ setActive, setData }) => {
     const closeModal = () => {
@@ -99,7 +100,7 @@ const Register = ({ setActive, setData }) => {
 
 
     return (
-        <Layout>
+        <PublicRoute>
             <AccountModal closeModal={closeModal}>
                 {info && <InformationModal>
                     <div className="p-6 grid justify-center gap-4">
@@ -202,7 +203,7 @@ const Register = ({ setActive, setData }) => {
                         </div>
                     </div>}
             </AccountModal>
-        </Layout>
+        </PublicRoute>
     );
 }
 

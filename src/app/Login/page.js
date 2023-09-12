@@ -9,6 +9,7 @@ import ConfirmationModal from "@/utils/ConfirmationModal";
 import useLoading from "@/utils/Loading";
 import { useRouter } from "next/navigation";
 import InformationModal from "@/utils/InformationModal";
+import { PublicRoute } from "@/components/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -64,7 +65,7 @@ const Login = () => {
   }, [session]);
 
   return (
-    <Layout>
+    <PublicRoute>
       <AccountModal>
         <div className="bg-white p-6 shadow-lg z-10">
           <div className="mx-4">
@@ -130,7 +131,7 @@ const Login = () => {
           </ConfirmationModal>
         )}
       </AccountModal>
-    </Layout>
+    </PublicRoute>
   );
 }
 

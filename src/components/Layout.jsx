@@ -7,11 +7,11 @@ const Layout = ({ children, setViewPort }) => {
 
 
     return (
-        <div className="w-full mt-16">
-            <Header setViewPort={setViewPort} />
-            {children}
-            <Footer />
-        </div>
+            <div className="w-full mt-16">
+                <Header setViewPort={setViewPort} />
+                {children}
+                <Footer />
+            </div>
     );
 }
 

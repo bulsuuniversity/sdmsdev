@@ -8,6 +8,7 @@ import {
     useProfileData,
     useReportData
 } from "@/app/libs/store";
+import { PrivateRoute } from "@/components/auth";
 
 const Page = () => {
     const { getSelfConsultData } = useSelfConsultData()
@@ -33,9 +34,11 @@ const Page = () => {
     }, [profileData])
 
     return (
-        <div>
-            <LogsLayout />
-        </div>
+        <PrivateRoute>
+            <div>
+                <LogsLayout />
+            </div>
+        </PrivateRoute>
     );
 }
 
