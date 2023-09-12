@@ -131,6 +131,9 @@ const Page = () => {
             },
         ],
     };
+
+    console.log(reports && reports.length < 0)
+    
     return (
         <DashboardLayout>
             <div className="bg-blue-100 px-14">

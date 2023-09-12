@@ -26,19 +26,21 @@ const Header = ({ setViewPort }) => {
     const currentPath = usePathname();
 
     useEffect(() => {
-        if (currentPath === "/Admin/AdminLogin" || "/Admin/AdminRegister") {
-            setHeader(true);
-        }
         if (currentPath === "/Login") {
             setActive('button1');
             setHeader(false);
         } else if (currentPath === "/Register") {
             setActive('button2');
             setHeader(false);
-        } else {
-            setHeader(false);
+        } else if (currentPath === "/Admin/AdminLogin") {
+            setHeader(true);
+        } else if (currentPath === "/Admin/AdminRegister") {
+            setHeader(true);
         }
     }, []);
+
+    console.log(currentPath)
+    console.log(header)
 
     useEffect(() => {
         if (session && session.id) {

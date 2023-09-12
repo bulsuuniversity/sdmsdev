@@ -36,11 +36,11 @@ const AdminMenu = ({ children }) => {
         )
     }
 
-    // useEffect(() => {
-    //     if (!session) {
-    //         router.push("/Admin/AdminLogin")
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (!session) {
+            router.push("/Admin/AdminLogin")
+        }
+    }, [])
 
     const handleSignOut = (e) => {
         e.preventDefault();
