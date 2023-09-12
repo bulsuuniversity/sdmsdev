@@ -18,8 +18,6 @@ const handler = NextAuth({
                 const user = await prisma.student.findMany({
                     where: { email: credentials.email, }
                 });
-                console.log("credentials", credentials)
-                console.log("user", user[0].password)
                 if (user && bcrypt.compareSync(credentials.password, user[0].password)) {
                     return user
                 }

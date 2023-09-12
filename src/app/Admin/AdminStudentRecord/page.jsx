@@ -9,7 +9,6 @@ import { url, headers } from "@/app/libs/api";
 import axios from "axios";
 import AdminMenu from "@/components/AdminMenu";
 import { GiCheckMark } from "react-icons/gi";
-import { MdOutlineEmail } from "react-icons/md";
 import { FaPeopleLine } from "react-icons/fa6";
 import useConfirmation from "@/utils/ConfirmationHook";
 import useLoading from "@/utils/Loading";
@@ -20,11 +19,15 @@ const Page = () => {
     const [info, setInfo] = useState()
     const [openInfo, setOpenINfo] = useState(false)
     const [data, setData] = useState()
-    const [openMessage, setOpenMessage] = useState(false)
-    const [sentEmail, setSentEmail] = useState()
+    const [imageToView, setImageToView] = useState()
     const [success, setSuccess] = useState(false)
     const { showConfirmation, ConfirmationDialog } = useConfirmation();
     const { startLoading, loading, stopLoading } = useLoading()
+
+    const handleSetImage = (image) => {
+        setImageToView(image)
+        setSeeImage(true)
+    }
 
     const emailData = {
         email: info && info.email,
@@ -37,9 +40,7 @@ const Page = () => {
         startLoading()
         try {
             const sendCode = await axios.post(`${url}/api/AdminSendMail`, emailData, { headers });
-            console.log(sendCode)
             setSuccess(true)
-            setSentEmail("")
             stopLoading()
         } catch (error) {
             console.error('Error:', error);
@@ -75,7 +76,6 @@ const Page = () => {
         try {
             const response = await axios.get(`${url}/api/studentAccount`, { headers });
             setData(response.data)
-            console.log("get accounts", response)
             stopLoading()
         } catch (err) {
             console.log(err);
@@ -86,10 +86,6 @@ const Page = () => {
     useEffect(() => {
         handleGetData()
     }, [])
-
-    useEffect(() => {
-        console.log("data for dtv reports", data)
-    }, [data])
 
     useEffect(() => {
         console.log("click id", clickedID)
@@ -177,8 +173,27 @@ const Page = () => {
                                 <p className="font-bold">Contact No.: </p>
                                 <div> {info.phoneNumber}</div>
                             </label>
+                            <label onClick={() => handleSetImage(info.credentials)} className="flex gap-3">
+                                <p className="font-bold">Attachment: </p>
+                                <div>{info.credentials ? (info.credentials).slice(-8) : "No attachments"}</div>
+                            </label>
                         </div>
                     </div>
+                    {seeImage && info.attachment !== "" && <InformationModal>
+                        <div className="relative p-6">
+                            <div className="h-96">
+                                <Image width={400} height={200}
+                                    className="object-fill h-96 w-96"
+                                    src={imageToView} alt="attachment" />
+                            </div>
+                            <div className="absolute -top-4 -right-4">
+                                <button
+                                    onClick={() => setSeeImage(false)} className="rounded-full text-red-600 bg-white">
+                                    <AiFillCloseCircle size={30} /></button>
+                            </div>
+
+                        </div>
+                    </InformationModal>}
                     <div className={`absolute left-24 -bottom-8`}>
                         {info.status !== "Registered" && <button onClick={handleUpdate}
                             className="bg-green-600 rounded-full p-2">

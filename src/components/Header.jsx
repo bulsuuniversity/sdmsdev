@@ -26,7 +26,6 @@ const Header = ({ setViewPort }) => {
     const currentPath = usePathname();
 
     useEffect(() => {
-        console.log(currentPath)
         if (currentPath === "/Admin/AdminLogin" || "/Admin/AdminRegister") {
             setHeader(true);
         }
@@ -39,13 +38,37 @@ const Header = ({ setViewPort }) => {
         } else {
             setHeader(false);
         }
-    }, [currentPath]);
+    }, []);
 
     useEffect(() => {
         if (session && session.id) {
             getProfileData(session.id)
         }
-    }, [session])
+    }, [])
+
+
+    //  const handleDeleteFile = async () => {
+    //     try {
+    //         const response = await axios.delete(`${url}/api/removeFile`, {
+    //             data: {
+    //                 fileName: ['file1.jsx', 'file2.jsx','file3.jsx' ],
+    //                 fileDir: 'fileToDelete',
+    //                 // fileDir: 'src/fileToDelete',
+    //             },
+    //         });
+    //         console.log(response.data.message);
+    //     } catch (error) {
+    //         console.error('Error deleting file:', error);
+    //     }
+
+    // };
+
+    // const thirtyMinutes = 3 * 60 * 1000;
+    // useEffect(() => {
+    //     const time = setTimeout(handleDeleteFile, thirtyMinutes); 
+    //     return () => clearTimeout(time);
+    // }, []);
+
 
     return (
         <div className="fixed top-0 w-screen bg-red-900 overflow-hidden h-16 flex font-serif justify-between z-10">

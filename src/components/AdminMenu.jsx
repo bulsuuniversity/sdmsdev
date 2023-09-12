@@ -27,11 +27,6 @@ const AdminMenu = ({ children }) => {
         setActive(currentPathname)
     }, [currentPathname])
 
-    useEffect(() => {
-        console.log("Admin menu session", session)
-        console.log("Admin menu Profile data", profileData)
-    }, [session])
-
 
     if (session && session.role !== "admin") {
         return (
@@ -41,11 +36,11 @@ const AdminMenu = ({ children }) => {
         )
     }
 
-    useEffect(() => {
-        if (!session) {
-            router.push("/Admin/AdminLogin")
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!session) {
+    //         router.push("/Admin/AdminLogin")
+    //     }
+    // }, [])
 
     const handleSignOut = (e) => {
         e.preventDefault();

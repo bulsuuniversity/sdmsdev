@@ -55,30 +55,6 @@ const Page = () => {
         setInfo(clcikedInfo)
     }, [clickedID])
 
-    // cannot delete folders 
-    // const handleDeleteFile = async () => {
-    //     try {
-    //         const response = await axios.delete(`${url}/api/removeFile`, {
-    //             data: {
-    //                 fileName: 'useless.jsx',
-    //                 fileDir: 'src/app',
-    //             },
-    //         });
-    //         console.log(response.data.message);
-    //     } catch (error) {
-    //         console.error('Error deleting file:', error);
-    //     }
-
-    // };
-
-    // const thirtyMinutes = 5 * 60 * 1000;
-    // useEffect(() => {
-    //     const time = setTimeout(handleDeleteFile, thirtyMinutes); 
-    //     return () => clearTimeout(time);
-    // }, []);
-
-
-
     return (
         <LogsLayout>
             {openInfo && info && <InformationModal>

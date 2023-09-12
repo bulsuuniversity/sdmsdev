@@ -8,9 +8,10 @@ import ima1 from "../../public/ima1.jpeg"
 import ima2 from "../../public/ima2.jpeg"
 import ima3 from "../../public/ima3.jpeg"
 import { useState, useRef, useEffect } from "react";
-import { useSession } from "next-auth/react";
 import { useProfileData } from "./libs/store";
 import ConfirmationModal from "@/utils/ConfirmationModal";
+import axios from "axios";
+import { url, headers } from "./libs/api";
 
 const Home = () => {
   const [viewPort, setViewPort] = useState(null);
@@ -18,11 +19,6 @@ const Home = () => {
   const { profileData } = useProfileData()
   const [data, setData] = useState()
 
-  const { data: session } = useSession();
-
-  useEffect(() => {
-    console.log('Home page session', session)
-  }, [session])
 
   const getDetails = async () => {
     try {
@@ -71,7 +67,7 @@ const Home = () => {
             </div>
           </ConfirmationModal>
         }
-        <Blog data={data} ref={refs.blogRef} images={images} />
+        <Blog ref={refs.blogRef} images={images} />
         <Contact data={data} ref={refs.contactRef} />
         <About data={data} ref={refs.aboutRef} />
       </Layout>

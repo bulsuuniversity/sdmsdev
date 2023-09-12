@@ -8,7 +8,6 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";
 import { url, headers } from "@/app/libs/api";
 import axios from "axios";
-import AdminMenu from "@/components/AdminMenu";
 import { GiCheckMark } from "react-icons/gi";
 import { MdOutlineEmail } from "react-icons/md";
 import SendMessage from "@/components/SendMessage";
@@ -54,7 +53,6 @@ const Page = () => {
         try {
             const response = await axios.get(`${url}/api/consultSelf`, { headers });
             setData(response.data)
-            console.log(response)
             stopLoading()
         } catch (err) {
             console.log(err);
@@ -67,11 +65,6 @@ const Page = () => {
     }, [])
 
     useEffect(() => {
-        console.log("data for dtgv", data)
-    }, [data])
-
-    useEffect(() => {
-        console.log("click id", clickedID)
         const clcikedInfo = data && Object.values(data).find(selfConsult => selfConsult.id === clickedID);
         setInfo(clcikedInfo)
 

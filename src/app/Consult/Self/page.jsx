@@ -93,12 +93,12 @@ const Page = () => {
                             onChange={(e) => handleInputChange('consultationReason', e.target.value)}
                             required
                         >
-                            <option value="">Select Status</option>
+                            <option value="">Select Reason</option>
                             <option value="Depression">Depression</option>
                             <option value="Anxiety">Anxiety</option>
                             <option value="Family issues">Family issues</option>
                             <option value="Stress">Stress</option>
-                            <option value="Social phobia">Social phobia</option>
+                            <option value="Social-phobia">Social phobia</option>
                             <option value="Others">Other/s</option>
                         </select>
                     </label>

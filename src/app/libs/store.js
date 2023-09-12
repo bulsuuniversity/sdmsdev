@@ -21,7 +21,6 @@ export const useProfileData = create((set) => ({
       set((state) => ({
         profileData: response.data,
       }));
-      console.log('profile data store', response)
     } catch (err) {
       console.log(err);
     }

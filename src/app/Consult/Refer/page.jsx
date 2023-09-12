@@ -153,10 +153,12 @@ const Page = () => {
                             required
                         >
                             <option value="">Select Reason</option>
-                            <option value="Academic Issues">Academic Issues</option>
-                            <option value="Behavioral Concerns">Behavioral Concerns</option>
-                            <option value="Emotional Support">Emotional Support</option>
-                            <option value="Other">Other</option>
+                            <option value="Depression">Depression</option>
+                            <option value="Anxiety">Anxiety</option>
+                            <option value="Family issues">Family issues</option>
+                            <option value="Stress">Stress</option>
+                            <option value="Social-phobia">Social phobia</option>
+                            <option value="Others">Other/s</option>
                         </select>
                     </label>
                     <label className="grid">

@@ -52,7 +52,6 @@ const Page = () => {
         try {
             const response = await axios.get(`${url}/api/consultReferral`, { headers });
             setData(response.data)
-            console.log(response)
             stopLoading()
         } catch (err) {
             console.log(err);
@@ -64,12 +63,8 @@ const Page = () => {
         handleGetData()
     }, [])
 
-    useEffect(() => {
-        console.log("data for referral dtgv", data)
-    }, [data])
 
     useEffect(() => {
-        console.log("click id", clickedID)
         const clcikedInfo = data && Object.values(data).find(selfConsult => selfConsult.id === clickedID);
         setInfo(clcikedInfo)
     }, [clickedID])

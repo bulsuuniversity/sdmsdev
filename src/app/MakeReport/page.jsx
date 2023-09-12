@@ -162,7 +162,7 @@ const page = () => {
                                     required
                                 >
                                     <option value="">Select Action of Discipline</option>
-                                    <option value="Cyberbulliying">Cyberbulliying</option>
+                                    <option value="Cyberbullying">Cyberbullying</option>
                                     <option value="Misinformation">Misinformation</option>
                                     <option value="Verbal abuse">Verbal abuse</option>
                                     <option value="Harrassment">Harrassment</option>

@@ -7,10 +7,12 @@ import Link from "next/link";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import AdminMenu from "../../../components/AdminMenu";
+import { useSession } from "next-auth/react";
 
 const DashboardLayout = ({ children }) => {
     const [response, setResponse] = useState()
     const [dashboard, setDashboard] = useState('')
+    const { data: session } = useSession()
 
     const handleSubmit = async () => {
         try {
@@ -39,7 +41,7 @@ const DashboardLayout = ({ children }) => {
         <AdminMenu>
             <div className="w-full h-full">
                 <div className="w-full p-5 text-md font-bold">
-                    Welcome Back!
+                    Welcome Back! {session && session.email}
                 </div>
                 <div className={`${!children ? "grid gap-16" : "flex gap-4 "} justify-center items-center`}>
                     <div className="text-md font-bold">Dashboard</div>

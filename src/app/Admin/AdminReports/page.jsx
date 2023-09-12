@@ -59,7 +59,6 @@ const Page = () => {
         try {
             const response = await axios.get(`${url}/api/studentReport`, { headers });
             setData(response.data)
-            console.log("get reports", response)
             stopLoading()
         } catch (err) {
             console.log(err);
@@ -71,12 +70,8 @@ const Page = () => {
         handleGetData()
     }, [])
 
-    useEffect(() => {
-        console.log("data for dtv reports", data)
-    }, [data])
 
     useEffect(() => {
-        console.log("click id", clickedID)
         const clcikedInfo = data && Object.values(data).find(selfConsult => selfConsult.id === clickedID);
         setInfo(clcikedInfo)
     }, [clickedID])

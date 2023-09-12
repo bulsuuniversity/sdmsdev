@@ -75,7 +75,6 @@ export const GET = async () => {
                 role: "user"
             }
         })
-
         return NextResponse.json(posts);
     } catch (err) {
         console.log(err)
