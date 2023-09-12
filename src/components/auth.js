@@ -2,6 +2,16 @@ import { useSession } from 'next-auth/react';
 import Header from './Header';
 import Footer from './Footer';
 
+// A wrapper component for public routes
+function PublicRoute({ children }) {
+    return (
+        <>
+            <Header />
+            {children}
+            <Footer />
+        </>)
+}
+
 function PrivateRoute({ children }) {
     const { data: session } = useSession();
 
@@ -29,7 +39,7 @@ function PrivateRouteAdmin({ children }) {
             </>
         )
     } else if (session && session.role !== "admin") {
-        return (
+        return(
             <>
                 <Header />
                 <p>Unauthorized</p>
@@ -40,4 +50,4 @@ function PrivateRouteAdmin({ children }) {
     return <>{children}</>;
 }
 
-export { PrivateRoute, PrivateRouteAdmin };
+export { PublicRoute, PrivateRoute, PrivateRouteAdmin };
