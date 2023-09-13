@@ -6,7 +6,7 @@ export async function POST(req) {
     const emailData = await req.json()
     try {
         const mailed = await transporter.sendMail({
-            from: "Student Discipline Management System",
+            from: "bulsubulacanstateuniversity@gmail.com",
             to: emailData.email,
             subject: emailData.subject,
             text: emailData.message,

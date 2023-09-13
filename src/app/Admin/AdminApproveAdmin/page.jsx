@@ -34,8 +34,8 @@ const Page = () => {
     const emailData = {
         email: info && info.email,
         subject: "SDMS Admin",
-        message: "This is to inform you that your registration account in SDMD is approved by the Admin.",
-        html: `<p>This is to inform you that your registration account in SDMD is approved by the Admin.</p>`
+        message: "This is to inform you that your registration account in SDMS is approved by the Admin.",
+        html: `<p>This is to inform you that your registration account in SDMS is approved by the Admin.</p>`
     }
 
     const sendEmail = async () => {
@@ -122,10 +122,10 @@ const Page = () => {
         <AdminMenu>
             <div className="m-7 flex items-center">
                 <FaPeopleLine size={50} /> <p className="border border-2 border-black h-16 mx-4" />
-                <p className="font-bold text-xl">Reports</p>
+                <p className="font-bold text-xl">Admin Accounts</p>
             </div>
             <div className="flex">
-                <Link href={'/Admin/AdminStudentRecord'} className="font-bold p-4">Student</Link>
+                <Link href={'/Admin/AdminStudentRecord'} className="font-bold p-2">Student</Link>
                 <p className="font-bold border border-black p-2 border-bottom">Admin</p>
             </div>
 
