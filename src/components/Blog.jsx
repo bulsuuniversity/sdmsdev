@@ -75,14 +75,18 @@ const Blog = ({ images }, ref) => {
                     <Slider {...settings}>
                         {carousel ?
                             carousel.map((image, index) => (
-                                <div key={index} className="w-3/4 md:h-[24rem] h-[8rem] object-cover overflow-hidden">
-                                    <Image src={image.image} width={900} height={500} className="object-cover" alt={index} />
+                                <div className="flex justify-center items-center">
+                                    <div key={index} className="w-3/4 md:h-[24rem] h-[8rem] object-cover overflow-hidden">
+                                        <Image src={image.image} width={900} height={500} className="object-cover" alt={index} />
+                                    </div>
                                 </div>
                             ))
                             :
                             images.map((image, index) => (
-                                <div key={index} className="w-3/4 md:h-[24rem] h-[8rem] object-cover overflow-hidden">
-                                    <Image src={image} width={900} height={500} className="object-cover" alt={index} />
+                                <div className="flex justify-center items-center">
+                                    <div key={index} className="w-3/4 md:h-[24rem] h-[8rem] object-cover overflow-hidden">
+                                        <Image src={image} width={900} height={500} className="object-cover" alt={index} />
+                                    </div>
                                 </div>
                             ))}
                     </Slider>
