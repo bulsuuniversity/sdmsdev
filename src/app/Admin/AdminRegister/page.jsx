@@ -70,12 +70,12 @@ const Register = ({ setActive, setData }) => {
         setUploading(true);
         try {
             const response = await axios.get(`${url}/api/findByEmail/${email}`, { headers });
-            if (Array.isArray(response.data) && response.data.length == 1) {
-                const sendCode = await axios.post(`${url}/api/Mailer`, emailData, { headers });
-                setCode(sendCode.data.key)
+            if (Array.isArray(response.data) && response.data.length > 0) {
+                setInfo(true)
                 setUploading(false)
             } else {
-                setInfo(true)
+                const sendCode = await axios.post(`${url}/api/Mailer`, emailData, { headers });
+                setCode(sendCode.data.key)
                 setUploading(false)
             }
         } catch (error) {
