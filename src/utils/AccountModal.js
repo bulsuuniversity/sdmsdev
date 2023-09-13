@@ -3,7 +3,7 @@ import Link from "next/link";
 const AccountModal = ({ children }) => {
     return (
         <div style={{ backgroundImage: 'URL("/bulacan-state-university.jpg")' }}
-            className={`fixed inset-0 flex bg-no-repeat w-screen bg-cover flex-col items-center mt-16 justify-center`}>
+            className={`fixed inset-0 flex bg-no-repeat w-screen h-screen bg-cover flex-col items-center mt-16 justify-center`}>
             <div className="relative">
                 <div className="absolute right-0 top-0 flex justify-end ">
                     <Link

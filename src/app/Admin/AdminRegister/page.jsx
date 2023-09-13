@@ -21,6 +21,7 @@ const Register = ({ setActive, setData }) => {
     const [uploading, setUploading] = useState(false)
     const [idNum, setIdNum] = useState("")
     const [info, setInfo] = useState(false)
+    const [notPassword, setNotPassword] = useState(false)
 
 
     const handleEmailChange = (e) => {
@@ -39,11 +40,21 @@ const Register = ({ setActive, setData }) => {
         setConfirmPassword(e.target.value);
     };
 
+    useEffect(() => {
+        if (password !== confirmPassword) {
+            setNotPassword(true)
+        }
+        if (password === confirmPassword) {
+            setNotPassword(false)
+        }
+    }, [confirmPassword, password])
+
     const data = {
         email: email,
         idNumber: idNum,
         phoneNumber: phoneNumber,
-        password: confirmPassword
+        password: confirmPassword,
+        role: 'admin'
     };
 
 
@@ -145,13 +156,13 @@ const Register = ({ setActive, setData }) => {
                                         required
                                     />
                                 </div>
-                                <button
+                                {notPassword ? <div className="text-red-500 flex text-center">Password do not match</div> : <button
                                     type="submit"
                                     className={`w-full py-1 my-1 px-4 ${uploading ? "bg-gray-600" : 'bg-fuchsia-950 hover:bg-blue-600'}  text-white `}
                                     disabled={uploading}
                                 >
-                                    Register
-                                </button>
+                                    {uploading ? "Please wait" : "Register"}
+                                </button>}
                                 <Link href={'/Admin/AdminLogin'} onClick={() => setActive('button1')}
                                     className="text-blue-500 cursor-pointer text-xs text-end">
                                     Already have an account? Log in here.

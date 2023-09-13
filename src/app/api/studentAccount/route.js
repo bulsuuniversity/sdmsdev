@@ -16,7 +16,7 @@ export const POST = async (request) => {
     try {
 
         const body = await request.json();
-        const { email, idNumber, phoneNumber, credentials, password } = body;
+        const { email, idNumber, phoneNumber, credentials, password, role } = body;
 
         const saltRounds = 10
 
@@ -29,7 +29,7 @@ export const POST = async (request) => {
                     idNumber: idNumber,
                     credentials: uploadResponse.secure_url,
                     password: hashedPassword,
-                    role: 'user',
+                    role: role,
                     status: 'Unregistered'
                 },
             })

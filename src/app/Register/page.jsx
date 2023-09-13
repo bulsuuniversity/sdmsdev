@@ -23,6 +23,7 @@ const Register = ({ setActive, setData }) => {
     const [uploading, setUploading] = useState(false)
     const [idNum, setIdNum] = useState("")
     const [info, setInfo] = useState(false)
+    const [notPassword, setNotPassword] = useState(false)
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -43,6 +44,15 @@ const Register = ({ setActive, setData }) => {
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
     };
+
+    useEffect(() => {
+        if (password !== confirmPassword) {
+            setNotPassword(true)
+        }
+        if (password === confirmPassword) {
+            setNotPassword(false)
+        }
+    }, [confirmPassword, password])
 
     const handlePictureChange = (e) => {
         const file = e.target.files[0];
@@ -68,7 +78,8 @@ const Register = ({ setActive, setData }) => {
         idNumber: idNum,
         phoneNumber: phoneNumber,
         credentials: credentials,
-        password: confirmPassword
+        password: confirmPassword,
+        role: 'user'
     };
 
 
@@ -164,7 +175,7 @@ const Register = ({ setActive, setData }) => {
                                     <div className="mb-4 text-sm">
                                         <input
                                             type="password"
-                                            className="w-full text-xs px-3 py-2 border border-black"
+                                            className={`border ${notPassword ? "border-red-500 border-2" : "border-black"} w-full text-xs px-3 py-2`}
                                             value={confirmPassword}
                                             onChange={handleConfirmPasswordChange}
                                             placeholder="CONFIRM PASSWORD"
@@ -187,13 +198,13 @@ const Register = ({ setActive, setData }) => {
                                             required
                                         />
                                     </div>
-                                    <button
+                                    {notPassword ? <div className="text-red-500 flex text-center">Password do not match</div> : <button
                                         type="submit"
                                         className={`w-full py-1 my-1 px-4 ${uploading ? "bg-gray-600" : 'bg-fuchsia-950 hover:bg-blue-600'}  text-white `}
                                         disabled={uploading}
                                     >
                                         {uploading ? "Please wait" : "Register"}
-                                    </button>
+                                    </button>}
                                     <Link href={'/Login'} onClick={() => setActive('button1')}
                                         className="text-blue-500 cursor-pointer text-xs text-end">
                                         Already have an account? Log in here.

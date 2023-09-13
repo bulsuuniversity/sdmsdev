@@ -1,6 +1,6 @@
 "use client"
 
-import StudentRecordDatagridview from "./StudentRecordDatagridview";
+import AdminDatagridView from "./AdminDatagridView";
 import { useEffect, useState } from "react";
 import InformationModal from "@/utils/InformationModal";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -12,7 +12,7 @@ import { GiCheckMark } from "react-icons/gi";
 import { FaPeopleLine } from "react-icons/fa6";
 import useConfirmation from "@/utils/ConfirmationHook";
 import useLoading from "@/utils/Loading";
-import Link from "next/link";
+import { GrClose } from "react-icons/gr";
 
 const Page = () => {
     const [clickedID, setClickedID] = useState()
@@ -65,6 +65,28 @@ const Page = () => {
         }
     }
 
+    const handleRemoveAccApi = async () => {
+        startLoading()
+        try {
+            const response = await axios.put(`${url}/api/RemoveAccount/${info.id}`,
+                { headers });
+            setData(response.data)
+            sendEmail()
+            stopLoading()
+            setSuccess(true)
+        } catch (err) {
+            console.log(err);
+            stopLoading()
+        }
+    }
+
+    const handleRemoveAcc = (e) => {
+        e.preventDefault();
+        showConfirmation('Are you sure you want to Remove this account?', () => {
+            handleRemoveAccApi()
+        });
+    };
+
     const handleUpdate = (e) => {
         e.preventDefault();
         showConfirmation('Are you sure you want to approve this account?', () => {
@@ -75,7 +97,7 @@ const Page = () => {
     const handleGetData = async () => {
         startLoading()
         try {
-            const response = await axios.get(`${url}/api/studentAccount`, { headers });
+            const response = await axios.get(`${url}/api/AdminAccount`, { headers });
             setData(response.data)
             stopLoading()
         } catch (err) {
@@ -99,12 +121,10 @@ const Page = () => {
         <AdminMenu>
             <div className="m-7 flex items-center">
                 <FaPeopleLine size={50} /> <p className="border border-2 border-black h-16 mx-4" />
-                <p className="font-bold text-xl">Accounts</p>
+                <p className="font-bold text-xl">Reports</p>
             </div>
-            <div className="flex gap-6">
-            <p className="font-bold border border-black pb-2 border-bottom">Student</p>
-            <Link href={'/Admin/AdminApproveAdmin'} className="font-bold">Admin</Link>
-            </div>
+            <Link href={'/Admin/AdminStudentRecord'} className="font-bold">Student</Link>
+            <p className="font-bold border border-black pb-2 border-bottom">Admin</p>
             {openInfo && info && <InformationModal>
                 <div className="relative p-6">
                     <div className="absolute -top-4 -right-4">
@@ -199,20 +219,25 @@ const Page = () => {
                         </div>
                     </InformationModal>}
                     <div className={`absolute left-24 -bottom-8`}>
-                        {info.status !== "Registered" && <button onClick={handleUpdate}
-                            className="bg-green-600 rounded-full p-2">
-                            <div><GiCheckMark size={32} /></div>
-                        </button>}
+                        {info.status !== "Registered" ?
+                            <button onClick={handleUpdate}
+                                className="bg-green-600 rounded-full p-2">
+                                <div><GiCheckMark size={32} /></div>
+                            </button> :
+                            <button onClick={handleRemoveAcc}
+                                className="bg-red-600 rounded-full p-2">
+                                <div><GrClose size={32} /></div>
+                            </button>}
                     </div>
                 </div>
             </InformationModal>}
             <div className="md:mx-10 mx-1 my-10 border border-blue-400 border-2">
                 {data && data.length > 0 ?
-                    <StudentRecordDatagridview
+                    <AdminDatagridView
                         setOpenINfo={setOpenINfo}
                         setClickedID={setClickedID}
                         tableData={data}
-                    />: <div className="inset-0">No records found</div>}
+                    /> : <div className="inset-0">No records found</div>}
             </div>
         </AdminMenu>
     );

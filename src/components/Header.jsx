@@ -45,7 +45,6 @@ const Header = ({ setViewPort }) => {
         }
     }, [])
 
-
     //  const handleDeleteFile = async () => {
     //     try {
     //         const response = await axios.delete(`${url}/api/removeFile`, {
@@ -94,7 +93,7 @@ const Header = ({ setViewPort }) => {
 
                         {isopen &&
                             <div className="fixed inset-0 top-16 z-20">
-                                {session ?
+                                {session && session.status === "Registered" && session.role === "user" ?
                                     <div className="bg-red-900 flex flex-col gap-3 p-8 h-screen">
                                         <Homebutton setViewPort={setViewPort} />
                                         <ContactButton setViewPort={setViewPort} />
@@ -112,7 +111,7 @@ const Header = ({ setViewPort }) => {
 
                     </div>
                     <div className="md:flex hidden cursor-pointer text-white text-2xl items-center justify-end">
-                        {session ?
+                        {session && session.role === "user" ?
                             <>
                                 <Homebutton setViewPort={setViewPort} />
                                 <ContactButton setViewPort={setViewPort} />
