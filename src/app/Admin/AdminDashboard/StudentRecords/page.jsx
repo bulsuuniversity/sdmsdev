@@ -94,13 +94,14 @@ const page = () => {
         responsive: true,
         plugins: {
             legend: false,
-            datalabels: {
-                display: 'auto',
-                color: 'black',
-                formatter: (value, context) => {
-                    return `${context.chart.data.labels[context.dataIndex]}: ${registeredUser && Math.round((value / registeredUser.length) * 100)}%`;
-                },
-            },
+            datalabels: false
+            // datalabels: {
+            //     display: 'auto',
+            //     color: 'black',
+            //     formatter: (value, context) => {
+            //         return `${context.chart.data.labels[context.dataIndex]}: ${registeredUser && Math.round((value / registeredUser.length) * 100)}%`;
+            //     },
+            // },
         }
     };
 
@@ -108,13 +109,14 @@ const page = () => {
         responsive: true,
         plugins: {
             legend: false,
-            datalabels: {
-                display: 'auto',
-                color: 'black',
-                formatter: (value, context) => {
-                    return `${context.chart.data.labels[context.dataIndex]}: ${unRegisteredUser && Math.round((value / unRegisteredUser.length) * 100)}%`;
-                },
-            },
+            datalabels: false
+            // datalabels: {
+            //     display: 'auto',
+            //     color: 'black',
+            //     formatter: (value, context) => {
+            //         return `${context.chart.data.labels[context.dataIndex]}: ${unRegisteredUser && Math.round((value / unRegisteredUser.length) * 100)}%`;
+            //     },
+            // },
         }
     };
 

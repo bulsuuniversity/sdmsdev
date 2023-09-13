@@ -133,7 +133,7 @@ const Login = () => {
                     <ConfirmationModal>
                         <div className="flex flex-col justify-center p-7 justify-center">
                             <div className="text-2xl font-bold whitespace-normal text-center ">
-                                {session ? 'LOGIN SUCCESSFUL!' : 'LOG OUT SUCCESSFUL!'}
+                                {session && 'SUCCESSFULL'}
                             </div>
                             <div className="text-center italic text-sm">Redirecting you now to the home page.</div>
                             <span className="loader" />

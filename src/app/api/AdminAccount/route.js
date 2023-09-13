@@ -6,7 +6,7 @@ export const GET = async () => {
     try {
         const posts = await prisma.student.findMany({
             where: {
-                role: "user"
+                role: "admin"
             }
         })
         return NextResponse.json(posts);

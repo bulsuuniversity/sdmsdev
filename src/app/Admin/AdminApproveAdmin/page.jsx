@@ -124,8 +124,11 @@ const Page = () => {
                 <FaPeopleLine size={50} /> <p className="border border-2 border-black h-16 mx-4" />
                 <p className="font-bold text-xl">Reports</p>
             </div>
-            <Link href={'/Admin/AdminStudentRecord'} className="font-bold">Student</Link>
-            <p className="font-bold border border-black pb-2 border-bottom">Admin</p>
+            <div>
+                <Link href={'/Admin/AdminStudentRecord'} className="font-bold">Student</Link>
+                <p className="font-bold border border-black pb-2 border-bottom">Admin</p>
+            </div>
+
             {openInfo && info && <InformationModal>
                 <div className="relative p-6">
                     <div className="absolute -top-4 -right-4">
