@@ -45,7 +45,6 @@ const Header = ({ setViewPort }) => {
         }
     }, [])
 
-    console.log(session)
 
     //  const handleDeleteFile = async () => {
     //     try {
