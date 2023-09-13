@@ -42,7 +42,7 @@ const Menu = ({ }) => {
         showConfirmation('Are you sure you want to Log out?', () => {
             signOut()
         });
-        router.push("/Login")
+        router.push("/")
     };
 
     return (
