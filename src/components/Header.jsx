@@ -45,6 +45,8 @@ const Header = ({ setViewPort }) => {
         }
     }, [])
 
+    console.log(session)
+
     //  const handleDeleteFile = async () => {
     //     try {
     //         const response = await axios.delete(`${url}/api/removeFile`, {

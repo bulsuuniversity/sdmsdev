@@ -13,6 +13,7 @@ import { FaPeopleLine } from "react-icons/fa6";
 import useConfirmation from "@/utils/ConfirmationHook";
 import useLoading from "@/utils/Loading";
 import { GrClose } from "react-icons/gr";
+import Link from "next/link";
 
 const Page = () => {
     const [clickedID, setClickedID] = useState()
