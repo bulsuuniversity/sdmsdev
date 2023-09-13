@@ -102,7 +102,7 @@ const Page = () => {
                 <p className="font-bold text-xl">Accounts</p>
             </div>
             <div className="flex gap-6">
-            <p className="font-bold border border-black pb-2 border-bottom">Student</p>
+            <p className="font-bold border border-black p-2 border-bottom">Student</p>
             <Link href={'/Admin/AdminApproveAdmin'} className="font-bold">Admin</Link>
             </div>
             {openInfo && info && <InformationModal>
