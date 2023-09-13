@@ -69,30 +69,29 @@ const Blog = ({ images }, ref) => {
     };
 
     return (
-        <div ref={ref} className="w-full md:px-0 px-12 md:h-[28rem] h-[11rem]">
+        <div ref={ref} className="w-full md:px-0 px-12 h-[28rem]">
             <div className="flex justify-center items-center">
-                <div className="w-3/4 h-3/4  pt-5">
+                <div className="w-3/4 h-3/4 pt-5">
                     <Slider {...settings}>
                         {carousel ?
                             carousel.map((image, index) => (
-                                <div key={index} className="bg-red-500 grid items-center justify-center">
-                                    <div className="m-auto h-[28rem] overflow-hidden object-cover w-[28rem]">
-                                        <Image src={image.image} width={900} height={500} className="mt-6 object-cover" alt={index} />
+                                <div key={index} className="grid items-center justify-center">
+                                    <div className="m-auto md:h-[24rem] h-52 overflow-hidden object-cover w-[28rem]">
+                                        <Image src={image.image} width={500} height={500} className="mt-6 object-cover" alt={index} />
                                     </div>
                                 </div>
                             ))
                             :
                             images.map((image, index) => (
-                                <div key={index} className="bg-red-500 grid items-center justify-center">
-                                    <div className="m-auto h-[28rem] overflow-hidden object-cover w-[28rem]">
-                                        <Image src={image} width={900} height={500} className="object-cover" alt={index} />
+                                <div key={index} className="grid items-center justify-center">
+                                    <div className="m-auto md:h-[24rem] h-52 overflow-hidden object-cover w-[28rem]">
+                                        <Image src={image} width={500} height={500} className="mt-6 object-cover" alt={index} />
                                     </div>
                                 </div>
                             ))}
                     </Slider>
                 </div>
             </div>
-
         </div>
     );
 };
