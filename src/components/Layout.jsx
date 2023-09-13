@@ -12,7 +12,9 @@ const Layout = ({ children, setViewPort }) => {
             <div className="w-full mt-16">
                 <Header setViewPort={setViewPort} />
                 {children}
-                <Footer />
+                <div className="fixed bottom-0 w-full">
+                    <Footer />
+                </div>
             </div>
         </PublicRoute>
     );

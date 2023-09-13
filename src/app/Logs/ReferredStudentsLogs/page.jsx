@@ -2,13 +2,14 @@
 
 import DataGridView from "@/utils/DataGridView";
 import LogsLayout from "@/components/LogsLayout";
-import { useReferConsultData } from "@/app/libs/store";
+import { useProfileData, useReferConsultData } from "@/app/libs/store";
 import { useEffect, useState } from "react";
 import InformationModal from "@/utils/InformationModal";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const Page = () => {
     const { referConsultData } = useReferConsultData()
+    const { profileData } = useProfileData()
     const [clickedID, setClickedID] = useState()
     const [info, setInfo] = useState()
     const [openInfo, setOpenINfo] = useState(false)
@@ -22,9 +23,12 @@ const Page = () => {
             five: "",
         })
 
+    const refer = referConsultData && Object.values(referConsultData).filter(student => student.student.id === profileData.id);
+
+
     useEffect(() => {
-        if (referConsultData) {
-            const formattedData = referConsultData.map((data) => ({
+        if (refer) {
+            const formattedData = refer.map((data) => ({
                 zero: data.referralDate,
                 one: data.id,
                 two: data.referredStudent,
@@ -32,7 +36,7 @@ const Page = () => {
                 four: data.sentMessage,
                 five: data.status,
             }));
-            setData(formattedData) 
+            setData(formattedData)
         }
     }, [])
 
@@ -95,7 +99,7 @@ const Page = () => {
                     setOpenINfo={setOpenINfo}
                     setClickedID={setClickedID}
                     headerData={headerData}
-                    tableData={data} />: <div>No Logs Found</div>}
+                    tableData={data} /> : <div>No Logs Found</div>}
             </div>
         </LogsLayout>
     );

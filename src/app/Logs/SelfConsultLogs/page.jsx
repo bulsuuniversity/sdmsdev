@@ -6,8 +6,10 @@ import { useSelfConsultData } from "@/app/libs/store";
 import { useEffect, useState } from "react";
 import InformationModal from "@/utils/InformationModal";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useProfileData } from "@/app/libs/store";
 
 const Page = () => {
+    const { profileData } = useProfileData()
     const { selfConsultData } = useSelfConsultData()
     const [clickedID, setClickedID] = useState()
     const [info, setInfo] = useState()
@@ -22,9 +24,11 @@ const Page = () => {
             five: "",
         })
 
+    const self = selfConsultData && Object.values(selfConsultData).filter(student => student.student.id === profileData.id);
+
     useEffect(() => {
-        if (selfConsultData) {
-            const formattedData = selfConsultData.map((data) => ({
+        if (self) {
+            const formattedData = self.map((data) => ({
                 zero: data.appointmentDate,
                 one: data.id,
                 two: data.consultationType,
@@ -87,7 +91,7 @@ const Page = () => {
                     setOpenINfo={setOpenINfo}
                     setClickedID={setClickedID}
                     headerData={headerData}
-                    tableData={data} />: <div>No Logs Found</div>}
+                    tableData={data} /> : <div>No Logs Found</div>}
             </div>
         </LogsLayout>
     );

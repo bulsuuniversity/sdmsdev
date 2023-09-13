@@ -11,7 +11,7 @@ import {
 import { PrivateRoute } from "@/components/auth";
 
 const Page = () => {
-    const { getSelfConsultData } = useSelfConsultData()
+    const { selfConsultData, getSelfConsultData } = useSelfConsultData()
     const { getReferConsultData } = useReferConsultData()
     const { reportData, getReportData } = useReportData()
     const { profileData } = useProfileData()

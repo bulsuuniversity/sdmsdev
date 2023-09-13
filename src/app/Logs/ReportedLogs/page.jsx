@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 import InformationModal from "@/utils/InformationModal";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";
-import { url } from "@/app/libs/api";
-import axios from "axios";
+import { useProfileData } from "@/app/libs/store";
 
 const Page = () => {
     const { reportData } = useReportData()
+    const { profileData } = useProfileData()
     const [clickedID, setClickedID] = useState()
     const [seeImage, setSeeImage] = useState(false)
     const [info, setInfo] = useState()
@@ -26,9 +26,11 @@ const Page = () => {
             five: "",
         })
 
+    const reports = reportData && Object.values(reportData).filter(student => student.reporter.id === profileData.id);
+
     useEffect(() => {
-        if (reportData) {
-            const formattedData = reportData.map((data) => ({
+        if (reports) {
+            const formattedData = reports.map((data) => ({
                 zero: data.dateOfIncident,
                 one: data.id,
                 two: data.offender,

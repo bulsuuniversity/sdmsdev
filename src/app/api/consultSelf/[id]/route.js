@@ -5,11 +5,7 @@ import { NextResponse } from "next/server";
 export const GET = async (request, { params }) => {
     try {
         const { id } = params;
-        const post = await prisma.consultself.findMany({
-            include: {
-                "student.id" : id
-            }
-        });
+        const post = await prisma.consultself.findMany();
         return NextResponse.json(post);
     } catch (err) {
         console.log(err)
