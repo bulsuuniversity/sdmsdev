@@ -10,11 +10,13 @@ import { signOut } from 'next-auth/react';
 function PublicRoute({ children }) {
     const { data: session } = useSession();
     const router = useRouter()
-    if (session && session.role === 'admin') {
-        useEffect(() => {
+
+    useEffect(() => {
+        if (session && session.role === 'admin') {
             router.push("/Admin")
-        }, [])
-    }
+        }
+    }, [])
+
     return (
         <>
             <Header />
