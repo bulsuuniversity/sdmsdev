@@ -1,6 +1,5 @@
 import { useSession } from 'next-auth/react';
 import Header from './Header';
-import Footer from './Footer';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';

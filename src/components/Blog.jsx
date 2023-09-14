@@ -65,27 +65,27 @@ const Blog = ({ images }, ref) => {
         autoplay: true,
         autoplaySpeed: 2000,
         nextArrow: <Next />,
-        prevArrow: <Prev icon="➡️" />,
+        prevArrow: <Prev />,
     };
 
     return (
-        <div ref={ref} className="w-full md:px-0 px-12 h-[28rem]">
+        <div ref={ref} className="w-full md:px-0 px-12 h-96 md:h-[32rem] 2xl:h-[45rem]">
             <div className="flex justify-center items-center">
                 <div className="w-3/4 h-3/4 pt-5">
                     <Slider {...settings}>
                         {carousel ?
                             carousel.map((image, index) => (
                                 <div key={index} className="grid items-center justify-center">
-                                    <div className="m-auto md:h-[24rem] h-52 overflow-hidden object-cover w-[28rem]">
-                                        <Image src={image.image} width={500} height={500} className="mt-6 object-cover" alt={index} />
+                                    <div className="m-auto 2xl:h-[40rem] 2xl:w-[48rem] md:h-[29rem] h-52 md:h-96 object-fit w-60 md:w-[32rem]">
+                                        <Image src={image.image} width={900} height={700} className="md:pt-24 pt-10 object-contain" alt={index} />
                                     </div>
                                 </div>
                             ))
                             :
                             images.map((image, index) => (
                                 <div key={index} className="grid items-center justify-center">
-                                    <div className="m-auto md:h-[24rem] h-52 overflow-hidden object-cover w-[28rem]">
-                                        <Image src={image} width={500} height={500} className="mt-6 object-cover" alt={index} />
+                                    <div className="m-auto 2xl:h-[40rem] 2xl:w-[48rem] md:h-[29rem] h-52 md:h-96 object-fit w-60 md:w-[32rem]">
+                                        <Image src={image} width={900} height={700} className="md:pt-24 pt-10 object-contain" alt={index} />
                                     </div>
                                 </div>
                             ))}

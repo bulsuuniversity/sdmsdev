@@ -60,7 +60,7 @@ const PersonalInformation = () => {
     };
 
     return (
-        <div>
+        <div className="xl:text-6xl">
             <div className="absolute text-lg -top-2 right-0">
                 <ConfirmationDialog />
                 {edit &&
@@ -79,7 +79,7 @@ const PersonalInformation = () => {
                     <BsExclamationCircle size={32} />
                 </div>}
             </h2>
-            <form className="font-medium md:text-lg text-xs grid md:flex gap-4 ml-6" onSubmit={handleUpdate}>
+            <form className="font-medium md:text-lg xl:text-4xl text-xs grid md:flex gap-4 ml-6" onSubmit={handleUpdate}>
                 <div className="grid">
                     <label htmlFor="name">Name: </label>
                     <label htmlFor="college">College: </label>
