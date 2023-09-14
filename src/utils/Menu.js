@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useProfileData } from '@/app/libs/store';
 import useConfirmation from './ConfirmationHook';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const Menu = ({ }) => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -41,21 +42,34 @@ const Menu = ({ }) => {
         e.preventDefault();
         showConfirmation('Are you sure you want to Log out?', () => {
             signOut()
+            router.push("/")
         });
-        router.push("/")
     };
 
     return (
         <div className={`flex items-center`} ref={profileRef}>
             <span onClick={handleToggleMenu} className="mr-7">
-                <div className='hidden md:block'><BsPersonCircle size={45} /></div>
+                <div className='hidden md:block'>
+                    {/* {profileData && profileData.profile ? */}
+                    <div className="w-40 h-40 rounded-full overflow-hidden ">
+                        <Image alt="profile"
+                            src={profileData.profile ? profileData.profile : "https://res.cloudinary.com/dckxajww8/image/upload/v1693269023/icons/profile_2_cotaml.png"}
+                            width={500}
+                            height={500}
+                            className="object-cover"
+                        />
+                    </div>
+                    {/* :
+                        <BsPersonCircle size={45} />
+                    } */}
+                </div>
                 <div className='md:hidden block'>Profile</div>
             </span>
             {menuOpen && (
                 <div className="fixed top-8 right-2 flex flex-col">
                     <div className='relative right-52 top-0'>
                         <div className="absolute top-0 -right-52 scale-y-[-1] text-blue-600">
-                            <RiNavigationFill size={38} style={{ rotate: '45deg' }} />
+                            <RiNavigationFill size={38} className='rotate-45' />
                         </div>
                         <ConfirmationDialog />
                         <div className="absolute top-8 w-max">
