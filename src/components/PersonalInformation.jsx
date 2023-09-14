@@ -62,7 +62,6 @@ const PersonalInformation = () => {
     return (
         <div className="xl:text-6xl">
             <div className="absolute text-lg -top-2 right-0">
-                <ConfirmationDialog />
                 {edit &&
                     <button
                         onClick={() => setEdit(false)}
@@ -87,6 +86,7 @@ const PersonalInformation = () => {
                     <label htmlFor="phoneNumber">Contact No.: </label>
                     <label htmlFor="yearLevel">Year Level: </label>
                 </div>
+                <ConfirmationDialog />
                 <div className="grid gap-1">
                     <input
                         value={editedValues.name === null ? " " : editedValues.name}

@@ -71,18 +71,9 @@ const Page = () => {
                 <form className="md:col-span-2 col-span-1 grid gap-4 border border-black border-2 mx-0 md:mx-24 px-4 md:px-12 py-4 bg-white rounded-lg" onSubmit={handleSubmit}>
                     <h2 className="text-2xl text-center font-bold">SELF-CONSULTATION REQUEST FORM</h2>
                     <p className="text-xs text-center italic">Please fill out the needed details for the request</p>
-                    {message &&
-                        <ConfirmationModal>
-                            <div className="grid gap-4 p-4 justify-center items-center">
-                                <div className="text-2xl w-full sm:w-72 text-center whitespace-normal font-bold">{responseData}</div>
-                                <div className="flex justify-center">
-                                    <button onClick={() => setMessage(false)} className="p-2 w-14 bg-amber-200 rounded-lg">Okay</button>
-                                </div>
-                            </div>
-                        </ConfirmationModal>
-                    }
+                   
                     <div className="">Ticket No.: _______</div>
-                    <ConfirmationDialog />
+                
                     <label className="grid">
                         <p className="font-bold">Reason for consultation:</p>
                         <select
@@ -116,6 +107,17 @@ const Page = () => {
                             required
                         />
                     </label>
+                    {message &&
+                        <ConfirmationModal>
+                            <div className="grid gap-4 p-4 justify-center items-center">
+                                <div className="text-2xl w-full sm:w-72 text-center whitespace-normal font-bold">{responseData}</div>
+                                <div className="flex justify-center">
+                                    <button onClick={() => setMessage(false)} className="p-2 w-14 bg-amber-200 rounded-lg">Okay</button>
+                                </div>
+                            </div>
+                        </ConfirmationModal>
+                    }
+                        <ConfirmationDialog />
                     <label className="grid">
                         <p className="font-bold">Type of consultation:</p>
                         <select

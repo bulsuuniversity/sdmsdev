@@ -95,17 +95,10 @@ const Page = () => {
                     <h2 className="text-2xl whitespace-normal text-center font-bold">REFERRAL CONSULTATION FORM</h2>
                     <p className="text-xs whitespace-normal text-center italic">Please provide the details for the referral</p>
 
-                    {message && <ConfirmationModal>
-                        <div className="p-6 grid gap-4">
-                            <div>{responseData}</div>
-                            <div className="flex justify-center">
-                                <button onClick={() => setMessage(false)} className="bg-amber-300 py-2 px-4 rounded-lg">Okay</button>
-                            </div>
-                        </div>
-                    </ConfirmationModal>}
+
 
                     <div className="text-sm font-bold">Ticket No.: _______</div>
-                    <ConfirmationDialog />
+
                     <label className="grid">
                         <p className="text-sm font-bold">Referred Student:</p>
                         <div className="grid gap-2">
@@ -131,6 +124,15 @@ const Page = () => {
                                 <option value="COE">COE</option>
                                 <option value="others">Others</option>
                             </select>
+                            {message && <ConfirmationModal>
+                                <div className="p-6 grid gap-4">
+                                    <div>{responseData}</div>
+                                    <div className="flex justify-center">
+                                        <button onClick={() => setMessage(false)} className="bg-amber-300 py-2 px-4 rounded-lg">Okay</button>
+                                    </div>
+                                </div>
+                            </ConfirmationModal>}
+                            <ConfirmationDialog />
                             {customOption && <input
                                 placeholder="Enter college"
                                 className="border border-2"

@@ -133,15 +133,7 @@ const page = () => {
         <Layout>
             <PrivateRoute>
                 <div className="py-4 px-4 md:px-28">
-                    {confirmation && <ConfirmationModal>
-                        <div className="grid gap-2 m-10">
-                            <div>{message}</div>
-                            <div className="flex mt-6 justify-center">
-                                <button className="bg-amber-100 py-2 px-4 w-16 rounded-lg" onClick={handleOk}>Okay</button>
-                            </div>
-                        </div>
-                    </ConfirmationModal>}
-                    <ConfirmationDialog />
+
                     <div className="border grid justify-center border-black border-2 mb-14 md:mb-7 rounded-lg px-2 md:px-6 py-4">
                         <h2 className="text-4xl text-center">Report Form</h2>
                         <h3 className="text-xs italic px-20 pb-4 grid justify-center">
@@ -175,6 +167,15 @@ const page = () => {
                                         onChange={(e) => handleInputChange('actionOfDiscipline', e.target.value)}
                                     />}
                                 </label>
+                                {confirmation && <ConfirmationModal>
+                                    <div className="grid gap-2 m-10">
+                                        <div>{message}</div>
+                                        <div className="flex mt-6 justify-center">
+                                            <button className="bg-amber-100 py-2 px-4 w-16 rounded-lg" onClick={handleOk}>Okay</button>
+                                        </div>
+                                    </div>
+                                </ConfirmationModal>}
+                                <ConfirmationDialog />
                                 <label className="grid">
                                     <p className="font-bold text-md">Offender:</p>
                                     <input
