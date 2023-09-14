@@ -15,12 +15,10 @@ const Next = ({ className, style, onClick, }) => {
                 display: "block",
                 background: "transparent",
                 color: 'gray',
-                transform: 'scaleX(-1)',
-                rotate: '270deg'
             }}
             onClick={onClick}
         >
-            <RiNavigationFill size={40} style={{ rotate: '225deg' }} />
+            <RiNavigationFill size={40} className="rotate-[130deg]"/>
         </div>
     );
 };
@@ -34,11 +32,10 @@ const Prev = ({ className, style, onClick }) => {
                 display: "block",
                 background: "transparent",
                 color: 'gray',
-                rotate: '90deg'
             }}
             onClick={onClick}
         >
-            <RiNavigationFill size={40} style={{ rotate: '225deg' }} />
+            <RiNavigationFill size={40} className="-rotate-45" />
         </div>
     );
 };

@@ -184,13 +184,13 @@ const Page = () => {
                         </div>
                     </div>
                     {seeImage && info.attachment !== "" && <InformationModal>
-                        <div className="relative p-6">
-                            <div className="h-96">
-                                <Image width={400} height={200}
-                                    className="object-fill h-96 w-96"
+                        <div className="relative p-10 h-screen w-screen grid justify-center items-center">
+                            <div  onClick={() => setSeeImage(false)} className="m-10 overflow-auto">
+                                <Image width={500} height={500}
+                                    className="p-10 object-fill"
                                     src={imageToView} alt="attachment" />
                             </div>
-                            <div className="absolute -top-4 -right-4">
+                            <div className="absolute top-2 right-2">
                                 <button
                                     onClick={() => setSeeImage(false)} className="rounded-full text-red-600 bg-white">
                                     <AiFillCloseCircle size={30} /></button>
