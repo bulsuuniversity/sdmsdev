@@ -106,7 +106,6 @@ const Page = () => {
             setMessage("Account removed!")
             stopLoading()
             setSuccess(true)
-            setOpenINfo(false)
         } catch (err) {
             console.log(err);
             stopLoading()
@@ -120,6 +119,10 @@ const Page = () => {
         });
     };
 
+    const handleClose = () => {
+        setSuccess(false)
+        setOpenINfo(false)
+    }
 
     return (
         <AdminMenu>
@@ -142,7 +145,7 @@ const Page = () => {
                     {success && <InformationModal>
                         <div className='bg-amber-200 grid p-10 rounded-lg gap-4'>
                             <p>{message}</p>
-                            <button onClick={() => setSuccess(false)} className='bg-amber-600 rounded-lg py-2 px-4'>Okay</button>
+                            <button onClick={handleClose} className='bg-amber-600 rounded-lg py-2 px-4'>Okay</button>
                         </div>
                     </InformationModal>}
                     {loading && <InformationModal>

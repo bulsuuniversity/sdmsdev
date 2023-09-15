@@ -90,8 +90,11 @@ function PrivateRouteAdmin({ children }) {
         return (
             <>
                 <Header />
-                <div className='grid gap-4 my-20'>
+                <div className='grid justify-center items-center gap-4 my-20'>
                     <p>Unauthorized</p>
+                    <div>
+                    <iframe src="https://giphy.com/embed/4VY613vurPreyrIHux" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/americangods-season-2-starz-american-gods-4VY613vurPreyrIHux">via GIPHY</a></p>
+                    </div>
                     <p>Please wait for the Admin to approve your account</p>
                     <a href='mailto:bulsubulacanUniversity@gmail.com'>Click to email the Admin</a>                </div>
                 <button onClick={handleLogout}>Log out</button>
