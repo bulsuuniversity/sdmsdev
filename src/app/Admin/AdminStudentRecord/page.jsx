@@ -101,7 +101,7 @@ const Page = () => {
                 <FaPeopleLine size={50} /> <p className="border border-2 border-black h-16 mx-4" />
                 <p className="font-bold text-xl">Student Accounts</p>
             </div>
-            <div className="flex gap-6">
+            <div className="flex gap-6 pl-10">
             <p className="font-bold border border-black p-2 border-bottom">Student</p>
             <Link href={'/Admin/AdminApproveAdmin'} className="font-bold p-2">Admin</Link>
             </div>
