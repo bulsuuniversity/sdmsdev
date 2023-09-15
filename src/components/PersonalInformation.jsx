@@ -60,7 +60,8 @@ const PersonalInformation = () => {
     };
 
     return (
-        <div className="xl:text-6xl">
+        <div className="xl:text-2xl">
+            <ConfirmationDialog />
             <div className="absolute text-lg -top-2 right-0">
                 {edit &&
                     <button
@@ -78,7 +79,7 @@ const PersonalInformation = () => {
                     <BsExclamationCircle size={32} />
                 </div>}
             </h2>
-            <form className="font-medium md:text-lg xl:text-4xl text-xs grid md:flex gap-4 ml-6" onSubmit={handleUpdate}>
+            <form className="font-medium md:text-lg xl:text-2xl text-xs grid md:flex gap-4 ml-6" onSubmit={handleUpdate}>
                 <div className="grid">
                     <label htmlFor="name">Name: </label>
                     <label htmlFor="college">College: </label>
@@ -86,7 +87,6 @@ const PersonalInformation = () => {
                     <label htmlFor="phoneNumber">Contact No.: </label>
                     <label htmlFor="yearLevel">Year Level: </label>
                 </div>
-                <ConfirmationDialog />
                 <div className="grid gap-1">
                     <input
                         value={editedValues.name === null ? " " : editedValues.name}

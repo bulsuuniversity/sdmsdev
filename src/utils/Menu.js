@@ -13,7 +13,7 @@ import useConfirmation from './ConfirmationHook';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
-const Menu = ({ }) => {
+const Menu = ({ profile }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const profileRef = useRef(null);
     const { profileData } = useProfileData()
@@ -38,6 +38,7 @@ const Menu = ({ }) => {
     }, []);
 
 
+
     const handleSignOut = (e) => {
         e.preventDefault();
         showConfirmation('Are you sure you want to Log out?', () => {
@@ -50,19 +51,16 @@ const Menu = ({ }) => {
         <div className={`flex items-center`} ref={profileRef}>
             <span onClick={handleToggleMenu} className="mr-7">
                 <div className='hidden md:block'>
-                    {/* {profileData && profileData.profile ? */}
-                    <div className="w-40 h-40 rounded-full overflow-hidden ">
+                    {profile ? <div className="w-14 h-14 rounded-full overflow-hidden ">
                         <Image alt="profile"
-                            src={profileData.profile ? profileData.profile : "https://res.cloudinary.com/dckxajww8/image/upload/v1693269023/icons/profile_2_cotaml.png"}
-                            width={500}
-                            height={500}
-                            className="object-cover"
-                        />
+                            src={profile}
+                            width={100}
+                            height={100}
+                            className="object-fill" />
                     </div>
-                    {/* :
-                        <BsPersonCircle size={45} />
-                    } */}
+                        : <BsPersonCircle size={40} className='text-white'/>}
                 </div>
+
                 <div className='md:hidden block'>Profile</div>
             </span>
             {menuOpen && (

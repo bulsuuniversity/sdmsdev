@@ -21,7 +21,7 @@ const Header = ({ setViewPort }) => {
     const [header, setHeader] = useState(false);
     const { data: session } = useSession()
     const router = useRouter()
-    const { getProfileData } = useProfileData()
+    const { getProfileData, profileData } = useProfileData()
 
     const currentPath = usePathname();
 
@@ -99,7 +99,7 @@ const Header = ({ setViewPort }) => {
                                         <Homebutton setViewPort={setViewPort} />
                                         <ContactButton setViewPort={setViewPort} />
                                         <AboutButton setViewPort={setViewPort} />
-                                        <Menu />
+                                        <Menu profile={profileData.profile} />
                                     </div>
                                     :
                                     <>
@@ -117,7 +117,7 @@ const Header = ({ setViewPort }) => {
                                 <Homebutton setViewPort={setViewPort} />
                                 <ContactButton setViewPort={setViewPort} />
                                 <AboutButton setViewPort={setViewPort} />
-                                <Menu />
+                                <Menu profile={profileData.profile} />
                             </>
                             :
                             <>
