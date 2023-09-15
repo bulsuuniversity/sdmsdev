@@ -37,13 +37,19 @@ const Menu = ({ profile }) => {
         };
     }, []);
 
-
+    async function handleSignOutna() {
+        try {
+            await signOut();
+            router.push("/")
+        } catch (error) {
+            console.error('Sign out failed', error);
+        }
+    }
 
     const handleSignOut = (e) => {
         e.preventDefault();
         showConfirmation('Are you sure you want to Log out?', () => {
-            signOut()
-            router.push("/")
+            handleSignOutna()
         });
     };
 
@@ -58,7 +64,7 @@ const Menu = ({ profile }) => {
                             height={100}
                             className="object-fill" />
                     </div>
-                        : <BsPersonCircle size={40} className='text-white'/>}
+                        : <BsPersonCircle size={40} className='text-white' />}
                 </div>
 
                 <div className='md:hidden block'>Profile</div>

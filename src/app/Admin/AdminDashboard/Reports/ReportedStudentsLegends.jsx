@@ -6,7 +6,7 @@ const UnregisteredLegends = ({ data }) => {
         <div className="bg-white rounded-lg p-4 grid">
             <div className="grid justify-start">
                 <label className="flex items-center gap-4">
-                    <div><BsCircle size={20} className="bg-yellow-600 rounded-full" /></div>
+                    <div><BsCircle size={20} className="bg-yellow-300 rounded-full" /></div>
                     <p>College of Business Administration</p>
                 </label>
                 <div className="flex justify-center">
@@ -15,7 +15,7 @@ const UnregisteredLegends = ({ data }) => {
             </div>
             <div className="grid justify-start">
                 <label className="flex items-center gap-4">
-                    <div><BsCircle size={20} className="bg-green-600 rounded-full" /></div>
+                    <div><BsCircle size={20} className="bg-green-700 rounded-full" /></div>
                     <p>College of Industrial Technology</p>
                 </label>
                 <div className="flex justify-center">
@@ -33,7 +33,7 @@ const UnregisteredLegends = ({ data }) => {
             </div>
             <div className="grid justify-start">
                 <label className="flex items-center gap-4">
-                    <div><BsCircle size={20} className="bg-gray-700 rounded-full" /></div>
+                    <div><BsCircle size={20} className="bg-gray-400 rounded-full" /></div>
                     <p>College of Informmation and Computing Sciences</p>
                 </label>
                 <div className="flex justify-center">

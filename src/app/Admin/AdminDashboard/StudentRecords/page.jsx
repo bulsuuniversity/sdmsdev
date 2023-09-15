@@ -44,6 +44,7 @@ const page = () => {
     const COE = users ? (Object.values(registeredUser).filter(user => user.college === "COE")).length : 1
 
     const RegsiteredData = { CBA, CIT, COED, CICS, COE }
+    const RegsiteredAllData = CBA + CIT + COED + CICS + COE
 
     const unCBA = users ? (Object.values(unRegisteredUser).filter(user => user.college === "CBA")).length : 1
     const unCIT = users ? (Object.values(unRegisteredUser).filter(user => user.college === "CIT")).length : 1
@@ -53,6 +54,8 @@ const page = () => {
     const Others = users ? unRegisteredUser.length - (unCBA + unCIT + unCOED + unCICS + unCOE) : 1
 
     const unRegsiteredData = { unCBA, unCIT, unCOED, unCICS, unCOE, Others }
+    const unRegsiteredAllData = unCBA + unCIT + unCOED + unCICS + unCOE + Others
+
 
     useEffect(() => {
         handleGetData()
@@ -62,7 +65,7 @@ const page = () => {
         labels: ['Registered Students', 'Unregistered Students'],
         datasets: [
             {
-                data: [registered, unRegistered],
+                data: [registeredUser && registeredUser.length, unRegisteredUser && unRegisteredUser.length],
                 backgroundColor: ['#780000', '#494f56'],
                 borderWidth: 1,
             },
@@ -72,7 +75,7 @@ const page = () => {
         labels: ['Unregistered Students', 'Registered Students'],
         datasets: [
             {
-                data: [unRegistered, registered],
+                data: [unRegisteredUser && unRegisteredUser.length, registeredUser && registeredUser.length],
                 backgroundColor: ['#8d8f84', '#494f56'],
                 borderWidth: 1,
             },
@@ -94,29 +97,43 @@ const page = () => {
         responsive: true,
         plugins: {
             legend: false,
-            datalabels: false
-            // datalabels: {
-            //     display: 'auto',
-            //     color: 'black',
-            //     formatter: (value, context) => {
-            //         return `${context.chart.data.labels[context.dataIndex]}: ${registeredUser && Math.round((value / registeredUser.length) * 100)}%`;
-            //     },
-            // },
-        }
+            datalabels: {
+                display: 'auto',
+                color: 'black',
+                borderColor: "#fff",
+                textStrokeColor: 'white',
+                textStrokeWidth: 2,
+                formatter: (value, context) => {
+                    const label = context.chart.data.labels[context.dataIndex];
+                    const percentage = registeredUser
+                        ? Math.round((value / registeredUser.length) * 100) : 0;
+                    return percentage === 0 ? '' : `${label}: ${percentage}%`;
+                },
+
+            },
+        },
     };
+
 
     const pieOptions2 = {
         responsive: true,
         plugins: {
             legend: false,
-            datalabels: false
-            // datalabels: {
-            //     display: 'auto',
-            //     color: 'black',
-            //     formatter: (value, context) => {
-            //         return `${context.chart.data.labels[context.dataIndex]}: ${unRegisteredUser && Math.round((value / unRegisteredUser.length) * 100)}%`;
-            //     },
-            // },
+            // datalabels: false
+            datalabels: {
+                display: 'auto',
+                color: 'black',
+                borderColor: "#fff",
+                textStrokeColor: 'white',
+                textStrokeWidth: 2,
+                formatter: (value, context) => {
+                    const label = context.chart.data.labels[context.dataIndex];
+                    const percentage = unRegisteredUser
+                        ? Math.round((value / unRegisteredUser.length) * 100) : 0;
+
+                    return percentage === 0 ? '' : `${label}: ${percentage}%`;
+                },
+            },
         }
     };
 
@@ -130,13 +147,17 @@ const page = () => {
         datasets: [
             {
                 label: 'Student Count',
-                data: [CBA, CIT, COED, CICS, COE,],
+                data: [CBA,
+                    CIT,
+                    COED,
+                    CICS,
+                    COE,],
                 backgroundColor: [
                     'rgb(202, 138, 4)',
                     'rgb(22, 163, 74)',
                     'rgb(37, 99, 235)',
-                    'rgb(55, 65, 81)',
-                    'rgb(225, 139, 34)',
+                    'rgb(156, 163, 175)',
+                    'rgb(217, 119, 6)',
                 ],
                 borderWidth: 1,
             },
@@ -158,9 +179,9 @@ const page = () => {
                     'rgb(202, 138, 4)',
                     'rgb(22, 163, 74)',
                     'rgb(37, 99, 235)',
-                    'rgb(55, 65, 81)',
-                    'rgb(225, 139, 34)',
-                    'rgb(166, 108, 152)'
+                    'rgb(156, 163, 175)',
+                    'rgb(217, 119, 6)',
+                    'rgb(124, 58, 237)'
                 ],
                 borderWidth: 1,
             },
@@ -192,7 +213,7 @@ const page = () => {
                                     <div className="absolute text-4xl top-24 left-14">{unRegistered}&#37;</div>
                                 </div>
                                 <div className="flex items-center gap-2 justify-center">
-                                    <GrCheckbox className="bg-gray-800" />
+                                    <GrCheckbox className="bg-gray-400" />
                                     Unregistered Students
                                 </div>
                             </div>

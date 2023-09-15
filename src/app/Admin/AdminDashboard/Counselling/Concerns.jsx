@@ -32,7 +32,7 @@ const Concerns = ({ data }) => {
             </div>
             <div className="grid justify-start">
                 <label className="flex items-center gap-4">
-                    <div><BsCircle size={20} className="bg-gray-700 rounded-full" /></div>
+                    <div><BsCircle size={20} className="bg-gray-300 rounded-full" /></div>
                     <p>Stress</p>
                 </label>
                 <div className="flex justify-center">

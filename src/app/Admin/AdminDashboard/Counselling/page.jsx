@@ -87,7 +87,7 @@ const page = () => {
         labels: ['Self Consultation', 'Referral Consultation'],
         datasets: [
             {
-                data: [registered, unRegistered],
+                data: [selfConsult && selfConsult.length, referralConsult && referralConsult.length],
                 backgroundColor: ['#780000', '#494f56'],
                 borderWidth: 1,
             },
@@ -97,7 +97,7 @@ const page = () => {
         labels: ['Referral Consultation', 'Self Consultation'],
         datasets: [
             {
-                data: [unRegistered, registered],
+                data: [referralConsult && referralConsult.length, selfConsult && selfConsult.length],
                 backgroundColor: ['#8d8f84', '#494f56'],
                 borderWidth: 1,
             },
@@ -119,7 +119,7 @@ const page = () => {
         responsive: true,
         plugins: {
             legend: false,
-            datalabels: false
+
             // datalabels: {
             //     display: 'auto',
             //     color: 'black',
@@ -128,6 +128,19 @@ const page = () => {
             //         return `${context.chart.data.labels[context.dataIndex]}: ${labelData}%`;
             //     },
             // },
+            datalabels: {
+                display: 'auto',
+                color: 'black',
+                borderColor: "#fff",
+                textStrokeColor: 'white',
+                textStrokeWidth: 2,
+                formatter: (value, context) => {
+                    const label = context.chart.data.labels[context.dataIndex];
+                    const percentage = selfConsult && referralConsult
+                        ? Math.round((value / (selfConsult.length + referralConsult.length)) * 100) : 0;
+                    return percentage === 0 ? '' : `${label}: ${percentage}%`;
+                },
+            },
         }
     };
 
@@ -148,12 +161,12 @@ const page = () => {
                 consultationAll.Social,
                 consultationAll.Others],
                 backgroundColor: [
-                    'rgb(202, 138, 4)',
+                    'rgb(250, 204, 21)',
                     'rgb(22, 163, 74)',
                     'rgb(37, 99, 235)',
-                    'rgb(55, 65, 81)',
-                    'rgb(225, 139, 34)',
-                    'rgb(166, 108, 152)'
+                    'rgb(209, 213, 219)',
+                    'rgb(217, 119, 6)',
+                    'rgb(124, 58, 237)'
                 ],
                 borderWidth: 1,
             },
@@ -186,7 +199,7 @@ const page = () => {
                                     <div className="absolute text-4xl top-24 left-14">{unRegistered}&#37;</div>
                                 </div>
                                 <div className="flex items-center gap-2 justify-center">
-                                    <GrCheckbox className="bg-gray-800" />
+                                    <GrCheckbox className="bg-gray-400" />
                                     Referral Consultation
                                 </div>
                             </div>
@@ -206,7 +219,7 @@ const page = () => {
                             </div>
                             <div className="grid justify-center font-bold">
                                 <p>Total number of pending Consultations:</p>
-                                <p className="text-center">{referral && self && self.length + referral.length}</p>
+                                <p className="text-center">{referralConsult && selfConsult && selfConsult.length + referralConsult.length}</p>
                             </div>
                         </div>
                         <h2 className="font-bold flex py-4 justify-center">

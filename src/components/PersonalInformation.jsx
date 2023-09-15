@@ -79,7 +79,7 @@ const PersonalInformation = () => {
                     <BsExclamationCircle size={32} />
                 </div>}
             </h2>
-            <form className="font-medium md:text-lg xl:text-2xl text-xs grid md:flex gap-4 ml-6" onSubmit={handleUpdate}>
+            <form className="font-medium md:text-lg xl:text-2xl text-xs flex gap-4 ml-6" onSubmit={handleUpdate}>
                 <div className="grid">
                     <label htmlFor="name">Name: </label>
                     <label htmlFor="college">College: </label>
@@ -103,7 +103,7 @@ const PersonalInformation = () => {
                         <option defaultValue={editedValues.college === null ? " " : editedValues.college}>{editedValues.college}</option>
                         <option value="CBA">CBA</option>
                         <option value="CIT">CIT</option>
-                        <option value="CoED">CoED</option>
+                        <option value="COED">COED</option>
                         <option value="CICS">CICS</option>
                         <option value="COE">COE</option>
                     </select>

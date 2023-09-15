@@ -6,7 +6,7 @@ const RegsiteredLegends = ({ data }) => {
         <div className="bg-white rounded-lg p-4 grid">
             <div className="grid justify-start">
                 <label className="flex items-center gap-4">
-                    <div><BsCircle size={20} className="bg-yellow-600 rounded-full" /></div>
+                    <div><BsCircle size={20} className="bg-yellow-300 rounded-full" /></div>
                     <p>Cyberbullying</p>
                 </label>
                 <div className="flex justify-center">
@@ -15,7 +15,7 @@ const RegsiteredLegends = ({ data }) => {
             </div>
             <div className="grid justify-start">
                 <label className="flex items-center gap-4">
-                    <div><BsCircle size={20} className="bg-amber-600 rounded-full" /></div>
+                    <div><BsCircle size={20} className="bg-amber-700 rounded-full" /></div>
                     <p>Misinformation</p>
                 </label>
                 <div className="flex justify-center">
@@ -42,7 +42,7 @@ const RegsiteredLegends = ({ data }) => {
             </div>
             <div className="grid justify-start">
                 <label className="flex items-center gap-4">
-                    <div><BsCircle size={20} className="bg-gray-700 rounded-full" /></div>
+                    <div><BsCircle size={20} className="bg-gray-400 rounded-full" /></div>
                     <p>Hateful Behavior</p>
                 </label>
                 <div className="flex justify-center">

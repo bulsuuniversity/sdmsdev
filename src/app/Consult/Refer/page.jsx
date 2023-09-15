@@ -119,7 +119,7 @@ const Page = () => {
                                 <option value="">Select College</option>
                                 <option value="CBA">CBA</option>
                                 <option value="CIT">CIT</option>
-                                <option value="CoED">CoED</option>
+                                <option value="COED">COED</option>
                                 <option value="CICS">CICS</option>
                                 <option value="COE">COE</option>
                                 <option value="others">Others</option>

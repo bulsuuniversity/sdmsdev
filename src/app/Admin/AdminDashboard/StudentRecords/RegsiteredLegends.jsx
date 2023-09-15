@@ -32,7 +32,7 @@ const RegsiteredLegends = ({ data }) => {
             </div>
             <div className="grid justify-start">
                 <label className="flex items-center gap-4">
-                    <div><BsCircle size={20} className="bg-gray-700 rounded-full" /></div>
+                    <div><BsCircle size={20} className="bg-gray-400 rounded-full" /></div>
                     <p>College of Informmation and Computing Sciences</p>
                 </label>
                 <div className="flex justify-center">

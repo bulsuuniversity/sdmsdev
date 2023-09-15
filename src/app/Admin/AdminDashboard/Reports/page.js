@@ -60,14 +60,19 @@ const Page = () => {
         responsive: true,
         plugins: {
             legend: false,
-            datalabels: false
-            // datalabels: {
-            //     display: 'auto',
-            //     color: 'black',
-            //     formatter: (value, context) => {
-            //         return `${context.chart.data.labels[context.dataIndex]}: ${reports && Math.round((value / reports.length) * 100)}%`;
-            //     },
-            // },
+            datalabels: {
+                display: 'auto',
+                color: 'black',
+                borderColor: "#fff",
+                textStrokeColor: 'white',
+                textStrokeWidth: 2,
+                formatter: (value, context) => {
+                    const label = context.chart.data.labels[context.dataIndex];
+                    const percentage = reports
+                        ? Math.round((value / reports.length) * 100) : 0;
+                    return percentage === 0 ? '' : `${label}: ${percentage}%`;
+                },
+            },
         }
     };
 
@@ -75,14 +80,19 @@ const Page = () => {
         responsive: true,
         plugins: {
             legend: false,
-            datalabels: false
-            // datalabels: {
-            //     display: 'auto',
-            //     color: 'black',
-            //     formatter: (value, context) => {
-            //         return `${context.chart.data.labels[context.dataIndex]}: ${reports && Math.round((value / reports.length) * 100)}%`;
-            //     },
-            // },
+            datalabels: {
+                display: 'auto',
+                color: 'black',
+                borderColor: "#fff",
+                textStrokeColor: 'white',
+                textStrokeWidth: 2,
+                formatter: (value, context) => {
+                    const label = context.chart.data.labels[context.dataIndex];
+                    const percentage = reports
+                        ? Math.round((value / reports.length) * 100) : 0;
+                    return percentage === 0 ? '' : `${label}: ${percentage}%`;
+                },
+            },
         }
     };
 
@@ -96,14 +106,19 @@ const Page = () => {
         datasets: [
             {
                 label: 'Reported Actions',
-                data: [Cyberbullying, Misinformation, Verbal, Harrassment, Hateful, Others],
+                data: [Cyberbullying,
+                    Misinformation,
+                    Verbal,
+                    Harrassment,
+                    Hateful,
+                    Others],
                 backgroundColor: [
-                    'rgb(202, 138, 4)',
+                    'rgb(253, 224, 71)',
+                    'rgb(180, 83, 9)',
                     'rgb(22, 163, 74)',
                     'rgb(37, 99, 235)',
-                    'rgb(55, 65, 81)',
-                    'rgb(225, 139, 34)',
-                    'rgb(166, 108, 152)'
+                    'rgb(156, 163, 175)',
+                    'rgb(109, 40, 217)'
                 ],
                 borderWidth: 1,
             },
@@ -120,14 +135,15 @@ const Page = () => {
         datasets: [
             {
                 label: 'Student Reported',
-                data: [CBA, CIT, COED, CICS, COE, OthersCollege],
+                data: [CBA, CIT, COED,
+                    CICS, COE, OthersCollege],
                 backgroundColor: [
-                    'rgb(202, 138, 4)',
-                    'rgb(22, 163, 74)',
+                    'rgb(253, 224, 71)',
+                    'rgb(21, 128, 61)',
                     'rgb(37, 99, 235)',
-                    'rgb(55, 65, 81)',
-                    'rgb(225, 139, 34)',
-                    'rgb(166, 108, 152)'
+                    'rgb(156, 163, 175)',
+                    'rgb(217, 119, 6)',
+                    'rgb(109, 40, 217)'
                 ],
                 borderWidth: 1,
             },
@@ -135,7 +151,7 @@ const Page = () => {
     };
 
     console.log(reports && reports.length < 0)
-    
+
     return (
         <DashboardLayout>
             <div className="bg-blue-100 px-14">

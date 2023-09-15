@@ -197,7 +197,7 @@ const page = () => {
                                         <option value="">Select offender College</option>
                                         <option value="CBA">CBA</option>
                                         <option value="CIT">CIT</option>
-                                        <option value="CoED">CoED</option>
+                                        <option value="COED">COED</option>
                                         <option value="CICS">CICS</option>
                                         <option value="COE">COE</option>
                                         <option value="Others">Others</option>
