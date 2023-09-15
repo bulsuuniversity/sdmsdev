@@ -49,6 +49,7 @@ const Login = () => {
         } else {
             setErrorMess("You don't have account yet!")
             setError(true)
+            setLoading(false)
         }
     };
 

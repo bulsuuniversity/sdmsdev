@@ -45,8 +45,8 @@ const AdminMenu = ({ children }) => {
     const handleSignOut = (e) => {
         e.preventDefault();
         showConfirmation('Are you sure you want to Log out?', () => {
-            signOut()
             router.push("/Admin/AdminLogin")
+            signOut()
         });
     };
 

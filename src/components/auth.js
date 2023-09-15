@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
+import { ImNotification } from 'react-icons/im';
 
 
 function PublicRoute({ children }) {
@@ -36,7 +37,14 @@ function PrivateRoute({ children }) {
         return (
             <>
                 <Header />
-                <p className='my-20'>Please log in to access this page.</p>
+                <div className='grid justify-center items-center gap-4 my-20'>
+                    <h2 className='text-center font-bold text-2xl font-red-600'>Unauthorized</h2>
+                    <div className='flex justify-center'>
+                        <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
+                    </div>
+                    <div className='text-center'>Please Login to access this page!</div>
+                    <Link className='italic text-center' href={"/Login"}>Click to Login</Link>
+                </div>
             </>
         )
     } else if (session && session.status !== 'Registered') {
@@ -44,13 +52,15 @@ function PrivateRoute({ children }) {
             <>
                 <Header />
                 <div className='grid justify-center items-center gap-4 my-20'>
-                    <p>Unauthorized</p>
-                    <div>
-                        <iframe src="https://giphy.com/embed/4VY613vurPreyrIHux" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/americangods-season-2-starz-american-gods-4VY613vurPreyrIHux">via GIPHY</a></p>
+                    <h2 className='text-center font-bold text-2xl font-red-600'>Unauthorized</h2>
+                    <p className='text-centerfont-bold text-lg'>Please wait for the Admin to approve your account</p>
+                    <div className='flex justify-center'>
+                        <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
                     </div>
-                    <p>Please wait for the Admin to approve your account</p>
-                    <a href='mailto:bulsubulacanUniversity@gmail.com'>Click to email the Admin</a>
-                    <button onClick={handleLogout}>Log out</button>
+                    <a className='text-blue-400 text-center italic' href="mailto:bulsubulacanUniversity@gmail.com?subject=Request%20for%20Approval&body=This%20is%20..your%20name%20...%20">Click to email the Admin</a>
+                    <div className="flex justify-center">
+                        <button className='bg-red-800 text-white w-28 px-4 py-2' onClick={handleLogout}>Log out</button>
+                    </div>
                 </div>
             </>
         )
@@ -76,9 +86,13 @@ function PrivateRouteAdmin({ children }) {
         return (
             <>
                 <Header />
-                <div className='flex gap-10 my-20'>
-                    <p>Unauthorized</p>
-                    <Link href={"/Admin/AdminLogin"}>Click to Login Admin</Link>
+                <div className='grid justify-center items-center gap-4 my-20'>
+                    <h2 className='text-center font-bold text-2xl font-red-600'>Unauthorized</h2>
+                    <div className='flex justify-center'>
+                        <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
+                    </div>
+                    <div className='text-center'>Please Login to access this page!</div>
+                    <Link className='italic text-center' href={"/Admin/AdminLogin"}>Click to Login Admin Account</Link>
                 </div>
             </>
         )
@@ -86,11 +100,17 @@ function PrivateRouteAdmin({ children }) {
         return (
             <>
                 <Header />
-                <div className='flex gap-14 my-20'>
-                    <p>Unauthorized</p>
-                    <button onClick={handleLogout}>Log out</button>
+                <div className='grid justify-center items-center gap-4 my-20'>
+                    <h2 className='text-center font-bold text-2xl font-red-600'>Unauthorized</h2>
+                    <p className='text-centerfont-bold text-lg'>You are not an admin</p>
+                    <div className='flex justify-center'>
+                        <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
+                    </div>
+                    <a className='text-blue-400 text-center italic' href='mailto:bulsubulacanUniversity@gmail.com'>Click to email the Admin</a>
+                    <div className="flex justify-center">
+                        <button className='bg-red-800 text-white w-28 px-4 py-2' onClick={handleLogout}>Log out</button>
+                    </div>
                 </div>
-
             </>
         )
     } else if (session && session.role === "admin" && session.status !== "Registered") {
@@ -98,13 +118,16 @@ function PrivateRouteAdmin({ children }) {
             <>
                 <Header />
                 <div className='grid justify-center items-center gap-4 my-20'>
-                    <p>Unauthorized</p>
-                    <div>
-                        <iframe src="https://giphy.com/embed/4VY613vurPreyrIHux" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/americangods-season-2-starz-american-gods-4VY613vurPreyrIHux">via GIPHY</a></p>
+                    <h2 className='text-center font-bold text-2xl font-red-600'>Unauthorized</h2>
+                    <p className='text-centerfont-bold text-lg'>Please wait for the Admin to approve your account</p>
+                    <div className='flex justify-center'>
+                        <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
                     </div>
-                    <p>Please wait for the Admin to approve your account</p>
-                    <a href='mailto:bulsubulacanUniversity@gmail.com'>Click to email the Admin</a>                </div>
-                <button onClick={handleLogout}>Log out</button>
+                    <a className='text-blue-400 text-center italic' href='mailto:bulsubulacanUniversity@gmail.com'>Click to email the Admin</a>
+                    <div className="flex justify-center">
+                        <button className='bg-red-800 text-white w-28 px-4 py-2' onClick={handleLogout}>Log out</button>
+                    </div>
+                </div>
             </>
         )
     }

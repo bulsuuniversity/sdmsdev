@@ -10,6 +10,8 @@ import useLoading from "@/utils/Loading";
 import { useRouter } from "next/navigation";
 import InformationModal from "@/utils/InformationModal";
 import { PublicRoute } from "@/components/auth";
+import axios from "axios";
+import { url, headers } from "../libs/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,6 +21,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
   const route = useRouter()
   const [erroring, setError] = useState(false)
+  const [errorMess, setErrorMess] = useState(false)
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -32,16 +35,27 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
-    const response = await signIn('credentials', {
-      email: email,
-      password: password,
-      redirect: false,
-    });
-    if (response.error) {
-      setLoading(false)
+    const emailCheck = await axios.get(`${url}/api/findByEmail/${email}`, { headers });
+    if (Array.isArray(emailCheck.data)
+      && emailCheck.data.length > 0
+      && emailCheck.data[0].role === "user") {
+      const response = await signIn('credentials', {
+        email: email,
+        password: password,
+        redirect: false,
+      });
+      if (response.error) {
+        setLoading(false)
+        setError(true)
+        setErrorMess("Failed to Login! Please check the email or password.")
+      }
+    } else {
+      setErrorMess("You don't have account yet!")
       setError(true)
+      setLoading(false)
     }
   };
+
 
   useEffect(() => {
     if (session && session.role === "user") {
@@ -77,7 +91,7 @@ const Login = () => {
             {erroring &&
               <InformationModal>
                 <div className="grid p-6 justify-center gap-2">
-                  <p className="text-center w-48">Failed to Login! Please check your email or password.</p>
+                  <p className="text-center w-48">{errorMess}</p>
                   <div className="flex justify-center">
                     <button onClick={() => setError(false)}
                       className="px-4 bg-amber-200 rounded-lg py-2 w-16">Okay</button>

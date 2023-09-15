@@ -39,8 +39,8 @@ const Menu = ({ profile }) => {
 
     async function handleSignOutna() {
         try {
-            await signOut();
             router.push("/")
+            await signOut()
         } catch (error) {
             console.error('Sign out failed', error);
         }

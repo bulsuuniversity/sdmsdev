@@ -36,10 +36,12 @@ const handler = NextAuth({
             session = token
             return session;
         },
+        async onEnd(req, res) {
+            res.redirect('/');
+        },
     },
     secret: 'super secret',
 });
-
 
 export { handler as GET, handler as POST }
 
