@@ -61,7 +61,7 @@ const Page = () => {
         plugins: {
             legend: false,
             datalabels: {
-                display: 'auto',
+                // display: 'auto',
                 color: 'black',
                 borderColor: "#fff",
                 textStrokeColor: 'white',
@@ -81,7 +81,7 @@ const Page = () => {
         plugins: {
             legend: false,
             datalabels: {
-                display: 'auto',
+                // display: 'auto',
                 color: 'black',
                 borderColor: "#fff",
                 textStrokeColor: 'white',

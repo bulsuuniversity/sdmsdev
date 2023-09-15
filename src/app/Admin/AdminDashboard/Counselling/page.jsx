@@ -119,17 +119,8 @@ const page = () => {
         responsive: true,
         plugins: {
             legend: false,
-
-            // datalabels: {
-            //     display: 'auto',
-            //     color: 'black',
-            //     formatter: (value, context) => {
-            //         const labelData = selfConsult && referralConsult && Math.round((value / (selfConsult.length + referralConsult.length)) * 100)
-            //         return `${context.chart.data.labels[context.dataIndex]}: ${labelData}%`;
-            //     },
-            // },
             datalabels: {
-                display: 'auto',
+                // display: 'auto',
                 color: 'black',
                 borderColor: "#fff",
                 textStrokeColor: 'white',
