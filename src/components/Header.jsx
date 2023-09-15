@@ -75,7 +75,8 @@ const Header = ({ setViewPort }) => {
                 <div className="w-16 flex p-3 overflow h-full">
                     <Image width={400} height={300} className="object-cover" src={Logo} alt="Logo" />
                 </div>
-                <span className="body-font font-romanesco text-white md:flex hidden text-2xl items-center">Bulacan State University</span>
+                {/* font-romanesco */}
+                <span className=" text-white md:flex hidden text-2xl items-center">Bulacan State University</span>
             </div>
             {header ?
                 <div className="flex italic text-white pr-4 text-2xl items-center justify-end">
