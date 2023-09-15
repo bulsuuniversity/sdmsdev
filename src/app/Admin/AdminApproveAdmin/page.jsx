@@ -72,7 +72,7 @@ const Page = () => {
             const response = await axios.put(`${url}/api/RemoveAccount/${info.id}`,
                 { headers });
             setData(response.data)
-            sendEmail()
+            // sendEmail()
             stopLoading()
             setSuccess(true)
         } catch (err) {
@@ -222,17 +222,19 @@ const Page = () => {
 
                         </div>
                     </InformationModal>}
-                    <div className={`absolute left-24 -bottom-8`}>
-                        {info.status !== "Registered" ?
-                            <button onClick={handleUpdate}
-                                className="bg-green-600 rounded-full p-2">
-                                <div><GiCheckMark size={32} /></div>
-                            </button> :
-                            <button onClick={handleRemoveAcc}
-                                className="bg-red-600 rounded-full p-2">
-                                <div><GrClose size={32} /></div>
-                            </button>}
-                    </div>
+                    {/* <div className={`absolute left-24 -bottom-8`}> */}
+                    {info.email !== "bulsubulacanstateuniversity@gmail.com" &&
+                        <div className="flex justify-center pt-4">
+                            {info.status !== "Registered" ?
+                                <button onClick={handleUpdate}
+                                    className="bg-green-600 rounded-full p-2">
+                                    <div><GiCheckMark size={32} /></div>
+                                </button> :
+                                <button onClick={handleRemoveAcc}
+                                    className="bg-red-600 rounded-full p-2">
+                                    <div><GrClose size={32} /></div>
+                                </button>}
+                        </div>}
                 </div>
             </InformationModal>}
             <div className="md:mx-10 mx-1 my-10 border border-blue-400 border-2">

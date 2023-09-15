@@ -13,6 +13,7 @@ import { FaPeopleLine } from "react-icons/fa6";
 import useConfirmation from "@/utils/ConfirmationHook";
 import useLoading from "@/utils/Loading";
 import Link from "next/link";
+import { GrClose } from "react-icons/gr";
 
 const Page = () => {
     const [clickedID, setClickedID] = useState()
@@ -24,6 +25,7 @@ const Page = () => {
     const [success, setSuccess] = useState(false)
     const { showConfirmation, ConfirmationDialog } = useConfirmation();
     const { startLoading, loading, stopLoading } = useLoading()
+    const [message, setMessage] = useState()
 
     const handleSetImage = (image) => {
         setImageToView(image)
@@ -58,6 +60,7 @@ const Page = () => {
             setData(response.data)
             sendEmail()
             stopLoading()
+            setMessage("Account approved successfully!")
             setSuccess(true)
         } catch (err) {
             console.log(err);
@@ -93,6 +96,29 @@ const Page = () => {
         setInfo(clcikedInfo)
     }, [clickedID])
 
+    const handleRemoveAccApi = async () => {
+        startLoading()
+        try {
+            const response = await axios.put(`${url}/api/RemoveAccount/${info.id}`,
+                { headers });
+            setData(response.data)
+            // sendEmail()
+            setMessage("Account removed!")
+            stopLoading()
+            setSuccess(true)
+            setOpenINfo(false)
+        } catch (err) {
+            console.log(err);
+            stopLoading()
+        }
+    }
+
+    const handleRemoveAcc = (e) => {
+        e.preventDefault();
+        showConfirmation('Are you sure you want to Remove this account?', () => {
+            handleRemoveAccApi()
+        });
+    };
 
 
     return (
@@ -102,8 +128,8 @@ const Page = () => {
                 <p className="font-bold text-xl">Student Accounts</p>
             </div>
             <div className="flex gap-6 pl-10">
-            <p className="font-bold border border-black p-2 border-bottom">Student</p>
-            <Link href={'/Admin/AdminApproveAdmin'} className="font-bold p-2">Admin</Link>
+                <p className="font-bold border border-black p-2 border-bottom">Student</p>
+                <Link href={'/Admin/AdminApproveAdmin'} className="font-bold p-2">Admin</Link>
             </div>
             {openInfo && info && <InformationModal>
                 <div className="relative p-6">
@@ -115,7 +141,7 @@ const Page = () => {
                     <ConfirmationDialog />
                     {success && <InformationModal>
                         <div className='bg-amber-200 grid p-10 rounded-lg gap-4'>
-                            <p>Approved Successfully!</p>
+                            <p>{message}</p>
                             <button onClick={() => setSuccess(false)} className='bg-amber-600 rounded-lg py-2 px-4'>Okay</button>
                         </div>
                     </InformationModal>}
@@ -185,7 +211,7 @@ const Page = () => {
                     </div>
                     {seeImage && info.attachment !== "" && <InformationModal>
                         <div className="relative p-10 h-screen w-screen grid justify-center items-center">
-                            <div  onClick={() => setSeeImage(false)} className="m-10 overflow-auto">
+                            <div onClick={() => setSeeImage(false)} className="m-10 overflow-auto">
                                 <Image width={500} height={500}
                                     className="p-10 object-fill"
                                     src={imageToView} alt="attachment" />
@@ -198,11 +224,17 @@ const Page = () => {
 
                         </div>
                     </InformationModal>}
-                    <div className={`absolute left-24 -bottom-8`}>
-                        {info.status !== "Registered" && <button onClick={handleUpdate}
-                            className="bg-green-600 rounded-full p-2">
-                            <div><GiCheckMark size={32} /></div>
-                        </button>}
+                    {/* <div className={`absolute left-24 -bottom-8`}> */}
+                    <div className="flex justify-center pt-4">
+                        {info.status !== "Registered" ?
+                            <button onClick={handleUpdate}
+                                className="bg-green-600 rounded-full p-2">
+                                <div><GiCheckMark size={32} /></div>
+                            </button> :
+                            <button onClick={handleRemoveAcc}
+                                className="bg-red-600 rounded-full p-2">
+                                <div><GrClose size={32} /></div>
+                            </button>}
                     </div>
                 </div>
             </InformationModal>}
@@ -212,7 +244,7 @@ const Page = () => {
                         setOpenINfo={setOpenINfo}
                         setClickedID={setClickedID}
                         tableData={data}
-                    />: <div className="inset-0">No records found</div>}
+                    /> : <div className="inset-0">No records found</div>}
             </div>
         </AdminMenu>
     );

@@ -7,14 +7,14 @@ import { PrivateRouteAdmin } from "./auth";
 const AdminLayout = ({ children }) => {
 
     return (
-        // <PrivateRouteAdmin>
+        <PrivateRouteAdmin>
             <div className={`w-full`}>
                 {children}
                 <div className="fixed bottom-0 w-screen">
                     <Footer />
                 </div>
             </div>
-        // </PrivateRouteAdmin>
+        </PrivateRouteAdmin>
     );
 };
 
