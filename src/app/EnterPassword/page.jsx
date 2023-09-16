@@ -8,6 +8,8 @@ import useLoading from "@/utils/Loading";
 import ConfirmationModal from "@/utils/ConfirmationModal";
 import { useRouter, useSearchParams } from 'next/navigation'
 import Layout from "@/components/Layout";
+import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 const Page = () => {
     const [password, setPassword] = useState()
     const [confirmPassword, setConfirmPassword] = useState()
@@ -15,6 +17,8 @@ const Page = () => {
     const [message, setMessage] = useState()
     const [responseData, setResponseData] = useState()
     const route = useRouter()
+    const [notPassword, setNotPassword] = useState(false)
+    const {data: session} = useSession()
 
     const searchParams = useSearchParams()
     const emailParams = searchParams.get('email')
@@ -24,8 +28,9 @@ const Page = () => {
         startLoading()
         try {
             const response = await axios.get(`${url}/api/findByEmail/${emailParams}`, { headers });
+            console.log(response)
             if (response) {
-                const changed = await axios.put(`${url}/api/changePassword/${response.data.id}`, {
+                const changed = await axios.put(`${url}/api/changePassword/${response.data[0].id}`, {
                     password
                 }, { headers });
                 console.log(changed)
@@ -39,12 +44,28 @@ const Page = () => {
         }
     };
 
+    useEffect(() => {
+        if (password !== confirmPassword) {
+            setNotPassword(true)
+        }
+        if (password === confirmPassword) {
+            setNotPassword(false)
+        }
+    }, [confirmPassword, password])
+
 
     useEffect(() => {
         if (responseData === "success") {
             const timer = setTimeout(() => {
                 setMessage(true)
-                route.push('/')
+                if (!session) {
+                    signIn('credentials', {
+                        email: emailParams,
+                        password: confirmPassword,
+                        redirect: false,
+                    });
+                }
+                route.push('/Profile')
             }, 1000);
             return () => {
                 clearTimeout(timer);
@@ -61,7 +82,7 @@ const Page = () => {
                         <div>
                             <div className="flex flex-col justify-center p-7 justify-center">
                                 <div className="text-2xl font-bold whitespace-normal text-center ">
-                                    PASSWORD CHANGED SUCCESSFULLY!
+                                    SUCCESSFULLY CHANGED PASSWORD!
                                 </div>
                                 <div className="text-center italic text-sm">Redirecting you now to the home page.</div>
                                 <span className="loader" />
@@ -73,7 +94,7 @@ const Page = () => {
                         <div>
                             <div className="flex flex-col justify-center p-7 justify-center">
                                 <div className="text-2xl font-bold whitespace-normal text-center ">
-                                    PASSWORD CHANGED FAILED!
+                                    PASSWORD CHANGE FAILED!
                                 </div>
                                 <button onClick={() => setResponseData("")} className="bg-amber-300 py-2 px-4 rounded-lg">Okay</button>
                             </div>
@@ -90,13 +111,15 @@ const Page = () => {
                             placeholder="password" required />
                         <input type="password"
                             placeholder="confirm password"
-                            className="border p-2 text-sm border-2"
+                            className={`border ${notPassword && "border-red-600"} p-2 text-sm border-2`}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required />
                         <button type="submit"
+                            disabled={notPassword}
                             className={`py-2 text-white px-4 ${loading ? "bg-gray-600" : "bg-purple-800"} `}>
-                            {loading ? "Submiting" : "Submit"}</button>
+                            {loading ? "Submiting" : "Submit"}
+                        </button>
                     </form>
                 </div>
 

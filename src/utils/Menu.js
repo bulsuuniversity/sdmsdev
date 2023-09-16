@@ -67,7 +67,10 @@ const Menu = ({ profile }) => {
                     </div>
                         : <BsPersonCircle size={40} className='text-white' />}
                 </div>
-
+                {profileData && profileData.name ? '' :
+                    <div className='fixed top-1 right-2 bg-amber-400 text-white rounded-full'>
+                        <BsExclamationCircle size={20} /></div>
+                }
                 <div className='md:hidden block'>Profile</div>
             </span>
             {menuOpen && (
@@ -79,21 +82,21 @@ const Menu = ({ profile }) => {
                         <ConfirmationDialog />
                         <div className="absolute top-8 w-max">
                             <div className="flex text-red-900 shadow shadow-gray-500 text-sm w-full flex-col">
-                                <div className="bg-gray-400 flex flex-col">
+                                <div className={`${profileData && profileData.name ? 'bg-white' : 'bg-gray-400'} flex flex-col`}>
                                     <Link
-                                        href={'/MakeReport'}
+                                        href={profileData && !profileData.name ? '' : '/MakeReport'}
                                         // onClick={handleToggleMenu}
-                                        className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        className={`${profileData && profileData.name ? '' : 'cursor-not-allowed'} flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center`}>
                                         <BiCommentError size={32} /> MAKE A REPORT</Link>
                                     <Link
-                                        href={'/Consult'}
+                                        href={profileData && !profileData.name ? '' : '/Consult'}
                                         // onClick={handleToggleMenu}
-                                        className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        className={`${profileData && profileData.name ? '' : 'cursor-not-allowed'} flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center`}>
                                         <FaUserFriends size={32} /> CONSULTATION</Link>
                                     <Link
-                                        href={'/Logs'}
+                                        href={profileData && !profileData.name ? '' : '/Logs'}
                                         // onClick={handleToggleMenu}
-                                        className='flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center'>
+                                        className={`${profileData && profileData.name ? '' : 'cursor-not-allowed'} flex gap-4 border border-transparent p-4 hover:bg-gray-300 hover:border-gray-800 items-center`}>
                                         <ImNewspaper size={32} /> REPORT LOGS</Link>
                                 </div>
                                 <div className="bg-white flex flex-col">

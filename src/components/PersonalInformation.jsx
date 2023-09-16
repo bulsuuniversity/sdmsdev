@@ -60,7 +60,7 @@ const PersonalInformation = () => {
     };
 
     return (
-        <div className="xl:text-2xl">
+        <div className="">
             <ConfirmationDialog />
             <div className="absolute text-lg -top-2 right-0">
                 {edit &&
@@ -79,7 +79,7 @@ const PersonalInformation = () => {
                     <BsExclamationCircle size={32} />
                 </div>}
             </h2>
-            <form className="font-medium md:text-lg xl:text-2xl text-xs flex gap-4 ml-6" onSubmit={handleUpdate}>
+            <form className="md:text-lg  text-xs flex gap-4 ml-6" onSubmit={handleUpdate}>
                 <div className="grid">
                     <label htmlFor="name">Name: </label>
                     <label htmlFor="college">College: </label>
@@ -89,18 +89,21 @@ const PersonalInformation = () => {
                 </div>
                 <div className="grid gap-1">
                     <input
-                        value={editedValues.name === null ? " " : editedValues.name}
+                        value={editedValues.name === null ? "" : editedValues.name}
                         type="text"
                         readOnly={edit}
                         onChange={(e) => handleInputChange("name", e.target.value)}
                         className="border"
+                        required
                     />
                     <select
                         disabled={edit}
                         onChange={(e) => handleInputChange("college", e.target.value)}
                         className="border"
+                        required
                     >
-                        <option defaultValue={editedValues.college === null ? " " : editedValues.college}>{editedValues.college}</option>
+                        <option value={editedValues.college === null ? "" : editedValues.college}>
+                            {editedValues.college === null ? "Select college" : editedValues.college}</option>
                         <option value="CBA">CBA</option>
                         <option value="CIT">CIT</option>
                         <option value="COED">COED</option>
@@ -108,25 +111,28 @@ const PersonalInformation = () => {
                         <option value="COE">COE</option>
                     </select>
                     <input
-                        value={editedValues.address === null ? " " : editedValues.address}
+                        value={editedValues.address === null ? "" : editedValues.address}
                         type="text"
                         readOnly={edit}
                         onChange={(e) => handleInputChange("address", e.target.value)}
                         className="border"
+                        required
                     />
                     <input
-                        value={editedValues.phoneNumber === null ? " " : editedValues.phoneNumber}
+                        value={editedValues.phoneNumber === null ? "" : editedValues.phoneNumber}
                         type="text"
                         readOnly={edit}
                         onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
                         className="border"
+                        required
                     />
                     <input
-                        value={editedValues.yearLevel === null ? " " : editedValues.yearLevel}
+                        value={editedValues.yearLevel === null ? "" : editedValues.yearLevel}
                         type="text"
                         readOnly={edit}
                         onChange={(e) => handleInputChange("yearLevel", e.target.value)}
                         className="border"
+                        required
                     />
                 </div>
                 <div className="flex items-center justify-center">

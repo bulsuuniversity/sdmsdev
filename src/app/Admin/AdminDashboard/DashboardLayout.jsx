@@ -33,10 +33,10 @@ const DashboardLayout = ({ children }) => {
                 </div>
                 <div className={`${!children ? "grid gap-16" : "flex gap-4 "} justify-center items-center`}>
                     <div className="text-md font-bold">Dashboard</div>
-                    <div className={`flex bg-gray-400 text-xs rounded-lg `}>
+                    <div className={`flex ml-12 bg-gray-400 text-xs rounded-lg `}>
                         <Link href={'/Admin/AdminDashboard/StudentRecords'}
                             className={`hover:bg-amber-400
-                            ${!children ? "p-7 ml-6 text-2xl" : ""}
+                            ${!children ? "p-7 text-2xl" : ""}
                              ${dashboard === 'StudentRecords' && 'bg-amber-300'} 
                              rounded-lg grid justify-center p-1 items-center`}>
                             <div className="flex justify-center"><IoIosPeople size={children ? 32 : 50} /></div>

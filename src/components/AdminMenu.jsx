@@ -47,7 +47,7 @@ const AdminMenu = ({ children }) => {
         e.preventDefault();
         showConfirmation('Are you sure you want to Log out?', () => {
             router.push("/Admin/AdminLogin")
-            signOut({ callbackUrl: url })
+            signOut({ callbackUrl: `${url}/Admin/AdminLogin` })
         });
     };
 

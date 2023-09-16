@@ -2,7 +2,7 @@
 
 import Layout from "@/components/Layout";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PersonalInformation from "@/components/PersonalInformation";
 import Link from "next/link";
 import SelectImage from "@/utils/SelectImage";
@@ -19,21 +19,22 @@ const page = () => {
         setChangeProfile(!changeProfile)
     }
 
+
     return (
         <Layout>
-            <PrivateRoute>
+            {/* <PrivateRoute> */}
                 {changeProfile &&
                     <SelectImage handleCLick={handleCLick} profileData={profileData} getProfileData={getProfileData} />
                 }
                 {profileData && profileData.id &&
-                    <div className="bg-red-100 border xl:text-2xl border-2 h-screen p-4 z-1">
-                        <div className="grid md:grid-cols-12 grid-cols-1 md:bg-red-50 bg-fuchsia-950 h-full items-center">
-                            <div className="col-span-3 flex w-full h-full justify-start items-center">
+                    <div className="bg-red-100 border text-lg border-2 h-screen flex justify-center  p-4 z-1">
+                        <div className="grid md:grid-cols-12 grid-cols-1 w-screen lg:w-10/12 md:bg-red-50 mb-10 bg-fuchsia-950 h-full items-center">
+                            <div className="col-span-3 lg:col-span-2 flex w-full h-full items-center">
                                 <div className="bg-green-600">
                                     <div className="relative bg-blue-600 px-6">
-                                        <div className="absolute -top-60 left-8 rounded-full bg-white border
-                                     border-black border-8 overflow-hidden z-10 ">
-                                            <div className="w-60 h-60 rounded-full overflow-hidden ">
+                                        <div className="absolute -top-52 left-16 rounded-full bg-white border
+                                     border-white border-8 overflow-hidden z-10 ">
+                                            <div className="w-32 h-32 rounded-full overflow-hidden ">
                                                 <Image alt="profile"
                                                     src={profileData.profile === null ?
                                                         "https://res.cloudinary.com/dckxajww8/image/upload/v1693269023/icons/profile_2_cotaml.png"
@@ -44,18 +45,18 @@ const page = () => {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="absolute top-6 left-9 z-10 rounded-md bg-orange-300">
+                                        <div className="absolute -top-4 left-16 z-10 rounded-[2rem] bg-orange-300">
                                             <button
                                                 onClick={handleCLick}
-                                                className="text-2xl py-3 w-60">
+                                                className="py-3 w-36">
                                                 CHANGE PROFILE
                                             </button>
                                         </div>
-                                        <div className="absolute left-20 -top-32 overflow-hidden h-64 flex flex-col w-32 w-[10rem] h-[19rem] justify-center">
+                                        <div className="absolute left-20 -top-32 overflow-hidden flex flex-col w-28 h-80 justify-center">
                                             <div className="bg-fuchsia-950 h-full">
                                             </div>
                                             <div className={`h-0 w-0 
-                                            border-x-[5rem] border-x-transparent
+                                            border-x-[3.6rem] border-x-transparent
                                             border-t-[2rem] border-fuchsia-950
                                             `}>
                                             </div>
@@ -63,7 +64,7 @@ const page = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="xl:col-span-9 bg-red-50 md:mt-0 mt-44 xl:ml-10 md:text-2xl p-2">
+                            <div className="md:col-span-9 lg:col-span-10 bg-red-50 md:mt-0 xl:ml-10 p-2">
                                 <div className="p-2">
                                     <h2 className="font-semibold">Account Information</h2>
                                     <div className="ml-4 font-medium flex gap-5">
@@ -89,7 +90,7 @@ const page = () => {
                             </div>
                         </div>
                     </div>}
-            </PrivateRoute>
+            {/* </PrivateRoute> */}
         </Layout>
     );
 }

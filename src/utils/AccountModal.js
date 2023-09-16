@@ -1,6 +1,8 @@
 import { IoMdCloseCircle } from "react-icons/io";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 const AccountModal = ({ children }) => {
+    const { data: session } = useSession()
     return (
         <div style={{ backgroundImage: 'URL("/bulacan-state-university.jpg")' }}
             className={`fixed inset-0 flex bg-no-repeat w-screen h-screen bg-cover flex-col items-center mt-16 justify-center`}>
@@ -8,7 +10,7 @@ const AccountModal = ({ children }) => {
                 <div className="absolute right-0 top-0 flex justify-end ">
                     <Link
                         className="text-gray-500 hover:text-gray-700 rounded-full bg-white"
-                        href={'/'}
+                        href={session ? '/Profile':'/'}
                     >
                         <IoMdCloseCircle size={28} style={{ color: 'red' }} />
                     </Link>

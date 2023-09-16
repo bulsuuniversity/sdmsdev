@@ -43,8 +43,12 @@ const Header = ({ setViewPort }) => {
         if (session && session.id) {
             getProfileData(session.id)
         }
-    }, [])
+    }, [session])
 
+
+    useEffect(() => {
+        console.count(session)
+    }, session)
 
     //  const handleDeleteFile = async () => {
     //     try {
