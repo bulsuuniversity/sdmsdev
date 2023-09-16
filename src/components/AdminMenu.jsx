@@ -12,6 +12,7 @@ import { signOut } from "next-auth/react";
 import { IoMdMenu } from "react-icons/io";
 import { useSession } from "next-auth/react";
 import { useProfileData } from "@/app/libs/store";
+import { url } from "@/app/libs/api";
 
 
 const AdminMenu = ({ children }) => {
@@ -46,7 +47,7 @@ const AdminMenu = ({ children }) => {
         e.preventDefault();
         showConfirmation('Are you sure you want to Log out?', () => {
             router.push("/Admin/AdminLogin")
-            signOut()
+            signOut({ callbackUrl: url })
         });
     };
 

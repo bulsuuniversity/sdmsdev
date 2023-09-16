@@ -12,6 +12,7 @@ import { useProfileData } from '@/app/libs/store';
 import useConfirmation from './ConfirmationHook';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { url } from '@/app/libs/api';
 
 const Menu = ({ profile }) => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -39,8 +40,8 @@ const Menu = ({ profile }) => {
 
     async function handleSignOutna() {
         try {
-            router.push("/")
-            await signOut()
+            await signOut({ callbackUrl: url })
+
         } catch (error) {
             console.error('Sign out failed', error);
         }

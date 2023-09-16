@@ -36,9 +36,6 @@ const handler = NextAuth({
             session = token
             return session;
         },
-        async onEnd(req, res) {
-            res.redirect('/');
-        },
     },
     secret: 'super secret',
 });
