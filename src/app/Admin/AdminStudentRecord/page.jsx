@@ -57,11 +57,11 @@ const Page = () => {
         try {
             const response = await axios.put(`${url}/api/AdminApproveAccount/${info.id}`,
                 { headers });
-            setData(response.data)
-            sendEmail()
+               sendEmail()
             stopLoading()
             setMessage("Account approved successfully!")
             setSuccess(true)
+            handleGetData()
         } catch (err) {
             console.log(err);
             stopLoading()

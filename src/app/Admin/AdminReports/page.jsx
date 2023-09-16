@@ -33,7 +33,7 @@ const Page = () => {
         try {
             const response = await axios.put(`${url}/api/studentReport/${info.id}`,
                 { headers });
-            setData(response.data)
+                handleGetData()
             stopLoading()
             setSuccess(true)
         } catch (err) {

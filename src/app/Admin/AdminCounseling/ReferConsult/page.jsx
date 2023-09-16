@@ -31,7 +31,7 @@ const Page = () => {
         try {
             const response = await axios.put(`${url}/api/consultReferral/${info.id}`,
                 { headers });
-            setData(response.data)
+                handleGetData()
             setSuccess(true)
             stopLoading()
         } catch (err) {

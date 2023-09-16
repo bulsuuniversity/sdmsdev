@@ -60,7 +60,7 @@ const Blog = ({ images }, ref) => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 5000,
         nextArrow: <Next />,
         prevArrow: <Prev />,
     };

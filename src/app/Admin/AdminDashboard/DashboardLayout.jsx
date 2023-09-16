@@ -36,7 +36,7 @@ const DashboardLayout = ({ children }) => {
                     <div className={`flex bg-gray-400 text-xs rounded-lg `}>
                         <Link href={'/Admin/AdminDashboard/StudentRecords'}
                             className={`hover:bg-amber-400
-                            ${!children ? "p-5 text-xl" : ""}
+                            ${!children ? "p-7 ml-6 text-2xl" : ""}
                              ${dashboard === 'StudentRecords' && 'bg-amber-300'} 
                              rounded-lg grid justify-center p-1 items-center`}>
                             <div className="flex justify-center"><IoIosPeople size={children ? 32 : 50} /></div>
