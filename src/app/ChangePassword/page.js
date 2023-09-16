@@ -4,7 +4,7 @@ import AccountModal from "@/utils/AccountModal";
 import ConfirmationModal from "@/utils/ConfirmationModal";
 import useLoading from "@/utils/Loading";
 import { useProfileData } from "../libs/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { url, headers } from "../libs/api";
 import Layout from "@/components/Layout";
@@ -26,6 +26,12 @@ const Page = () => {
                 <a href="${url}/EnterPassword?email=${email}">Click this.</a> 
                 <p>Ticket Number:</p>`,
     };
+
+    useEffect(() => {
+        if (profileData && profileData.id !== " ") {
+            setEmail(profileData.email)
+        }
+    }, [])
 
     const handleSendCode = async (e) => {
         e.preventDefault();
@@ -67,7 +73,8 @@ const Page = () => {
                         {profileData.id !== " " ? 'Change Password' : 'Forgot Password'}
                     </div>
                     <div className="text-xs text-center italic py-4">
-                        {sent ? 'Please verify if it is you' : 'Please enter the needed information below.'}
+                        {sent ? 'Please verify if it is you' :
+                            `Please ${profileData.id !== " " ? "enter" : "correct"} the needed information below.`}
                     </div>
                     {sent && <div className="whitespace-normal my-2 text-center text-xs rounded-[2rem] bg-green-300 p-2">
                         Reset link has been sent to your <p>email! Please check.</p> </div>}
