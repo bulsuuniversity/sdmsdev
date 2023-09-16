@@ -30,9 +30,6 @@ const Page = () => {
         }
     }
 
-    // const reporter = reports && Object.values(reports).filter(user => user.status === "Registered")
-    // const reported = reports && Object.values(reports).filter(user => user.status !== "Registered")
-
     const Cyberbullying = reports ? (Object.values(reports).filter(report => report.actionOfDiscipline === "Cyberbullying")).length : 1
     const Misinformation = reports ? (Object.values(reports).filter(report => report.actionOfDiscipline === "Misinformation")).length : 1
     const Verbal = reports ? (Object.values(reports).filter(report => report.actionOfDiscipline === "Verbal abuse")).length : 1

@@ -120,7 +120,6 @@ const page = () => {
         plugins: {
             legend: false,
             datalabels: {
-                anchor: 'end',
                 color: 'black',
                 borderColor: "#fff",
                 textStrokeColor: 'white',

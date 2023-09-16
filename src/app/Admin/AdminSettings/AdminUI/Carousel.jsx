@@ -76,7 +76,7 @@ const Carousel = ({ setOpen }) => {
                 publicId: publicId,
             }, { headers });
             setMessage(true)
-            setResponse("Successfully Delete Image!")
+            setResponse("Successfully Deleted Image!")
             handleGetImages()
         } catch (error) {
             console.error('An error occurred:', error);
