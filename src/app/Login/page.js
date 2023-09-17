@@ -70,15 +70,6 @@ const Login = () => {
       return () => {
         clearTimeout(timer);
       };
-    } else if (session && session.role === "admin") {
-      const timer = setTimeout(() => {
-        setLoading(false)
-        setSuccess(true);
-        route.push('/Admin')
-      }, 500);
-      return () => {
-        clearTimeout(timer);
-      };
     }
   }, [session]);
 
@@ -102,9 +93,11 @@ const Login = () => {
                 </div>
               </InformationModal>}
             {session ? <div className="grid justify-center items-center gap-4">
-              <div>Please logout the logged in account</div>
+              <div className="text-center">Please logout the logged in account</div>
+              <div className="flex justify-center">
               <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
-              <Link href={profileData && profileData.role === "user" ? '/Profile' : '/Admin'}>Click here to logout</Link>
+              </div>
+              <Link className="text-center" href={profileData && profileData.role === "user" ? '/Profile' : '/Admin'}>Click here to logout</Link>
             </div> :
               <form onSubmit={handleSubmit}>
                 <div className="mb-4 text-sm">
