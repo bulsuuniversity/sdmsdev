@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 
 const About = ({ data }, ref) => {
     return (
-        <div ref={ref} className="bg-gray-600 h-max pb-12">
+        <div ref={ref} className="bg-gray-600 h-max">
             <div className="text-white text-3xl flex justify-center p-6 font-serif font-cambria">
                 About
             </div>

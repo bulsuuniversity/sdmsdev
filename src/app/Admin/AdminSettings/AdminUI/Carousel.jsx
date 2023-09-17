@@ -16,6 +16,7 @@ const Carousel = ({ setOpen }) => {
     const [message, setMessage] = useState()
     const [response, setResponse] = useState()
     const [images, setImages] = useState()
+    const [preview, setPreview] = useState(false)
 
 
     const handlePictureChange = (e) => {
@@ -26,15 +27,14 @@ const Carousel = ({ setOpen }) => {
             reader.onloadend = () => {
                 if (picture.type.startsWith("image/")) {
                     setFile(reader.result);
-                    handleUpdate()
-                } else {
-                    setFile(null);
+                    setPreview(true)
                 }
             };
-        } else {
-            setMessage(true)
-            setResponse("Please try again. Something went wrong in the server.")
         }
+        // else {
+        //     setMessage(true)
+        //     setResponse("Please try again. Something went wrong in the server.")
+        // }
     };
 
     useEffect(() => {
@@ -49,6 +49,7 @@ const Carousel = ({ setOpen }) => {
             console.error('An error occurred:', error);
         }
     };
+
 
     const handleAddImage = async () => {
         startLoading()
@@ -119,6 +120,15 @@ const Carousel = ({ setOpen }) => {
                     <div className="p-10 w-60 grid">
                         <div className="text-2xl text-center">
                             Please wait...
+                        </div>
+                    </div></InformationModal>}
+                {preview && <InformationModal>
+                    <div className="p-10 grid justify-center">
+                        <div className="content-fit w-44 h-44">
+                            <Image src={file} width={500} height={500} alt="preview" />
+                        </div>
+                        <div className="flex justify-center">
+                            <button className="bg-ren-700 text-white px-4 py-2" onClick={handleUpdate}>Upload</button>
                         </div>
                     </div></InformationModal>}
                 <div className="absolute -top-4 -right-4">

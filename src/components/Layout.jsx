@@ -9,7 +9,7 @@ const Layout = ({ children, setViewPort }) => {
 
     return (
         <PublicRoute>
-            <div className="w-full mt-16 pb-10">
+            <div className="w-full mt-16">
                 <Header setViewPort={setViewPort} />
                 {children}
                 <div className="fixed bottom-0 w-full">
