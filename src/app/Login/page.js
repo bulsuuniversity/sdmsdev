@@ -75,13 +75,13 @@ const Login = () => {
 
   return (
     <PublicRoute>
-      {session ? <InformationModal>
+      {profileData && profileData.role !== "user" ? <InformationModal>
         <div className="grid p-10 justify-center items-center gap-4">
           <div className="text-center">Please logout the logged in account</div>
           <div className="flex justify-center">
             <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
           </div>
-          <Link className="text-center" href={profileData && profileData.role === "user" ? '/Profile' : '/Admin'}>Click here to logout</Link>
+          <Link className="text-center" href={'/Admin'}>Click here to logout</Link>
         </div>
       </InformationModal> :
         <AccountModal>

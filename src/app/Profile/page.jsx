@@ -22,7 +22,7 @@ const page = () => {
 
     return (
         <Layout>
-            {/* <PrivateRoute> */}
+            <PrivateRoute>
                 {changeProfile &&
                     <SelectImage handleCLick={handleCLick} profileData={profileData} getProfileData={getProfileData} />
                 }
@@ -90,7 +90,7 @@ const page = () => {
                             </div>
                         </div>
                     </div>}
-            {/* </PrivateRoute> */}
+            </PrivateRoute>
         </Layout>
     );
 }

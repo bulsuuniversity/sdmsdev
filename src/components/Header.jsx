@@ -46,10 +46,6 @@ const Header = ({ setViewPort }) => {
     }, [session])
 
 
-    useEffect(() => {
-        console.count(session)
-    }, session)
-
     //  const handleDeleteFile = async () => {
     //     try {
     //         const response = await axios.delete(`${url}/api/removeFile`, {
