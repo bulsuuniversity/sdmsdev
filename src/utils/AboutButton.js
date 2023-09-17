@@ -7,8 +7,7 @@ const router = useRouter()
         if (window.location.pathname === "/") {
             setViewPort("aboutRef");
         } else {
-            router.push("/")
-            window.location.pathname === "/" && setViewPort("aboutRef")
+            router.push("/?viewPort=aboutRef")
         }
     };
     return (

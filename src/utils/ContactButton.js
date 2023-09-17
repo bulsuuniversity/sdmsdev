@@ -1,17 +1,19 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 
 const ContactButton = ({ setViewPort }) => {
-const router = useRouter()
+
+
+    const router = useRouter()
     const handleClick = () => {
         if (window.location.pathname === "/") {
             setViewPort("contactRef");;
         } else {
-            router.push("/")
-            window.location.pathname === "/" && setViewPort("contactRef");
+            router.push("/?viewPort=contactRef")
         }
-
     };
+
     return (
         <div
             onClick={handleClick}

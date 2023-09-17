@@ -12,6 +12,7 @@ import { useProfileData } from "./libs/store";
 import ConfirmationModal from "@/utils/ConfirmationModal";
 import axios from "axios";
 import { url, headers } from "./libs/api";
+import { useSearchParams } from "next/navigation";
 
 const Home = () => {
   const [viewPort, setViewPort] = useState(null);
@@ -43,6 +44,18 @@ const Home = () => {
   useEffect(() => {
     refs[viewPort]?.current?.scrollIntoView({ behavior: 'smooth' });
   }, [viewPort, refs]);
+
+  const searchParams = useSearchParams()
+  const view = searchParams.get('viewPort')
+
+  useEffect(() => {
+    if ("contactRef" === view) {
+      setViewPort("contactRef")
+    } else if ("aboutRef" === view) {
+      setViewPort("aboutRef")
+    }
+  }, [])
+
 
   const images = [
     ima1,
