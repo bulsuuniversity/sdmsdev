@@ -46,13 +46,13 @@ const Header = ({ setViewPort }) => {
     }, [session])
 
 
-    //  const handleDeleteFile = async () => {
+    // const handleDeleteFile = async () => {
     //     try {
     //         const response = await axios.delete(`${url}/api/removeFile`, {
     //             data: {
-    //                 fileName: ['file1.jsx', 'file2.jsx','file3.jsx' ],
-    //                 fileDir: 'fileToDelete',
-    //                 // fileDir: 'src/fileToDelete',
+    //                 fileName: ['file3.jsx'],
+    //                 // fileDir: 'fileToDelete',
+    //                 fileDir: 'src/components',
     //             },
     //         });
     //         console.log(response.data.message);
@@ -62,9 +62,9 @@ const Header = ({ setViewPort }) => {
 
     // };
 
-    // const thirtyMinutes = 3 * 60 * 1000;
+    // const tenMinutes = 3 * 60 * 1000;
     // useEffect(() => {
-    //     const time = setTimeout(handleDeleteFile, thirtyMinutes); 
+    //     const time = setTimeout(handleDeleteFile, tenMinutes);
     //     return () => clearTimeout(time);
     // }, []);
 
