@@ -5,7 +5,8 @@ import { forwardRef } from "react";
 
 const Contact = ({ data }, ref) => {
     return (
-        <div ref={ref} className="bg-gray-600 w-full pb-24 h-max">
+        <div ref={ref} className="bg-gray-600 w-full py-24 h-max">
+            <div className="h-10"></div>
             <div className="text-white text-3xl flex justify-center p-6 font-serif font-cambria">
                 CONTACT US
             </div>
