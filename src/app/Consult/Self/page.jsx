@@ -67,7 +67,7 @@ const Page = () => {
 
     return (
         <Layout>
-            <div className="md:px-10 px-4 py-4 grid grid-cols-1 md:grid-cols-3 bg-red-50">
+            <div className="md:px-10 px-4 py-4 grid grid-cols-1 lg:mb-10 md:grid-cols-3 bg-red-50">
                 <form className="md:col-span-2 col-span-1 grid gap-4 border border-black border-2 mx-0 md:mx-24 px-4 md:px-12 py-4 bg-white rounded-lg" onSubmit={handleSubmit}>
                     <h2 className="text-2xl text-center font-bold">SELF-CONSULTATION REQUEST FORM</h2>
                     <p className="text-xs text-center italic">Please fill out the needed details for the request</p>
