@@ -12,6 +12,7 @@ import InformationModal from "@/utils/InformationModal";
 import { PublicRoute } from "@/components/auth";
 import axios from "axios";
 import { url, headers } from "../libs/api";
+import { useProfileData } from "../libs/store";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ const Login = () => {
   const route = useRouter()
   const [erroring, setError] = useState(false)
   const [errorMess, setErrorMess] = useState(false)
+  const { profileData } = useProfileData()
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -98,39 +100,44 @@ const Login = () => {
                   </div>
                 </div>
               </InformationModal>}
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4 text-sm">
-                <input
-                  type="email"
-                  className="w-full text-xs px-3 py-2 border border-black"
-                  value={email}
-                  onChange={handleEmailChange}
-                  placeholder="EMAIL"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="password"
-                  className="w-full text-xs px-3 py-2 border border-black"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  placeholder="PASSWORD"
-                  required
-                />
-                <Link href={"/ChangePassword"} className="text-blue-500 text-xs cursor-pointer text-end">Forgot your password? Click here.</Link>
-              </div>
-              <button
-                type="submit"
-                className={`w-full py-2 my-4 ${loading ? 'bg-gray-600' : "bg-fuchsia-950 hover:bg-blue-600"} text-white px-4 `}
-                disabled={loading}
-              >
-                Log In
-              </button>
-              <Link href="/Register" className="text-blue-500 cursor-pointer text-xs text-end">
-                Don't have an account? Register here.
-              </Link>
-            </form>
+            {session ? <div className="grid justify-center items-center gap-4">
+              <div>Please logout the logged in account</div>
+              <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
+              <Link href={profileData && profileData.role === "user" ? '/Profile' : '/Admin'}>Click here to logout</Link>
+            </div> :
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4 text-sm">
+                  <input
+                    type="email"
+                    className="w-full text-xs px-3 py-2 border border-black"
+                    value={email}
+                    onChange={handleEmailChange}
+                    placeholder="EMAIL"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="password"
+                    className="w-full text-xs px-3 py-2 border border-black"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    placeholder="PASSWORD"
+                    required
+                  />
+                  <Link href={"/ChangePassword"} className="text-blue-500 text-xs cursor-pointer text-end">Forgot your password? Click here.</Link>
+                </div>
+                <button
+                  type="submit"
+                  className={`w-full py-2 my-4 ${loading ? 'bg-gray-600' : "bg-fuchsia-950 hover:bg-blue-600"} text-white px-4 `}
+                  disabled={loading}
+                >
+                  Log In
+                </button>
+                <Link href="/Register" className="text-blue-500 cursor-pointer text-xs text-end">
+                  Don't have an account? Register here.
+                </Link>
+              </form>}
           </div>
         </div>
 

@@ -57,9 +57,9 @@ const About = ({ setOpen }) => {
                             <button onClick={() => setMessage(false)} className="bg-amber-100 py-2 w-16 px-4 rounded-lg">Okay</button>
                         </div>
                     </div></InformationModal>}
-                <form className="grid gap-2 text-2xl" onSubmit={handleSubmit}>
-                    <input
-                        className="ml-8 rounded-md bg-gray-300"
+                <form className="grid gap-2 text-lg md:mx-32 mx-2 md:my-16 my-max" onSubmit={handleSubmit}>
+                    <textarea
+                        className="h-[20rem] md:w-[60rem] sm:w-[40rem] w-[30rem] text-center p-5 whitespace-normal rounded-md bg-gray-300"
                         value={formData}
                         onChange={(e) => setFormData(e.target.value)}
                         type="text"
