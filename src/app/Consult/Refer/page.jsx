@@ -87,7 +87,7 @@ const Page = () => {
 
     return (
         <Layout>
-            <div className="md:px-10 p-4 grid grid-cols-1 md:grid-cols-3 bg-red-50">
+            <div className="md:px-10 p-4 mb-9 grid grid-cols-1 md:grid-cols-3 bg-red-50">
                 <div className="md:block hidden col-span-1">
                     <Image alt="design" className="object-cover scale-x-[-1]" src="/bg.png" width={500} height={700} />
                 </div>
