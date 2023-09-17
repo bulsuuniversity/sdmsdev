@@ -75,30 +75,33 @@ const Login = () => {
 
   return (
     <PublicRoute>
-      <AccountModal>
-        <div className="bg-white p-6 shadow-lg z-10">
-          <div className="mx-4">
-            <div className="flex flex-col text-xs justify-center">
-              <h2 className="text-2xl text-center font-semibold">Login</h2>
-              <h4 className="italic py-4 text-center">Please enter the needed information below</h4>
-            </div>
-            {erroring &&
-              <InformationModal>
-                <div className="grid p-6 justify-center gap-2">
-                  <p className="text-center w-48">{errorMess}</p>
-                  <div className="flex justify-center">
-                    <button onClick={() => setError(false)}
-                      className="px-4 bg-amber-200 rounded-lg py-2 w-16">Okay</button>
-                  </div>
-                </div>
-              </InformationModal>}
-            {session ? <div className="grid justify-center items-center gap-4">
-              <div className="text-center">Please logout the logged in account</div>
-              <div className="flex justify-center">
-              <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
+      {session ? <InformationModal>
+        <div className="grid p-10 justify-center items-center gap-4">
+          <div className="text-center">Please logout the logged in account</div>
+          <div className="flex justify-center">
+            <ImNotification size={100} className='bg-red-600 text-white rounded-full' />
+          </div>
+          <Link className="text-center" href={profileData && profileData.role === "user" ? '/Profile' : '/Admin'}>Click here to logout</Link>
+        </div>
+      </InformationModal> :
+        <AccountModal>
+          <div className="bg-white p-6 shadow-lg z-10">
+            <div className="mx-4">
+              <div className="flex flex-col text-xs justify-center">
+                <h2 className="text-2xl text-center font-semibold">Login</h2>
+                <h4 className="italic py-4 text-center">Please enter the needed information below</h4>
               </div>
-              <Link className="text-center" href={profileData && profileData.role === "user" ? '/Profile' : '/Admin'}>Click here to logout</Link>
-            </div> :
+              {erroring &&
+                <InformationModal>
+                  <div className="grid p-6 justify-center gap-2">
+                    <p className="text-center w-48">{errorMess}</p>
+                    <div className="flex justify-center">
+                      <button onClick={() => setError(false)}
+                        className="px-4 bg-amber-200 rounded-lg py-2 w-16">Okay</button>
+                    </div>
+                  </div>
+                </InformationModal>}
+
               <form onSubmit={handleSubmit}>
                 <div className="mb-4 text-sm">
                   <input
@@ -131,22 +134,22 @@ const Login = () => {
                 <Link href="/Register" className="text-blue-500 cursor-pointer text-xs text-end">
                   Don't have an account? Register here.
                 </Link>
-              </form>}
-          </div>
-        </div>
-
-        {success && (
-          <ConfirmationModal>
-            <div className="flex flex-col justify-center p-7 justify-center">
-              <div className="text-2xl font-bold whitespace-normal text-center ">
-                SUCCESSFUL
-              </div>
-              <div className="text-center italic text-sm">Redirecting you now to the home page.</div>
-              <span className="loader" />
+              </form>
             </div>
-          </ConfirmationModal>
-        )}
-      </AccountModal>
+          </div>
+
+          {success && (
+            <ConfirmationModal>
+              <div className="flex flex-col justify-center p-7 justify-center">
+                <div className="text-2xl font-bold whitespace-normal text-center ">
+                  SUCCESSFUL
+                </div>
+                <div className="text-center italic text-sm">Redirecting you now to the home page.</div>
+                <span className="loader" />
+              </div>
+            </ConfirmationModal>
+          )}
+        </AccountModal>}
     </PublicRoute>
   );
 }
