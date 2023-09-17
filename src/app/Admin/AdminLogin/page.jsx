@@ -77,7 +77,7 @@ const Login = () => {
 
     return (
         <Layout>
-            <AccountModal>
+            <InformationModal>
                 <div className="bg-white p-6 shadow-lg z-10">
                     <div className="mx-4">
                         <div className="flex flex-col text-xs justify-center">
@@ -141,7 +141,7 @@ const Login = () => {
                         </div>
                     </ConfirmationModal>
                 )}
-            </AccountModal>
+            </InformationModal>
         </Layout>
     );
 }

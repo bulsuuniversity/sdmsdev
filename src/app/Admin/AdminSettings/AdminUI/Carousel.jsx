@@ -78,6 +78,7 @@ const Carousel = ({ setOpen }) => {
             }, { headers });
             setMessage(true)
             setResponse("Successfully Deleted Image!")
+            setPreview(false)
             handleGetImages()
         } catch (error) {
             console.error('An error occurred:', error);
@@ -128,7 +129,7 @@ const Carousel = ({ setOpen }) => {
                             <Image src={file} width={500} height={500} alt="preview" />
                         </div>
                         <div className="flex justify-center">
-                            <button className="bg-ren-700 text-white px-4 py-2" onClick={handleUpdate}>Upload</button>
+                            <button className="bg-red-700 text-white px-4 py-2" onClick={handleUpdate}>Upload</button>
                         </div>
                     </div></InformationModal>}
                 <div className="absolute -top-4 -right-4">
