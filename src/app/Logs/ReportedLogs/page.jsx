@@ -43,7 +43,7 @@ const Page = () => {
     }, [])
 
     const headerData = [
-        "DATE REPORTED",
+        "DATE OF INCIDENT",
         "TICKET NO.",
         "OFFENDER",
         "INCIDENT",
