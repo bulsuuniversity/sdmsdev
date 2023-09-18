@@ -57,7 +57,7 @@ const Page = () => {
         try {
             const response = await axios.put(`${url}/api/AdminApproveAccount/${info.id}`,
                 { headers });
-               sendEmail()
+            sendEmail()
             stopLoading()
             setMessage("Account approved successfully!")
             setSuccess(true)
@@ -130,7 +130,7 @@ const Page = () => {
                 <FaPeopleLine size={50} /> <p className="border border-2 border-black h-16 mx-4" />
                 <p className="font-bold text-xl">Student Accounts</p>
             </div>
-        {/*<div className="flex gap-6 pl-10">
+            {/*<div className="flex gap-6 pl-10">
                 <p className="font-bold border border-black p-2 border-bottom">Student</p>
                 <Link href={'/Admin/AdminApproveAdmin'} className="font-bold p-2">Admin</Link>
             </div>*/}
@@ -214,11 +214,13 @@ const Page = () => {
                     </div>
                     {seeImage && info.attachment !== "" && <InformationModal>
                         <div className="relative p-10 h-screen w-screen grid justify-center items-center">
-                            <div onClick={() => setSeeImage(false)} className="m-10 overflow-auto">
-                                <Image width={500} height={500}
-                                    className="p-10 object-fill"
-                                    src={imageToView} alt="attachment" />
-                            </div>
+                            <Link href={imageToView} target="blank">
+                                <div className="m-10 overflow-auto">
+                                    <Image width={500} height={500}
+                                        className="p-10 object-fill"
+                                        src={imageToView} alt="attachment" />
+                                </div>
+                            </Link>
                             <div className="absolute top-2 right-2">
                                 <button
                                     onClick={() => setSeeImage(false)} className="rounded-full text-red-600 bg-white">
@@ -240,7 +242,7 @@ const Page = () => {
                             </button>}
                     </div>
                 </div>
-            </InformationModal>}
+            </InformationModal >}
             <div className="md:mx-10 mx-1 my-10 border border-blue-400 border-2">
                 {data && data.length > 0 ?
                     <StudentRecordDatagridview
@@ -249,7 +251,7 @@ const Page = () => {
                         tableData={data}
                     /> : <div className="inset-0">No records found</div>}
             </div>
-        </AdminMenu>
+        </AdminMenu >
     );
 }
 
