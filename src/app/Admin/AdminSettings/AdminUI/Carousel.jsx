@@ -58,6 +58,7 @@ const Carousel = ({ setOpen }) => {
                 await axios.post(`${url}/api/HomeCarousel`, {
                     file,
                 }, { headers });
+                setPreview(false)
                 setMessage(true)
                 setResponse("Successfully Added Image!")
                 handleGetImages()

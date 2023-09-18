@@ -120,10 +120,10 @@ const Page = () => {
                                 <div className="indent-4">Email:  {info.student.email}</div>
                                 <div className="indent-4">Name:  {info.student.name}</div>
                                 <div className="indent-4">Contact No.: {info.student.phoneNumber}</div>
-                                <label onClick={() => setSeeImage(true)} className="flex gap-3">
+                                {/* <label onClick={() => setSeeImage(true)} className="flex gap-3">
                                     <p className="font-bold">View Profile Picture: </p>
                                     <div>{info.student.profile ? (info.student.profile).slice(-8) : "No Profile Upload"}</div>
-                                </label>
+                                </label> */}
                             </label>
                             {openMessage && info && <SendMessage suggestions={suggestions} sentEmail={sentEmail} setSentEmail={setSentEmail} email={info.student.email} setClose={setOpenMessage} />}
                             {seeImage && info.student.profile !== "" && <InformationModal>

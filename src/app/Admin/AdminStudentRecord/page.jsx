@@ -157,21 +157,25 @@ const Page = () => {
                         <div className="flex justify-center">
                             <div className="w-28 h-28 object-cover overflow-hidden rounded-full border-4 border-white mb-4">
                                 {info.profile ?
-                                    <Image
-                                        src={info.profile}
-                                        alt="Selected"
-                                        width={600}
-                                        height={600}
-                                        className="object-cover"
-                                        required
-                                    /> : <Image
+                                    <Link href={info.profile} target="blank">
+                                        <Image
+                                            src={info.profile}
+                                            alt="Selected"
+                                            width={600}
+                                            height={600}
+                                            className="object-cover"
+                                            required
+                                        />
+                                    </Link>
+                                    : <Image
                                         src="https://res.cloudinary.com/dckxajww8/image/upload/v1693269023/icons/profile_2_cotaml.png"
                                         alt="Selected"
                                         width={600}
                                         height={600}
                                         className="object-cover"
                                         required
-                                    />}
+                                    />
+                                }
                             </div>
                         </div>
                         <div className="grid gap-2 text-xs">

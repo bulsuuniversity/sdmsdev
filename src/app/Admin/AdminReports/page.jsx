@@ -130,10 +130,10 @@ const Page = () => {
                                     <div className="indent-4">Email:  {info.reporter.email}</div>
                                     <div className="indent-4">Name:  {info.reporter.name}</div>
                                     <div className="indent-4">Contact No.: {info.reporter.phoneNumber}</div>
-                                    <label onClick={() => handleSetImage(info.reporter.profile)} className="indent-4 flex">
+                                    {/* <label onClick={() => handleSetImage(info.reporter.profile)} className="indent-4 flex">
                                         <p>View Profile Picture: </p>
                                         <div>{info.reporter.profile ? (info.reporter.profile).slice(-8) : "No Profile"}</div>
-                                    </label>
+                                    </label> */}
                                 </label>
                             </div>
 
