@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { url, headers } from "@/utils/AdminAccountModal"
+import { url, headers } from "@/app/libs/api";
 import axios from "axios";
 import useLoading from "@/utils/Loading";
 import ConfirmationModal from "@/utils/ConfirmationModal";
@@ -10,6 +10,7 @@ import Layout from "@/components/Layout";
 import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
 import AdminAccountModal from "@/utils/AdminAccountModal";
+
 const Page = () => {
     const [password, setPassword] = useState()
     const [confirmPassword, setConfirmPassword] = useState()
