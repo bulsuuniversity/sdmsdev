@@ -75,7 +75,7 @@ const Login = () => {
 
   return (
     <PublicRoute>
-      {session && profileData && profileData.role !== "user" ? <InformationModal>
+      {session && session.role === "admin" ? <InformationModal>
         <div className="grid p-10 justify-center items-center gap-4">
           <div className="text-center">Please logout the logged in account</div>
           <div className="flex justify-center">
