@@ -25,16 +25,16 @@ const Header = ({ setViewPort }) => {
 
     const currentPath = usePathname();
 
-    useEffect(() => {
+     useEffect(() => {
         if (currentPath === "/Login") {
             setActive('button1');
             setHeader(false);
         } else if (currentPath === "/Register") {
             setActive('button2');
             setHeader(false);
-        } else if (currentPath === "/Admin/AdminLogin") {
+        } else if (currentPath.includes("/Admin")) {
             setHeader(true);
-        } else if (currentPath === "/Admin/AdminRegister") {
+        } else if (currentPath === "/Admin/AdminLogin") {
             setHeader(true);
         }
     }, []);
