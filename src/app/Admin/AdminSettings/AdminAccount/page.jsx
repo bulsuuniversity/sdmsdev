@@ -7,7 +7,7 @@ import useLoading from "@/utils/Loading";
 import InformationModal from "@/utils/InformationModal";
 import { useProfileData } from "@/app/libs/store";
 import axios from "axios";
-import { url, headers } from "@/app/libs/api";
+import { url, headers } from "@/app/libs/api"
 
 const Page = () => {
     const { profileData } = useProfileData()
