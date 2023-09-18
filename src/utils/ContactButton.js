@@ -18,7 +18,7 @@ const ContactButton = ({ setViewPort }) => {
         <div
             onClick={handleClick}
             className={`flex items-center`}>
-            <span className="mr-4">CONTACT US</span>
+            <span className="mr-4">Contact us</span>
         </div>
     );
 }

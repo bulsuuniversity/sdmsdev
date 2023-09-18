@@ -114,7 +114,7 @@ const Login = () => {
                                     placeholder="PASSWORD"
                                     required
                                 />
-                                <div className="text-blue-500 text-xs text-end">Forgot the password? Click here.</div>
+                                <Link href={"/ChangePassword"} className="text-blue-500 text-xs cursor-pointer text-end">Forgot password? Click here.</Link>
                             </div>
                             <button
                                 type="submit"

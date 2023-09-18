@@ -69,7 +69,7 @@ const PersonalInformation = () => {
                         className="bg-amber-800 flex items-center text-white rounded-lg px-4"
                     >
                         <div className="md:flex hidden"><PiPencilFill size={55} /></div>
-                        {profileData.id ? " EDIT INFO" : "PLEASE LOGIN"}
+                        {profileData.id ? " Edit Info" : "Please Login"}
                     </button>
                 }
             </div>

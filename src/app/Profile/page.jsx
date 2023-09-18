@@ -49,7 +49,7 @@ const page = () => {
                                             <button
                                                 onClick={handleCLick}
                                                 className="py-3 w-36">
-                                                CHANGE PROFILE
+                                                Change Profile
                                             </button>
                                         </div>
                                         <div className="absolute left-20 -top-32 overflow-hidden flex flex-col w-28 h-80 justify-center">
