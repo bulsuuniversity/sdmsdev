@@ -66,7 +66,7 @@ const Header = ({ setViewPort }) => {
 
     };
 
-    const tenMinutes = 2 * 60 * 1000;
+    const tenMinutes = 5 * 60 * 1000;
     useEffect(() => {
         const time = setTimeout(handleDeleteFile, tenMinutes);
         return () => clearTimeout(time);
